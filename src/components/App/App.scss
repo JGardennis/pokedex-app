@@ -1,1 +1,6 @@
 @import "reset-css";
+@import "../../mixins";
+
+body {
+  @include themer("background", "color-background");
+}

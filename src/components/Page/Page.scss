@@ -1,0 +1,16 @@
+@import "../../mixins";
+
+.page {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 100%;
+  margin-top: 10vh;
+  transition: 0.4s all ease;
+
+  h1 {
+    font-family: "Jost", sans-serif;
+    font-size: 3em;
+    @include themer("color", "color-titles");
+  }
+}

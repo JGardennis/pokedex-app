@@ -1,4 +1,5 @@
 import React from "react";
+import "./Page.scss";
 
 interface iProps {
   children: React.ReactNode;

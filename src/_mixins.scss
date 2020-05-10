@@ -1,3 +1,5 @@
+@import "themes";
+
 @mixin themer($key, $color) {
   @each $theme-name, $theme-color in $themes {
     .theme-#{$theme-name} & {
