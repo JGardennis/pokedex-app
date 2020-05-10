@@ -1,6 +1,24 @@
 @import "../../themes";
 
+@mixin btn-color($color) {
+  background-color: $color;
+  box-shadow: 2px 2px 14px $color;
+
+  & .pokeball__button {
+    border-color: $color;
+  }
+
+  & .pokeball::after {
+    background-color: $color;
+  }
+
+  &:hover {
+    box-shadow: 2px 8px 14px $color;
+  }
+}
+
 .menu-button {
+  position: relative;
   width: 250px;
   height: 60px;
   display: inline-block;
@@ -14,44 +32,25 @@
   margin: 0.2em;
   font-family: "Jost", sans-serif;
   transition: 0.4s all ease;
+  overflow: hidden;
 
   &:hover {
     box-shadow: 2px 8px 14px;
   }
 
   &.red {
-    background-color: $main-btn-red;
-    box-shadow: 2px 2px 14px $main-btn-red;
-
-    &:hover {
-      box-shadow: 2px 8px 14px $main-btn-red;
-    }
+    @include btn-color($main-btn-red);
   }
 
   &.green {
-    background-color: $main-btn-green;
-    box-shadow: 2px 2px 14px $main-btn-green;
-
-    &:hover {
-      box-shadow: 2px 8px 14px $main-btn-green;
-    }
+    @include btn-color($main-btn-green);
   }
 
   &.blue {
-    background-color: $main-btn-blue;
-    box-shadow: 2px 2px 14px $main-btn-blue;
-
-    &:hover {
-      box-shadow: 2px 8px 14px $main-btn-blue;
-    }
+    @include btn-color($main-btn-blue);
   }
 
   &.purple {
-    background-color: $main-btn-purple;
-    box-shadow: 2px 2px 14px $main-btn-purple;
-
-    &:hover {
-      box-shadow: 2px 8px 14px $main-btn-purple;
-    }
+    @include btn-color($main-btn-purple);
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import "./Page.scss";
+import Pokeball from "../Pokeball";
 
 interface iProps {
   children: React.ReactNode;
@@ -8,9 +9,7 @@ interface iProps {
 
 const Page = ({ className, children }: iProps) => (
   <div className={`${className} page`}>
-    <div className="pokeball">
-      <div className="pokeball__button"></div>
-    </div>
+    <Pokeball className="large" />
     {children}
   </div>
 );
