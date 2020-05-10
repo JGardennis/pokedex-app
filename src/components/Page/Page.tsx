@@ -4,4 +4,4 @@ const Page = ({ children }: { children: React.ReactNode }) => (
   <div className="page">{children}</div>
 );
 
-export default Page
+export default Page;
