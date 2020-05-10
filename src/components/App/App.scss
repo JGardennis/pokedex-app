@@ -1,6 +1,10 @@
 @import "reset-css";
 @import "../../mixins";
 
+// font-family: 'Rubik', sans-serif;
+// font-family: 'Jost', sans-serif;
+// font-family: 'PT Sans', sans-serif;
+
 body {
   @include themer("background", "color-background");
 }

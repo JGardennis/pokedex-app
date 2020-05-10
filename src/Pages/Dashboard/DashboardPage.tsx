@@ -1,4 +1,5 @@
 import React from "react";
+import "./DashboardPage.scss";
 import Page from "../../components/Page";
 
 const DashboardPage = () => (

@@ -7,7 +7,12 @@ interface iProps {
 }
 
 const Page = ({ className, children }: iProps) => (
-  <div className={`${className} page`}>{children}</div>
+  <div className={`${className} page`}>
+    <div className="pokeball">
+      <div className="pokeball__button"></div>
+    </div>
+    {children}
+  </div>
 );
 
 export default Page;
