@@ -1,13 +1,13 @@
 import React from "react";
-import Page from "../Page";
+import "./App.scss";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import DashboardPage from "../../Pages/Dashboard";
 
 function App() {
   return (
-    <div className="App">
-      <Page>
-        <h1>The Pokedex App</h1>
-      </Page>
-    </div>
+    <Router>
+      <Route path="/" component={DashboardPage} />
+    </Router>
   );
 }
 
