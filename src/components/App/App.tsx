@@ -1,20 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import DashboardPage from "../../Pages/Dashboard";
 
-function App() {
-  useEffect(() => {
-    if (document.documentElement.classList.length === 0) {
-      document.documentElement.classList.add("theme-light");
-    }
-  }, []);
-
-  return (
-    <Router>
-      <Route path="/" component={DashboardPage} />
-    </Router>
-  );
-}
+const App = () => (
+  <Router>
+    <Route path="/" component={DashboardPage} />
+  </Router>
+);
 
 export default App;
