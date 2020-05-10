@@ -1,0 +1,57 @@
+@import "../../themes";
+
+.menu-button {
+  width: 250px;
+  height: 60px;
+  display: inline-block;
+  line-height: 1.8;
+  align-items: center;
+  border-radius: 15px;
+  padding: 0 1em;
+  text-decoration: none;
+  font-size: 2em;
+  color: #fff;
+  margin: 0.2em;
+  font-family: "Jost", sans-serif;
+  transition: 0.4s all ease;
+
+  &:hover {
+    box-shadow: 2px 8px 14px;
+  }
+
+  &.red {
+    background-color: $main-btn-red;
+    box-shadow: 2px 2px 14px $main-btn-red;
+
+    &:hover {
+      box-shadow: 2px 8px 14px $main-btn-red;
+    }
+  }
+
+  &.green {
+    background-color: $main-btn-green;
+    box-shadow: 2px 2px 14px $main-btn-green;
+
+    &:hover {
+      box-shadow: 2px 8px 14px $main-btn-green;
+    }
+  }
+
+  &.blue {
+    background-color: $main-btn-blue;
+    box-shadow: 2px 2px 14px $main-btn-blue;
+
+    &:hover {
+      box-shadow: 2px 8px 14px $main-btn-blue;
+    }
+  }
+
+  &.purple {
+    background-color: $main-btn-purple;
+    box-shadow: 2px 2px 14px $main-btn-purple;
+
+    &:hover {
+      box-shadow: 2px 8px 14px $main-btn-purple;
+    }
+  }
+}
