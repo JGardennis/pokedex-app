@@ -28,4 +28,15 @@
       outline: none;
     }
   }
+
+  @include mobile {
+    &__input {
+      font-size: 15px;
+    }
+  }
+
+  @include smallMobile {
+    width: 95%;
+    margin: 3vh auto;
+  }
 }

@@ -1,12 +1,10 @@
 import React from "react";
-import "./DashboardPage.scss";
 import Page from "../../components/Page";
 import Search from "../../components/Search";
 import MenuButton from "../../components/MenuButton";
 
 const DashboardPage = () => (
-  <Page className="dashboard">
-    <h1>The Pokedex App</h1>
+  <Page title="The Pokedex App" className="dashboard">
     <Search />
     <MenuButton to="/pokedex" color="red">
       Pokedex

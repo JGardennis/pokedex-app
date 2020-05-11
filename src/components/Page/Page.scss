@@ -9,10 +9,58 @@
   margin-top: 10vh;
   transition: 0.4s all ease;
 
+  &.dashboard {
+    margin-top: 30vh !important;
+
+    @include mobile {
+    }
+  }
+
   h1 {
     font-family: "Jost", sans-serif;
     font-size: 3em;
     @include themer("color", "color-titles");
     transition: 0.4s all ease;
+  }
+
+  @include largeTablet {
+    width: 90%;
+
+    & .pokeball.large {
+      top: -25vh;
+      right: 0;
+      width: 300px;
+      height: 300px;
+
+      & .pokeball__button {
+        top: calc(50% - 100px);
+        left: calc(50% - 100px);
+        border: 30px solid;
+      }
+    }
+  }
+
+  @include mobile {
+    &.dashboard {
+      margin-top: 18vh !important;
+    }
+
+    & .pokeball.large {
+      top: -15vh;
+    }
+
+    & h1 {
+      font-size: 2.5em;
+    }
+  }
+
+  @include smallMobile {
+    width: 100%;
+
+    & h1 {
+      font-size: 2.2em;
+      width: 90%;
+      padding-left: 10px;
+    }
   }
 }

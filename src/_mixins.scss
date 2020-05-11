@@ -1,9 +1,65 @@
 @import "themes";
 
+// Used to map themes for light/dark mode
 @mixin themer($key, $color) {
   @each $theme-name, $theme-color in $themes {
     .theme-#{$theme-name} & {
       #{$key}: map-get(map-get($themes, $theme-name), $color);
     }
+  }
+}
+
+// Used to set colors of main menu buttons
+@mixin menu-button-colors($color, $altColor) {
+  background-color: $color;
+  box-shadow: 2px 2px 4px $color;
+
+  & .pokeball,
+  & .pokeball::before,
+  & .pokeball__button {
+    background-color: $altColor;
+  }
+
+  & .pokeball__button {
+    border-color: $color;
+  }
+
+  & .pokeball::after {
+    background-color: $color;
+  }
+
+  &:hover {
+    box-shadow: 2px 2px 8px $color;
+  }
+}
+
+// BREAKPOINTS
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+@mixin largeTablet {
+  @media (max-width: #{$large-tablet}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$mobile}) {
+    @content;
+  }
+}
+
+@mixin smallMobile {
+  @media (max-width: #{$small-mobile}) {
+    @content;
   }
 }

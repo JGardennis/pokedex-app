@@ -1,33 +1,10 @@
 @import "../../themes";
-
-// $color = button color
-// $altColor = button pokeball color
-@mixin btn-color($color, $altColor) {
-  background-color: $color;
-  box-shadow: 2px 2px 4px $color;
-
-  & .pokeball,
-  & .pokeball::before,
-  & .pokeball__button {
-    background-color: $altColor;
-  }
-
-  & .pokeball__button {
-    border-color: $color;
-  }
-
-  & .pokeball::after {
-    background-color: $color;
-  }
-
-  &:hover {
-    box-shadow: 2px 2px 8px $color;
-  }
-}
+@import "../../mixins";
 
 .menu-button {
   position: relative;
-  width: 250px;
+  width: 100%;
+  max-width: 230px;
   height: 60px;
   display: inline-block;
   line-height: 1.8;
@@ -47,18 +24,41 @@
   }
 
   &.red {
-    @include btn-color($main-btn-red, $alt-btn-red);
+    @include menu-button-colors($main-btn-red, $alt-btn-red);
   }
 
   &.green {
-    @include btn-color($main-btn-green, $alt-btn-green);
+    @include menu-button-colors($main-btn-green, $alt-btn-green);
   }
 
   &.blue {
-    @include btn-color($main-btn-blue, $alt-btn-blue);
+    @include menu-button-colors($main-btn-blue, $alt-btn-blue);
   }
 
   &.purple {
-    @include btn-color($main-btn-purple, $alt-btn-purple);
+    @include menu-button-colors($main-btn-purple, $alt-btn-purple);
+  }
+
+  @include mobile {
+    display: block;
+    margin: 0.5em auto;
+    height: 50px;
+    font-size: 1.5em;
+    line-height: 2;
+
+    & .pokeball {
+      width: 40px;
+      height: 40px;
+    }
+
+    & .pokeball__button {
+      top: calc(50% - 11px);
+      left: calc(50% - 11px);
+      border: 3px solid;
+    }
+  }
+
+  @include smallMobile {
+    width: 80%;
   }
 }
