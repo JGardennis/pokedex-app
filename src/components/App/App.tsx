@@ -8,29 +8,43 @@ import ItemsPage from "../../Pages/Items";
 import Page from "../Page";
 import Search from "../Search";
 import DashboardPage from "../../Pages/Dashboard";
+import Link from "../Link";
+import { capitalize } from "../../helpers/strings";
 
 interface iProps {
   location: Object;
   match: { path: string };
-  history: Object;
+  history: { location: { pathname: string } };
 }
 
 const App = ({ location, match, history }: iProps) => {
-  const isDashboard = match.path === "/";
+  const [isDashboard, setIsDashboard] = useState(true);
+  const [pageTitle, setPageTitle] = useState("");
 
   useEffect(() => {
-    console.log(match);
+    const path = history.location.pathname;
+    setIsDashboard(path === "/");
+    setPageTitle(
+      isDashboard ? "The Pokedex Page" : capitalize(path.replace("/", ""))
+    );
   }, [location]);
 
   return (
-    <Page title="The Pokedex App" className={isDashboard ? "dashboard" : ""}>
-      <Search placeholder="Search for pokemon, moves, and abilities" />
+    <Page title={pageTitle} className={isDashboard ? "dashboard" : ""}>
+      {!isDashboard && <Link to="/">BACK</Link>}
+      <Search
+        placeholder={`Search ${
+          isDashboard
+            ? "for pokemon, moves, and abilities"
+            : history.location.pathname.replace("/", "")
+        }`}
+      />
       <Switch>
-        <Route path="/items" component={ItemsPage} />
-        <Route path="/pokedex" component={PokedexPage} />
-        <Route path="/abilities" component={AbilitiesPage} />
-        <Route path="/moves" component={MovesPage} />
-        <Route path="/" component={DashboardPage} />
+        <Route path="/items" component={ItemsPage} exact />
+        <Route path="/pokemon" component={PokedexPage} exact />
+        <Route path="/abilities" component={AbilitiesPage} exact />
+        <Route path="/moves" component={MovesPage} exact />
+        <Route path="/" component={DashboardPage} exact />
       </Switch>
     </Page>
   );
