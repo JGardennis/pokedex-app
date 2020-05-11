@@ -1,8 +1,16 @@
 @import "../../themes";
 
-@mixin btn-color($color) {
+// $color = button color
+// $altColor = button pokeball color
+@mixin btn-color($color, $altColor) {
   background-color: $color;
-  box-shadow: 2px 2px 14px $color;
+  box-shadow: 2px 2px 4px $color;
+
+  & .pokeball,
+  & .pokeball::before,
+  & .pokeball__button {
+    background-color: $altColor;
+  }
 
   & .pokeball__button {
     border-color: $color;
@@ -13,7 +21,7 @@
   }
 
   &:hover {
-    box-shadow: 2px 8px 14px $color;
+    box-shadow: 2px 2px 8px $color;
   }
 }
 
@@ -35,22 +43,22 @@
   overflow: hidden;
 
   &:hover {
-    box-shadow: 2px 8px 14px;
+    box-shadow: 2px 8px 8px;
   }
 
   &.red {
-    @include btn-color($main-btn-red);
+    @include btn-color($main-btn-red, $alt-btn-red);
   }
 
   &.green {
-    @include btn-color($main-btn-green);
+    @include btn-color($main-btn-green, $alt-btn-green);
   }
 
   &.blue {
-    @include btn-color($main-btn-blue);
+    @include btn-color($main-btn-blue, $alt-btn-blue);
   }
 
   &.purple {
-    @include btn-color($main-btn-purple);
+    @include btn-color($main-btn-purple, $alt-btn-purple);
   }
 }
