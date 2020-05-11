@@ -9,7 +9,6 @@ import Page from "../Page";
 import Search from "../Search";
 import DashboardPage from "../../Pages/Dashboard";
 import Link from "../Link";
-import { capitalize } from "../../helpers/strings";
 
 interface iProps {
   location: Object;
@@ -19,18 +18,13 @@ interface iProps {
 
 const App = ({ location, match, history }: iProps) => {
   const [isDashboard, setIsDashboard] = useState(true);
-  const [pageTitle, setPageTitle] = useState("");
 
   useEffect(() => {
-    const path = history.location.pathname;
-    setIsDashboard(path === "/");
-    setPageTitle(
-      isDashboard ? "The Pokedex Page" : capitalize(path.replace("/", ""))
-    );
-  }, [location]);
+    setIsDashboard(history.location.pathname === "/");
+  }, [history.location]);
 
   return (
-    <Page title={pageTitle} className={isDashboard ? "dashboard" : ""}>
+    <Page title="The Pokedex App" className={isDashboard ? "dashboard" : ""}>
       {!isDashboard && <Link to="/">BACK</Link>}
       <Search
         placeholder={`Search ${
