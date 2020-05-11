@@ -8,10 +8,4 @@
 body {
   @include themer("background", "color-background");
   transition: 0.4s all ease;
-
-  @include largeTablet {
-    #root {
-      overflow: hidden;
-    }
-  }
 }

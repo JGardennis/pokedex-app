@@ -2,13 +2,14 @@ import React from "react";
 import "./Search.scss";
 import { ReactComponent as SearchSVG } from "../../assets/Icons/search-icon.svg";
 
-const Search = () => (
+interface iProps {
+  placeholder: string;
+}
+
+const Search = ({ placeholder }: iProps) => (
   <div className="search-bar">
     <SearchSVG />
-    <input
-      className="search-bar__input"
-      placeholder="Search for pokemon, moves, and abilities"
-    />
+    <input className="search-bar__input" placeholder={placeholder} />
   </div>
 );
 

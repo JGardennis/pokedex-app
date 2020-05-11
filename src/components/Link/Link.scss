@@ -1,0 +1,13 @@
+@import "../../mixins";
+
+.link {
+  display: block;
+  font-family: "PT Sans", sans-serif;
+  font-weight: 600;
+  @include themer("color", "color-titles");
+  text-decoration: none;
+
+  &.back-button {
+    margin-bottom: 1em;
+  }
+}

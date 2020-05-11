@@ -5,7 +5,7 @@ import MenuButton from "../../components/MenuButton";
 
 const DashboardPage = () => (
   <Page title="The Pokedex App" className="dashboard">
-    <Search />
+    <Search placeholder="Search for pokemon, moves, and abilities" />
     <MenuButton to="/pokedex" color="red">
       Pokedex
     </MenuButton>
