@@ -1,5 +1,14 @@
 import React from "react";
+import Page from "../../components/Page";
 
-const MovesPage = () => <h1>Moves</h1>;
+const MovesPage = () => (
+  <Page
+    title="Moves"
+    searchOptions={{ placeholder: "Search moves" }}
+    backButton
+  >
+    <p>moves here</p>
+  </Page>
+);
 
 export default MovesPage;

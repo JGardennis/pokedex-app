@@ -1,5 +1,14 @@
 import React from "react";
+import Page from "../../components/Page";
 
-const AbilitiesPage = () => <h1>Abilities</h1>;
+const AbilitiesPage = () => (
+  <Page
+    title="Abilities"
+    searchOptions={{ placeholder: "Search abilities" }}
+    backButton
+  >
+    <p>abilities here</p>
+  </Page>
+);
 
 export default AbilitiesPage;

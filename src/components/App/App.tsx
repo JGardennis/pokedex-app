@@ -8,12 +8,6 @@ import ItemsPage from "../../Pages/Items";
 import DashboardPage from "../../Pages/Dashboard";
 import Pokeball from "../Pokeball";
 
-interface iProps {
-  location: Object;
-  match: { path: string };
-  history: { location: { pathname: string } };
-}
-
 const App = () => (
   <>
     <Pokeball className="large" />

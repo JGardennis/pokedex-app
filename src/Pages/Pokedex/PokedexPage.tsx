@@ -1,5 +1,14 @@
 import React from "react";
+import Page from "../../components/Page";
 
-const PokedexPage = () => <h1>Pokedex</h1>;
+const PokedexPage = () => (
+  <Page
+    title="Pokedex"
+    searchOptions={{ placeholder: "Search Pokemon" }}
+    backButton
+  >
+    <p>pokemon here</p>
+  </Page>
+);
 
 export default PokedexPage;

@@ -20,8 +20,8 @@ const Page = ({
   searchOptions,
 }: iProps) => (
   <div className={`page ${landing ? "landing" : ""}`}>
-    {backButton && <Link to="/">Back</Link>}
     <h1 className="page__title">{title}</h1>
+    {backButton && <Link to="/">Back</Link>}
     <Search {...searchOptions} />
     {children}
   </div>

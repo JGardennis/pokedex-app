@@ -8,7 +8,7 @@ const DashboardPage = () => (
     searchOptions={{ placeholder: "Search all" }}
     landing
   >
-    <MenuButton to="/pokedex" color="red">
+    <MenuButton to="/pokemon" color="red">
       Pokedex
     </MenuButton>
     <MenuButton to="/moves" color="green">
