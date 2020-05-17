@@ -1,12 +1,16 @@
 import React from "react";
 import MenuButton from "../../components/MenuButton";
+import Page from "../../components/Page";
 
 const DashboardPage = () => (
-  <>
+  <Page
+    title="The Pokedex App"
+    searchOptions={{ placeholder: "Search all" }}
+    landing
+  >
     <MenuButton to="/pokedex" color="red">
       Pokedex
     </MenuButton>
-
     <MenuButton to="/moves" color="green">
       Moves
     </MenuButton>
@@ -16,7 +20,7 @@ const DashboardPage = () => (
     <MenuButton to="/items" color="purple">
       Items
     </MenuButton>
-  </>
+  </Page>
 );
 
 export default DashboardPage;

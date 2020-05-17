@@ -9,7 +9,7 @@
   margin-top: 10vh;
   transition: 0.4s all ease;
 
-  &.dashboard {
+  &.landing {
     margin-top: 30vh !important;
   }
 
@@ -20,30 +20,9 @@
     transition: 0.4s all ease;
   }
 
-  @include largeTablet {
-    width: 90%;
-
-    & .pokeball.large {
-      top: -25vh;
-      right: 0;
-      width: 300px;
-      height: 300px;
-
-      & .pokeball__button {
-        top: calc(50% - 100px);
-        left: calc(50% - 100px);
-        border: 30px solid;
-      }
-    }
-  }
-
   @include mobile {
-    &.dashboard {
+    &.landing {
       margin-top: 18vh !important;
-    }
-
-    & .pokeball.large {
-      top: -15vh;
     }
 
     & h1 {

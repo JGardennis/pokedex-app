@@ -6,6 +6,10 @@ interface iProps {
   placeholder: string;
 }
 
+export interface iSearchOptions {
+  placeholder: string;
+}
+
 const Search = ({ placeholder }: iProps) => (
   <div className="search-bar">
     <SearchSVG />

@@ -1,24 +1,28 @@
 import React from "react";
 import "./Page.scss";
-import Pokeball from "../Pokeball";
 import Link from "../Link";
+import Search from "../Search";
+import { iSearchOptions } from "../Search/Search";
 
 interface iProps {
   children: React.ReactNode;
   title: string;
-  className?: string;
+  searchOptions: iSearchOptions;
+  landing?: boolean;
   backButton?: boolean;
 }
 
-const Page = ({ className, children, title, backButton }: iProps) => (
-  <div className={`${className ? className : ""} page`}>
-    {backButton && (
-      <Link className="back-button" to="/">
-        BACK
-      </Link>
-    )}
-    <Pokeball className="large" />
-    <h1>{title}</h1>
+const Page = ({
+  children,
+  title,
+  landing,
+  backButton,
+  searchOptions,
+}: iProps) => (
+  <div className={`page ${landing ? "landing" : ""}`}>
+    {backButton && <Link to="/">Back</Link>}
+    <h1 className="page__title">{title}</h1>
+    <Search {...searchOptions} />
     {children}
   </div>
 );
