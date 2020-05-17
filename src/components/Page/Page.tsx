@@ -8,23 +8,25 @@ interface iProps {
   children: React.ReactNode;
   title: string;
   searchOptions: iSearchOptions;
-  landing?: boolean;
+  className?: string;
   backButton?: boolean;
 }
 
 const Page = ({
   children,
   title,
-  landing,
+  className,
   backButton,
   searchOptions,
-}: iProps) => (
-  <div className={`page ${landing ? "landing" : ""}`}>
-    <h1 className="page__title">{title}</h1>
-    {backButton && <Link to="/">Back</Link>}
-    <Search {...searchOptions} />
-    {children}
-  </div>
-);
+}: iProps) => {
+  return (
+    <div className={`page ${className || ""}`}>
+      <h1 className="page__title">{title}</h1>
+      {backButton && <Link to="/">Back</Link>}
+      <Search {...searchOptions} />
+      {children}
+    </div>
+  );
+};
 
 export default Page;

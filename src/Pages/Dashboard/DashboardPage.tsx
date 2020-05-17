@@ -6,7 +6,7 @@ const DashboardPage = () => (
   <Page
     title="The Pokedex App"
     searchOptions={{ placeholder: "Search all" }}
-    landing
+    className="landing"
   >
     <MenuButton to="/pokemon" color="red">
       Pokedex

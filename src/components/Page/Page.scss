@@ -13,6 +13,10 @@
     margin-top: 30vh !important;
   }
 
+  &.wide {
+    max-width: 1000px;
+  }
+
   h1 {
     font-family: "Jost", sans-serif;
     font-size: 3em;
