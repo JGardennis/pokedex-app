@@ -19,4 +19,17 @@
     font-size: 1.2em;
     font-weight: 500;
   }
+
+  &__types {
+    margin: 2em 0;
+  }
+
+  &__type {
+    margin-right: 0.5em;
+    padding: 0.5em;
+    border-radius: 2em;
+    width: 90px;
+    display: inline-block;
+    text-align: center;
+  }
 }

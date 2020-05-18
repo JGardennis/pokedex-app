@@ -39,6 +39,13 @@ const PokeCard = ({ name, id }: iProps) => {
       <Pokeball />
       <span>#{prefixZeros(id)}</span>
       <h2>{capitalize(name)}</h2>
+      <div className="pokeCard__types">
+        {data
+          ? data.types.map(({ slot, type }) => (
+              <span className="pokeCard__type">{capitalize(type.name)}</span>
+            ))
+          : null}
+      </div>
     </div>
   );
 };

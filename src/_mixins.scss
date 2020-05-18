@@ -31,6 +31,10 @@
       & .pokeball::after {
         background-color: $primary;
       }
+
+      & .pokeCard__type {
+        background-color: $secondary;
+      }
     }
   }
 }
