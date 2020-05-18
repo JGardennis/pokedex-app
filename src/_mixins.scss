@@ -9,6 +9,32 @@
   }
 }
 
+// Used to map pokemon style themes and colors
+@mixin typeTheme() {
+  @each $type-name, $color in $pokemonTypes {
+    $primary: map-get(map-get($pokemonTypes, $type-name), color-background);
+    $secondary: map-get(map-get($pokemonTypes, $type-name), color-alt);
+
+    &.type-#{$type-name} {
+      background-color: $primary;
+
+      & .pokeball,
+      & .pokeball::before,
+      & .pokeball__button {
+        background-color: $secondary;
+      }
+
+      & .pokeball__button {
+        border-color: $primary;
+      }
+
+      & .pokeball::after {
+        background-color: $primary;
+      }
+    }
+  }
+}
+
 // Used to set colors of main menu buttons
 @mixin menu-button-colors($color, $altColor) {
   background-color: $color;

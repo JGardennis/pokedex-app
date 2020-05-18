@@ -14,54 +14,75 @@ $themes: (
 $pokemonTypes: (
   grass: (
     color-background: #67cc8e,
+    color-alt: #91d9ad,
+  ),
+  bug: (
+    color-background: #a8c545,
+    color-alt: #c3d680,
   ),
   fire: (
     color-background: #ff9f9f,
+    color-alt: #eea7a7,
   ),
   water: (
     color-background: #7ecefd,
+    color-alt: #b5d9ee,
   ),
   electric: (
     color-background: #ffdc00,
+    color-alt: #ffec77,
   ),
   poison: (
     color-background: #9c27b0,
+    color-alt: #af6cbb,
   ),
   psychic: (
     color-background: #e391c0,
+    color-alt: #e2bad1,
   ),
   dark: (
     color-background: #374140,
+    color-alt: #808080,
   ),
   fighting: (
     color-background: #d57e7e,
+    color-alt: #d2a6a6,
   ),
   flying: (
     color-background: #59d8e6,
+    color-alt: #c8eaee,
   ),
   ground: (
     color-background: #f0c755,
+    color-alt: #f1dda8,
   ),
   ghost: (
     color-background: #c09dec,
+    color-alt: #d7c5ee,
   ),
   fairy: (
     color-background: #f6bae7,
+    color-alt: #f6d5ee,
   ),
   steel: (
     color-background: #dcdcdc,
+    color-alt: #f6f6f6,
   ),
   ice: (
     color-background: #acf0f2,
+    color-alt: #d8fbfc,
   ),
   rock: (
     color-background: #e6a14d,
+    color-alt: #e2be92,
   ),
   dragon: (
     color-background: #8a76ff,
+    color-alt: #ad9ffc,
   ),
   normal: (
     color-background: #f7deb2,
+    color-alt: #ffeccb,
   ),
 );
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./PokeCard.scss";
 import { prefixZeros, capitalize } from "../../helpers/strings";
+import Pokeball from "../Pokeball";
 
 interface iProps {
   name: string;
@@ -35,6 +36,7 @@ const PokeCard = ({ name, id }: iProps) => {
 
   return (
     <div className={`pokeCard type-${getPrimaryType()}`}>
+      <Pokeball />
       <span>#{prefixZeros(id)}</span>
       <h2>{capitalize(name)}</h2>
     </div>
