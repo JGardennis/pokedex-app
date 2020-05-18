@@ -7,6 +7,7 @@ import PokedexPage from "../../Pages/Pokedex";
 import ItemsPage from "../../Pages/Items";
 import DashboardPage from "../../Pages/Dashboard";
 import Pokeball from "../Pokeball";
+import PokemonData from "../../Pages/PokemonData";
 
 const App = () => (
   <>
@@ -14,6 +15,7 @@ const App = () => (
     <Switch>
       <Route path="/items" component={ItemsPage} exact />
       <Route path="/pokemon" component={PokedexPage} exact />
+      <Route path="/pokemon/:id" component={PokemonData} />
       <Route path="/abilities" component={AbilitiesPage} exact />
       <Route path="/moves" component={MovesPage} exact />
       <Route path="/" component={DashboardPage} exact />

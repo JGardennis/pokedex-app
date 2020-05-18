@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./PokeCard.scss";
 import { prefixZeros, capitalize } from "../../helpers/strings";
 import Pokeball from "../Pokeball";
+import Link from "../Link";
 
 interface iProps {
   name: string;
   id: string | null;
 }
 
-interface iPokemonData {
+export interface iPokemonData {
   types: { slot: number; type: { name: string; url: string } }[];
 }
 
@@ -35,7 +36,15 @@ const PokeCard = ({ name, id }: iProps) => {
   }
 
   return (
-    <div className={`pokeCard type-${getPrimaryType()}`}>
+    <Link
+      to={{
+        pathname: `/pokemon/${id}`,
+        state: {
+          data: data,
+        },
+      }}
+      className={`pokeCard type-${getPrimaryType()}`}
+    >
       <Pokeball />
       <span>#{prefixZeros(id)}</span>
       <h2>{capitalize(name)}</h2>
@@ -46,7 +55,7 @@ const PokeCard = ({ name, id }: iProps) => {
             ))
           : null}
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -3,7 +3,7 @@ import "./Link.scss";
 import { Link as ReactLink } from "react-router-dom";
 
 interface iProps {
-  to: string;
+  to: string | { pathname: string; state?: { [key: string]: any } };
   children: React.ReactNode;
   className?: string;
 }

@@ -4,13 +4,14 @@
   display: inline-block;
   position: relative;
   width: 300px;
-  height: 250px;
+  height: 200px;
   margin: 1em;
   box-shadow: 0px 0px 3px 0px rgba(162, 162, 162, 0.75);
   font-family: "rubik", sans-serif;
+  font-weight: initial;
   padding: 1em;
   border-radius: 5px;
-  color: #fff;
+  color: #fff !important;
 
   @include typeTheme();
 

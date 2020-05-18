@@ -6,7 +6,7 @@ import { iSearchOptions } from "../Search/Search";
 
 interface iProps {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   searchOptions: iSearchOptions;
   className?: string;
   backButton?: boolean;
@@ -21,9 +21,9 @@ const Page = ({
 }: iProps) => {
   return (
     <div className={`page ${className || ""}`}>
-      <h1 className="page__title">{title}</h1>
+      {title && <h1 className="page__title">{title}</h1>}
       {backButton && <Link to="/">Back</Link>}
-      <Search {...searchOptions} />
+      {<Search {...searchOptions} />}
       {children}
     </div>
   );
