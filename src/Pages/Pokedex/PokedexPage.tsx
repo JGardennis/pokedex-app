@@ -26,7 +26,7 @@ const PokedexPage = () => {
       backButton
     >
       {pokemon.map(({ name, url }) => (
-        <PokeCard name={name} id={getId(url)} />
+        <PokeCard name={name} key={name} id={getId(url)} />
       ))}
     </Page>
   );

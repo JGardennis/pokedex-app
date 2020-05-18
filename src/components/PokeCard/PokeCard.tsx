@@ -1,43 +1,42 @@
 import React, { useState, useEffect } from "react";
 import "./PokeCard.scss";
+import { prefixZeros, capitalize } from "../../helpers/strings";
 
 interface iProps {
   name: string;
   id: string | null;
 }
 
-type PokemonType = {
-  slot: number;
-  type: { name: string; url: string };
-};
+interface iPokemonData {
+  types: { slot: number; type: { name: string; url: string } }[];
+}
 
 const PokeCard = ({ name, id }: iProps) => {
-  const [types, setTypes] = useState([]);
+  const [data, setData] = useState<iPokemonData | null>(null);
+
+  const getPrimaryType = () => {
+    if (data) {
+      return data.types.find((t) => t.slot === 1)?.type.name;
+    }
+  };
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setTypes(data.types);
+        setData(data);
       });
+    // eslint-disable-next-line
   }, []);
-
-  const padded = () => {
-    let pad = "000";
-    return (pad + id).slice(-pad.length);
-  };
 
   if (!id) {
     return null;
   }
 
   return (
-    <div className="card">
-      <p>#{padded()}</p>
-      {name}
-      {types.map((t: PokemonType) => (
-        <p>{t.type.name}</p>
-      ))}
+    <div className={`pokeCard type-${getPrimaryType()}`}>
+      <span>#{prefixZeros(id)}</span>
+      <h2>{capitalize(name)}</h2>
     </div>
   );
 };

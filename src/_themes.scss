@@ -11,7 +11,61 @@ $themes: (
   ),
 );
 
-// COLORS
+$pokemonTypes: (
+  grass: (
+    color-background: #67cc8e,
+  ),
+  fire: (
+    color-background: #ff9f9f,
+  ),
+  water: (
+    color-background: #7ecefd,
+  ),
+  electric: (
+    color-background: #ffdc00,
+  ),
+  poison: (
+    color-background: #9c27b0,
+  ),
+  psychic: (
+    color-background: #e391c0,
+  ),
+  dark: (
+    color-background: #374140,
+  ),
+  fighting: (
+    color-background: #d57e7e,
+  ),
+  flying: (
+    color-background: #59d8e6,
+  ),
+  ground: (
+    color-background: #f0c755,
+  ),
+  ghost: (
+    color-background: #c09dec,
+  ),
+  fairy: (
+    color-background: #f6bae7,
+  ),
+  steel: (
+    color-background: #dcdcdc,
+  ),
+  ice: (
+    color-background: #acf0f2,
+  ),
+  rock: (
+    color-background: #e6a14d,
+  ),
+  dragon: (
+    color-background: #8a76ff,
+  ),
+  normal: (
+    color-background: #f7deb2,
+  ),
+);
+
+// BUTTON COLORS
 $main-btn-red: #ff5252;
 $alt-btn-red: #ff9f9f;
 $main-btn-green: #1bbc9b;
