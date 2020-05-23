@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Page from "../../components/Page";
 import PokeCard from "../../components/PokeCard";
-import { getPokemonList, getIdFromUrl } from "../../helpers/pokeApi";
-import { iDataRef } from "../../helpers/types";
+import { getPokemonList } from "../../helpers/pokeApi";
+import { Pokemon } from "../../helpers/types";
+import DataLoader from "../../components/DataLoader";
 
 const PokedexPage = () => {
-  const [pokemonList, setPokemonList] = useState<iDataRef[]>([]);
+  const [pokemonList, setPokemonList] = useState<Pokemon[] | null>(null);
+  const [nextList, setNextList] = useState<string | null>("");
+
+  const handleOnViewed = () => {
+    console.log("AYY");
+  };
 
   useEffect(() => {
-    getPokemonList(20).then(({ results }) => {
-      setPokemonList(results);
+    getPokemonList().then((res) => {
+      setPokemonList(res.pokemonData);
+      setNextList(res.next);
     });
   }, []);
 
@@ -20,9 +27,14 @@ const PokedexPage = () => {
       searchOptions={{ placeholder: "Search Pokemon" }}
       backButton
     >
-      {pokemonList.map(({ name, url }) => (
-        <PokeCard name={name} key={name} id={getIdFromUrl(url)} />
-      ))}
+      {pokemonList && (
+        <>
+          {pokemonList.map((data) => (
+            <PokeCard key={data.name} {...data} />
+          ))}
+          <DataLoader onViewed={handleOnViewed} />
+        </>
+      )}
     </Page>
   );
 };

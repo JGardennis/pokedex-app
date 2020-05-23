@@ -2,25 +2,33 @@ export type PokemonList = {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Array<iDataRef>;
+  results: Array<DataRef>;
 };
 
-export type iDataRef = {
+export type DataList = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: DataRef[];
+};
+
+export type DataRef = {
+  id: string;
   name: string;
   url: string;
 };
 
-export type iPokemonType = {
+export type PokemonType = {
   name: string;
   url: string;
   primary: boolean;
 };
 
 export type Pokemon = {
-  id: number;
+  id: string;
   name: string;
   image: string;
-  types: iPokemonType[];
-  moves: iDataRef[];
-  abilities: iDataRef[];
+  types: PokemonType[];
+  moves: DataRef[];
+  abilities: DataRef[];
 };

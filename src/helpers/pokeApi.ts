@@ -1,6 +1,6 @@
-import { PokemonList, Pokemon, iDataRef } from "./types";
+import { PokemonList, Pokemon, DataRef } from "./types";
 
-async function getPokemonById(id: number): Promise<Pokemon> {
+async function getPokemonById(id: string): Promise<Pokemon> {
   const data: Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   const pokemon = await data.json();
 
@@ -18,27 +18,29 @@ async function getPokemonById(id: number): Promise<Pokemon> {
   };
 }
 
-async function getPokemonList(
-  limit: number,
-  offset?: number
-): Promise<PokemonList> {
-  const queryString = `?limit=${limit}${offset ? `offset=${offset}` : ""}`;
-  const data: Response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon${queryString}`
-  );
+async function getPokemonList() {
+  const data: Response = await fetch(`https://pokeapi.co/api/v2/pokemon`);
 
-  const pokemonList: any = await data.json();
-  return pokemonList;
+  const { count, next, previous, results }: PokemonList = await data.json();
+
+  return {
+    count: count,
+    next: next,
+    previous: previous,
+    pokemonData: await Promise.all(
+      results.map(async (res) => await getPokemonById(getIdFromUrl(res.url)))
+    ),
+  };
 }
 
-function getIdFromUrl(url: string): string | null {
+function getIdFromUrl(url: string): string {
   const rgx = new RegExp(/pokemon\/([\d]*)/g).exec(url);
-  return rgx ? rgx[1] : null;
+  return rgx ? rgx[1] : "";
 }
 
-function getDataRefs(rawData: [], key: string): iDataRef[] {
-  return rawData.map((data) => {
-    return { name: "", url: "" };
+function getDataRefs(rawData: any, key: string): DataRef[] {
+  return rawData.map((data: any) => {
+    return { name: data[key].name, url: data[key].url };
   });
 }
 
