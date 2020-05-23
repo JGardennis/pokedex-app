@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Page from "../../components/Page";
 import PokeCard from "../../components/PokeCard";
+import { getPokemonList, getIdFromUrl } from "../../helpers/pokeApi";
+import { iDataRef } from "../../helpers/types";
 
 const PokedexPage = () => {
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemonList, setPokemonList] = useState<iDataRef[]>([]);
 
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon")
-      .then((res) => res.json())
-      .then((result) => {
-        setPokemon(result.results);
-      });
+    getPokemonList(20).then(({ results }) => {
+      setPokemonList(results);
+    });
   }, []);
-
-  const getId = (str: string) => {
-    const rgx = new RegExp(/pokemon\/([\d]*)/g).exec(str);
-    return rgx ? rgx[1] : null;
-  };
 
   return (
     <Page
@@ -25,8 +20,8 @@ const PokedexPage = () => {
       searchOptions={{ placeholder: "Search Pokemon" }}
       backButton
     >
-      {pokemon.map(({ name, url }) => (
-        <PokeCard name={name} key={name} id={getId(url)} />
+      {pokemonList.map(({ name, url }) => (
+        <PokeCard name={name} key={name} id={getIdFromUrl(url)} />
       ))}
     </Page>
   );

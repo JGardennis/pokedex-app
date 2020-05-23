@@ -3,57 +3,51 @@ import "./PokeCard.scss";
 import { prefixZeros, capitalize } from "../../helpers/strings";
 import Pokeball from "../Pokeball";
 import Link from "../Link";
+import { Pokemon } from "../../helpers/types";
+import { getPokemonById } from "../../helpers/pokeApi";
 
 interface iProps {
-  name: string;
   id: string | null;
+  name: string;
 }
 
-export interface iPokemonData {
-  types: { slot: number; type: { name: string; url: string } }[];
-}
-
-const PokeCard = ({ name, id }: iProps) => {
-  const [data, setData] = useState<iPokemonData | null>(null);
-
-  const getPrimaryType = () => {
-    if (data) {
-      return data.types.find((t) => t.slot === 1)?.type.name;
-    }
-  };
+const PokeCard = ({ id, name }: iProps) => {
+  const [pokemon, setPokemon] = useState<Pokemon>();
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
+    if (id) {
+      getPokemonById(parseInt(id)).then((result) => {
+        setPokemon(result);
       });
-    // eslint-disable-next-line
-  }, []);
+    }
+  }, [id]);
 
-  if (!id) {
-    return null;
-  }
+  if (!id || !pokemon) return null;
 
   return (
     <Link
+      className={`pokeCard type-${
+        pokemon.types.find((t) => !!t.primary)?.name
+      }`}
       to={{
         pathname: `/pokemon/${id}`,
         state: {
-          data: data,
+          pokemon: pokemon,
         },
       }}
-      className={`pokeCard type-${getPrimaryType()}`}
     >
       <Pokeball />
       <span>#{prefixZeros(id)}</span>
       <h2>{capitalize(name)}</h2>
+      <div className="pokeCard__image">
+        <img src={pokemon.image} alt={pokemon.name} />
+      </div>
       <div className="pokeCard__types">
-        {data
-          ? data.types.map(({ slot, type }) => (
-              <span className="pokeCard__type">{capitalize(type.name)}</span>
-            ))
-          : null}
+        {pokemon.types.map(({ name }) => (
+          <span key={name} className={`pokeCard__type`}>
+            {capitalize(name)}
+          </span>
+        ))}
       </div>
     </Link>
   );
