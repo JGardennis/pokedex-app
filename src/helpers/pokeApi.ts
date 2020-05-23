@@ -1,4 +1,4 @@
-import { PokemonList, Pokemon, DataRef } from "./types";
+import { ListData, Pokemon, DataRef } from "./types";
 
 async function getPokemonById(id: string): Promise<Pokemon> {
   const data: Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -18,18 +18,20 @@ async function getPokemonById(id: string): Promise<Pokemon> {
   };
 }
 
-async function getPokemonList() {
-  const data: Response = await fetch(`https://pokeapi.co/api/v2/pokemon`);
-
-  const { count, next, previous, results }: PokemonList = await data.json();
+async function getDataList(item: string, query?: string) {
+  const url = `https://pokeapi.co/api/v2/${item}`;
+  const data: Response = await fetch(`${url}${query || ""}`);
+  const { count, next, previous, results }: ListData = await data.json();
 
   return {
     count: count,
-    next: next,
-    previous: previous,
-    pokemonData: await Promise.all(
-      results.map(async (res) => await getPokemonById(getIdFromUrl(res.url)))
-    ),
+    next: next ? next.substring(next.indexOf("?")) : null,
+    previous: previous ? previous.substring(previous.indexOf("?")) : null,
+    results: results.map(({ name, url }) => ({
+      id: getIdFromUrl(url),
+      name: name,
+      url: url,
+    })),
   };
 }
 
@@ -44,4 +46,4 @@ function getDataRefs(rawData: any, key: string): DataRef[] {
   });
 }
 
-export { getPokemonList, getPokemonById, getIdFromUrl };
+export { getDataList, getPokemonById };

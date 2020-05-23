@@ -2,17 +2,20 @@ import React, { useRef, useEffect, useState } from "react";
 import "./DataLoader.scss";
 
 interface iProps {
-  onViewed: Function;
+  nextUrl: string | null;
+  setNextUrl: Function;
 }
 
-const DataLoader = ({ onViewed }: iProps) => {
-  const [hasRendered, setHasRendered] = useState(false);
+const DataLoader = ({ nextUrl, setNextUrl }: iProps) => {
+  const [lastLoaded, setLastLoaded] = useState("");
 
   const ref = useRef<any>();
 
   const handleObserved = ([entry]: any) => {
     if (entry.intersectionRatio === 1) {
-      onViewed();
+      if (nextUrl !== null && nextUrl !== lastLoaded) {
+        console.log("AYY");
+      }
     }
   };
 
@@ -25,7 +28,7 @@ const DataLoader = ({ onViewed }: iProps) => {
     if (ref.current) {
       observer.observe(ref.current);
     }
-  }, []);
+  });
 
   return <div className="dataLoader" ref={ref} />;
 };
