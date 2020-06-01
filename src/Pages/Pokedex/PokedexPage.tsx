@@ -1,38 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Page from "../../components/Page";
 import PokeCard from "../../components/PokeCard";
-import { getDataList, getPokemonById } from "../../helpers/pokeApi";
+import { getPokemonList } from "../../helpers/pokeApi";
 import { Pokemon } from "../../helpers/types";
-import DataLoader from "../../components/DataLoader";
 
 const PokedexPage = () => {
-  const [pokemonList, setPokemonList] = useState<Pokemon[] | null>(null);
-  const [nextList, setNextList] = useState<string | null>("");
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [nextUrl, setNextUrl] = useState<string>("");
 
-  // const handleOnViewed = () => {
-  //   console.log(nextList);
-  //   if (nextList) {
-  //     getPokemonList(nextList).then(({ pokemonData, next }) => {
-  //       if (pokemonList) {
-  //         setNextList(next);
-  //         setPokemonList(pokemonList.concat(pokemonData));
-  //       }
-  //     });
-  //   }
-  // };
-
-  useEffect(() => {
-    getDataList("pokemon").then(async ({ results, next }) => {
-      const pokemonData = await Promise.all(
-        results.map(async (res) => await getPokemonById(res.id))
-      );
-      setPokemonList(pokemonData);
+  const updatePokemonList = (query?: string) => {
+    getPokemonList(query).then(({ results, next }) => {
+      setPokemonList([...pokemonList, ...results]);
+      setNextUrl(next || "");
     });
-    // getPokemonList().then(({ pokemonData, next }) => {
-    //   setPokemonList(pokemonData);
-    //   setNextList(next);
-    // });
-  }, []);
+  };
+
+  useEffect(updatePokemonList, []);
 
   return (
     <Page
@@ -41,13 +24,17 @@ const PokedexPage = () => {
       searchOptions={{ placeholder: "Search Pokemon" }}
       backButton
     >
-      {pokemonList && (
-        <>
-          {pokemonList.map((data) => (
-            <PokeCard key={data.name} {...data} />
-          ))}
-          <DataLoader nextUrl={nextList} setNextUrl={setNextList} />
-        </>
+      {pokemonList.map((data) => (
+        <PokeCard key={data.name} {...data} />
+      ))}
+      {nextUrl && (
+        <button
+          onClick={() => {
+            updatePokemonList(nextUrl);
+          }}
+        >
+          More
+        </button>
       )}
     </Page>
   );

@@ -18,6 +18,18 @@ async function getPokemonById(id: string): Promise<Pokemon> {
   };
 }
 
+async function getPokemonList(query?: string) {
+  const data = await getDataList("pokemon", query);
+  const pokemon = await Promise.all(
+    data.results.map(async ({ url }) => await getPokemonById(getIdFromUrl(url)))
+  );
+
+  return {
+    ...data,
+    results: pokemon,
+  };
+}
+
 async function getDataList(item: string, query?: string) {
   const url = `https://pokeapi.co/api/v2/${item}`;
   const data: Response = await fetch(`${url}${query || ""}`);
@@ -46,4 +58,4 @@ function getDataRefs(rawData: any, key: string): DataRef[] {
   });
 }
 
-export { getDataList, getPokemonById };
+export { getDataList, getPokemonList, getPokemonById };
