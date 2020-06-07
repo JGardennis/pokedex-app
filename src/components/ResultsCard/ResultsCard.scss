@@ -1,6 +1,6 @@
 @import "../../mixins";
 
-.pokeCard {
+.resultsCard {
   display: inline-block;
   position: relative;
   width: 230px;
@@ -15,13 +15,13 @@
 
   @include typeTheme();
 
-  & h2 {
+  & .title {
     margin-top: 2em;
     font-size: 1.2em;
     font-weight: 500;
   }
 
-  &__image {
+  & .image {
     position: absolute;
     top: 20px;
     right: 0px;
@@ -34,18 +34,23 @@
     }
   }
 
-  &__types {
-    display: flex;
-    flex-direction: column;
-    margin-top: 3em;
-  }
+  /**
+  POKEMON CARD
+  **/
+  &.pokemonCard {
+    & .pokemon-types {
+      display: flex;
+      flex-direction: column;
+      margin-top: 3em;
 
-  &__type {
-    margin: 0.1em 0;
-    padding: 0.5em;
-    border-radius: 2em;
-    width: 90px;
-    display: block;
-    text-align: center;
+      .type {
+        margin: 0.1em 0;
+        padding: 0.5em;
+        border-radius: 2em;
+        width: 90px;
+        display: block;
+        text-align: center;
+      }
+    }
   }
 }
