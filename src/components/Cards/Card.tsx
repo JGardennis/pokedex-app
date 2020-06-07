@@ -10,12 +10,13 @@ interface iProps {
   id: string;
   type: PokemonTypeNames;
   name: string;
-  image: string;
   to: string | { pathname: string; state: { [key: string]: any } };
-  children: React.ReactNode;
+  pills?: string[];
+  image?: string;
+  children?: React.ReactNode;
 }
 
-const Card = ({ id, name, to, image, type, children }: iProps) => {
+const Card = ({ id, name, to, image, type, children, pills }: iProps) => {
   const { primary, secondary } = pokemonTypes[type];
   return (
     <Link to={to}>
@@ -27,6 +28,13 @@ const Card = ({ id, name, to, image, type, children }: iProps) => {
           <CardImage>
             <img src={image} alt={name} />
           </CardImage>
+        )}
+        {pills && (
+          <div className="pills">
+            {pills.map((pill) => (
+              <div className="pill">{capitalize(pill)}</div>
+            ))}
+          </div>
         )}
         {children}
       </CardWrap>

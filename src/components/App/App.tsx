@@ -12,8 +12,7 @@ import {
   getAbilityList,
   getItemList,
 } from "../../helpers/pokeApi";
-import { MovesCard, AbilityCard, ItemCard } from "../ResultsCard";
-import { PokemonCard } from "../Cards";
+import { AbilitiesCard, PokemonCard, MovesCard, ItemsCard } from "../Cards";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -31,7 +30,7 @@ const App = () => {
         <Route
           path="/items"
           render={() => (
-            <ResultsPage title="Items" getData={getItemList} Comp={ItemCard} />
+            <ResultsPage title="Items" getData={getItemList} Comp={ItemsCard} />
           )}
           exact
         />
@@ -53,7 +52,7 @@ const App = () => {
             <ResultsPage
               title="Abilities"
               getData={getAbilityList}
-              Comp={AbilityCard}
+              Comp={AbilitiesCard}
             />
           )}
           exact

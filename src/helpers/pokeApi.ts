@@ -86,7 +86,7 @@ async function getAbilityById(id: string): Promise<Ability> {
   return {
     id: ability.id,
     name: ability.name,
-    type: pokemon.types.find((t) => !!t.primary)?.name || "",
+    type: pokemon.types.find((t) => !!t.primary)?.name || "normal",
     text: getEnglishEntryFromItem(ability, "flavor_text_entries").flavor_text,
     battleEffect: getEnglishEntryFromItem(ability, "effect_entries").effect,
     pokemonIds: ability.pokemon.map((p: any) => getIdFromUrl(p.pokemon.url)),

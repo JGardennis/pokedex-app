@@ -24,7 +24,7 @@ export type Move = {
   id: string;
   name: string;
   class: string;
-  type: string;
+  type: PokemonTypeNames;
   text: string;
   effects: string[];
   effectChance: string;
@@ -37,7 +37,7 @@ export type Ability = {
   id: string;
   name: string;
   text: string;
-  type: string;
+  type: PokemonTypeNames;
   battleEffect: string;
   pokemonIds: number[];
 };

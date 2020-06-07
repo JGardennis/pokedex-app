@@ -1,6 +1,5 @@
 import React from "react";
 import { Pokemon } from "../../helpers/types";
-import { capitalize } from "../../helpers/strings";
 import Card from "./Card";
 
 export const PokemonCard = (props: Pokemon) => (
@@ -13,13 +12,8 @@ export const PokemonCard = (props: Pokemon) => (
         pokemon: props,
       },
     }}
-  >
-    <div className="pills">
-      {props.types.map(({ name }) => (
-        <span className="pill">{capitalize(name)}</span>
-      ))}
-    </div>
-  </Card>
+    pills={props.types.map(({ name }) => name)}
+  />
 );
 
 export default PokemonCard;
