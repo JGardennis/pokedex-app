@@ -13,9 +13,11 @@ import {
   getItemList,
 } from "../../helpers/pokeApi";
 import { PokemonCard, MovesCard, AbilityCard, ItemCard } from "../ResultsCard";
+import ThemeSwitch from "../ThemeSwitch";
 
 const App = () => (
   <>
+    <ThemeSwitch />
     <Pokeball className="large" />
     <Switch>
       <Route

@@ -4,14 +4,13 @@ const ThemeSwitch = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   const handleOnClick = () => {
-    setDarkMode(!darkMode);
-
     document.documentElement.classList[darkMode ? "remove" : "add"](
       "theme-light"
     );
     document.documentElement.classList[darkMode ? "add" : "remove"](
       "theme-dark"
     );
+    setDarkMode(!darkMode);
   };
 
   return (
