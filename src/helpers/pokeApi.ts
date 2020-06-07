@@ -1,4 +1,4 @@
-import { ListData, Pokemon, DataRef, Move } from "./types";
+import { ListData, Pokemon, DataRef, Move, Ability } from "./types";
 import { capitalize } from "./strings";
 /****
  *
@@ -44,17 +44,12 @@ async function getMoveById(id: string): Promise<Move> {
   const data: Response = await fetch(`https://pokeapi.co/api/v2/move/${id}`);
   const move = await data.json();
 
-  const getMoveText = (m: any) =>
-    m.flavor_text_entries.find((entry: any) => {
-      return entry.language.name === "en";
-    });
-
   return {
     id: id,
     name: move.name.replace(/[-]/g, " ").toUpperCase(),
     class: capitalize(move.damage_class.name),
     type: move.type.name,
-    text: getMoveText(move),
+    text: getEnglishEntryFromItem(move, "flavor_text_entries").flavor_text,
     effects: move.effect_entries.map((entry: any) => entry.effect),
     effectChance: move.effect_chance,
     power: move.power || 0,
@@ -73,6 +68,55 @@ async function getMoveList(query?: string) {
     ...data,
     results: moves,
   };
+}
+
+/****
+ *
+ * ABILITIES
+ *
+ */
+async function getAbilityById(id: string): Promise<Ability> {
+  const data: Response = await fetch(`https://pokeapi.co/api/v2/ability/${id}`);
+  const ability = await data.json();
+
+  const pokemon = await getPokemonById(
+    getIdFromUrl(ability.pokemon[0].pokemon.url)
+  );
+
+  // types.find((t) => !!t.primary)?.name
+
+  return {
+    id: ability.id,
+    name: ability.name,
+    type: pokemon.types.find((t) => !!t.primary)?.name || "",
+    text: getEnglishEntryFromItem(ability, "flavor_text_entries").flavor_text,
+    battleEffect: getEnglishEntryFromItem(ability, "effect_entries").effect,
+    pokemonIds: ability.pokemon.map((p: any) => getIdFromUrl(p.pokemon.url)),
+  };
+}
+
+async function getAbilityList(query?: string) {
+  const data = await getDataList("ability", query);
+  const abilities = await Promise.all(
+    data.results.map(async ({ url }) => await getAbilityById(getIdFromUrl(url)))
+  );
+
+  return {
+    ...data,
+    results: abilities,
+  };
+}
+
+/****
+ *
+ * UTILITIES
+ *
+ */
+
+function getEnglishEntryFromItem(item: any, key: string) {
+  return item[key].find((entry: any) => {
+    return entry.language.name === "en";
+  });
 }
 
 async function getDataList(item: string, query?: string) {
@@ -103,4 +147,4 @@ function getDataRefs(rawData: any, key: string): DataRef[] {
   });
 }
 
-export { getPokemonList, getMoveList };
+export { getPokemonList, getMoveList, getAbilityList };

@@ -28,10 +28,18 @@ export type Move = {
   text: string;
   effects: string[];
   effectChance: string;
-
   power: number;
   accuracy: number;
   pp: number;
+};
+
+export type Ability = {
+  id: string;
+  name: string;
+  text: string;
+  type: string;
+  battleEffect: string;
+  pokemonIds: number[];
 };
 
 export type PokemonType = {
