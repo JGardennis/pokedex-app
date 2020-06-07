@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Page from "../../components/Page";
 import { Pokemon } from "../../helpers/types";
-import Link from "../../components/Link";
+import { LinkButton } from "../../components/Buttons";
 
 interface iProps {
   match: { params: { id: string } };
@@ -33,7 +33,9 @@ const PokemonDataPage = ({ match, location }: iProps) => {
     <Page searchOptions={{ hide: true }}>
       <p>id: {match.params.id}</p>
       <p>name: {data ? data.name : ""}</p>
-      <Link to={`/pokemon/${parseInt(match.params.id) + 1}`}>Next</Link>
+      <LinkButton to={`/pokemon/${parseInt(match.params.id) + 1}`}>
+        Next
+      </LinkButton>
     </Page>
   );
 };

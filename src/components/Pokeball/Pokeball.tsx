@@ -1,14 +1,16 @@
 import React from "react";
-import "./Pokeball.scss";
+import { PokeballWrap, Inner } from "./Pokeball.styles";
 
 interface iProps {
-  className?: string;
+  large?: boolean;
+  primary?: string;
+  secondary?: string;
 }
 
-const Pokeball = ({ className }: iProps) => (
-  <div className={`pokeball ${className || ""}`}>
-    <div className="pokeball__button"></div>
-  </div>
+const Pokeball = (props: iProps) => (
+  <PokeballWrap {...props}>
+    <Inner {...props} />
+  </PokeballWrap>
 );
 
 export default Pokeball;

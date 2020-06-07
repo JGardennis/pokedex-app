@@ -1,8 +1,8 @@
 import React from "react";
 import "./Page.scss";
-import Link from "../Link";
 import Search from "../Search";
 import { iSearchOptions } from "../Search/Search";
+import { LinkButton } from "../Buttons";
 
 interface iProps {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ const Page = ({
   return (
     <div className={`page ${className || ""}`}>
       {title && <h1 className="page__title">{title}</h1>}
-      {backButton && <Link to="/">Back</Link>}
+      {backButton && <LinkButton to="/">Back</LinkButton>}
       {<Search {...searchOptions} />}
       {children}
     </div>

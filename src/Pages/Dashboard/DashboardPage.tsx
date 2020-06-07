@@ -1,6 +1,6 @@
 import React from "react";
-import MenuButton from "../../components/MenuButton";
 import Page from "../../components/Page";
+import { MenuButton } from "../../components/Buttons";
 
 const DashboardPage = () => (
   <Page

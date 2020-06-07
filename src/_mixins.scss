@@ -39,30 +39,6 @@
   }
 }
 
-// Used to set colors of main menu buttons
-@mixin menu-button-colors($color, $altColor) {
-  background-color: $color;
-  box-shadow: 2px 2px 4px $color;
-
-  & .pokeball,
-  & .pokeball::before,
-  & .pokeball__button {
-    background-color: $altColor;
-  }
-
-  & .pokeball__button {
-    border-color: $color;
-  }
-
-  & .pokeball::after {
-    background-color: $color;
-  }
-
-  &:hover {
-    box-shadow: 2px 2px 8px $color;
-  }
-}
-
 // BREAKPOINTS
 @mixin desktop {
   @media (min-width: #{$desktop}) {

@@ -1,8 +1,8 @@
 import React from "react";
 import "./ResultsCard.scss";
-import Link from "../Link";
 import Pokeball from "../Pokeball";
 import { prefixZeros, capitalize } from "../../helpers/strings";
+import { Link } from "react-router-dom";
 
 interface iProps {
   id: string;
