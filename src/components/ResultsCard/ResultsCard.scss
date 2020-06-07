@@ -48,4 +48,17 @@
       text-align: center;
     }
   }
+
+  &.itemCard {
+    .image {
+      width: 5em;
+    }
+
+    .text {
+      width: 200px;
+      line-height: 1.2;
+      margin-top: 1em;
+      font-size: 0.8em;
+    }
+  }
 }

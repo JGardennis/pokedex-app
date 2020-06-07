@@ -42,6 +42,13 @@ export type Ability = {
   pokemonIds: number[];
 };
 
+export type Item = {
+  id: string;
+  name: string;
+  image: string;
+  text: string;
+};
+
 export type PokemonType = {
   name: string;
   url: string;

@@ -1,4 +1,4 @@
-import { ListData, Pokemon, DataRef, Move, Ability } from "./types";
+import { ListData, Pokemon, DataRef, Move, Ability, Item } from "./types";
 import { capitalize } from "./strings";
 /****
  *
@@ -83,8 +83,6 @@ async function getAbilityById(id: string): Promise<Ability> {
     getIdFromUrl(ability.pokemon[0].pokemon.url)
   );
 
-  // types.find((t) => !!t.primary)?.name
-
   return {
     id: ability.id,
     name: ability.name,
@@ -104,6 +102,35 @@ async function getAbilityList(query?: string) {
   return {
     ...data,
     results: abilities,
+  };
+}
+
+/****
+ *
+ * ITEMS
+ *
+ */
+async function getItemById(id: string): Promise<Item> {
+  const data: Response = await fetch(`https://pokeapi.co/api/v2/item/${id}`);
+  const item = await data.json();
+
+  return {
+    id: item.id,
+    name: item.name.replace(/[-]/g, " "),
+    image: item.sprites.default,
+    text: getEnglishEntryFromItem(item, "effect_entries").short_effect,
+  };
+}
+
+async function getItemList(query?: string) {
+  const data = await getDataList("ability", query);
+  const items = await Promise.all(
+    data.results.map(async ({ url }) => await getItemById(getIdFromUrl(url)))
+  );
+
+  return {
+    ...data,
+    results: items,
   };
 }
 
@@ -147,4 +174,4 @@ function getDataRefs(rawData: any, key: string): DataRef[] {
   });
 }
 
-export { getPokemonList, getMoveList, getAbilityList };
+export { getPokemonList, getMoveList, getAbilityList, getItemList };
