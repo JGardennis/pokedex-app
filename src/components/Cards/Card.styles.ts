@@ -6,11 +6,12 @@ export const CardWrap = styled.div`
   width: 230px;
   height: 200px;
   margin: 1em;
-  box-shadow: 0px 0px 3px 0px rgba(162, 162, 162, 0.75);
+  box-shadow: ${({ theme }: any) => theme.boxShadow}
   font-family: ${({ theme }: any) => theme.secondaryFont};
   padding: 1em;
   border-radius: 5px;
-  background-color: ${(props: any) => props.bgColor};
+  background-color: ${(props) => props.bgColor};
+  transition: ${({ theme }: any) => theme.transition};
 
   a {
     text-decoration: none;

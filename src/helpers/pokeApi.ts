@@ -147,8 +147,8 @@ function getEnglishEntryFromItem(item: any, key: string) {
 }
 
 async function getDataList(item: string, query?: string) {
-  const url = `https://pokeapi.co/api/v2/${item}`;
-  const data: Response = await fetch(`${url}${query || ""}`);
+  const url = `https://pokeapi.co/api/v2/${item}?limit=30`;
+  const data: Response = await fetch(`${url}${`&${query}` || ""}`);
   const { count, next, previous, results }: ListData = await data.json();
 
   return {

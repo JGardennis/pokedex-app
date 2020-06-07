@@ -1,2 +1,2 @@
 export { default as MenuButton } from "./MenuButton";
-export { default as LinkButton } from "./LinkButton";
+export { LinkButton, Link, Button, ThemeButton } from "./Buttons.styles";

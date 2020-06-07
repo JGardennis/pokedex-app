@@ -5,6 +5,7 @@ import { prefixZeros, capitalize } from "../../helpers/strings";
 import { PokemonTypeNames } from "../../helpers/types";
 import { pokemonTypes } from "../Theme";
 import { Link } from "../Buttons/Buttons.styles";
+import { withTheme } from "styled-components";
 
 interface iProps {
   id: string;
@@ -14,14 +15,28 @@ interface iProps {
   pills?: string[];
   image?: string;
   children?: React.ReactNode;
+  theme?: any;
 }
 
-const Card = ({ id, name, to, image, type, children, pills }: iProps) => {
+const Card = ({
+  id,
+  name,
+  to,
+  image,
+  type,
+  children,
+  pills,
+  theme,
+}: iProps) => {
   const { primary, secondary } = pokemonTypes[type];
+
   return (
     <Link to={to}>
-      <CardWrap bgColor={primary} pillColor={secondary}>
-        <Pokeball primary={primary} secondary={secondary} />
+      <CardWrap bgColor={theme.cardBackground || primary} pillColor={secondary}>
+        <Pokeball
+          primary={theme.cardBackground || primary}
+          secondary={secondary}
+        />
         <span>#{prefixZeros(id)}</span>
         <CardTitle>{capitalize(name)}</CardTitle>
         {image && (
@@ -42,4 +57,4 @@ const Card = ({ id, name, to, image, type, children, pills }: iProps) => {
   );
 };
 
-export default Card;
+export default withTheme(Card);

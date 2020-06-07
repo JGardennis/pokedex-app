@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Page from "../../components/Page";
+import Page from "./Page";
+import { Button } from "../Buttons";
 
 interface iProps {
   title: string;
@@ -21,17 +22,16 @@ const ResultsPage = ({ title, getData, Comp }: iProps) => {
   useEffect(updateList, []);
 
   return (
-    <Page
-      title={title}
-      className="wide"
-      searchOptions={{ placeholder: `Search ${title.toLowerCase()}` }}
-      backButton
-    >
+    <Page title={title} backButton wide>
       {list.map((data: any) => (
         <Comp key={data.name} {...data} />
       ))}
 
-      {nextUrl && <button onClick={() => updateList(nextUrl)}>More</button>}
+      {nextUrl && (
+        <Button onClick={() => updateList(nextUrl)} center cta>
+          More
+        </Button>
+      )}
     </Page>
   );
 };

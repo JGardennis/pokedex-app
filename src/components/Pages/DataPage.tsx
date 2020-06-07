@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Page from "../../components/Page";
+import Page from "./Page";
 import { Pokemon } from "../../helpers/types";
-import { LinkButton } from "../../components/Buttons";
+import { Link, Button } from "../../components/Buttons";
 
 interface iProps {
   match: { params: { id: string } };
   location: { state: { data: Pokemon } };
 }
 
-const PokemonDataPage = ({ match, location }: iProps) => {
+const DataPage = ({ match, location }: iProps) => {
   const [data, setData] = useState<Pokemon | null>(null);
 
   useEffect(() => {
@@ -30,13 +30,13 @@ const PokemonDataPage = ({ match, location }: iProps) => {
   }, []);
 
   return (
-    <Page searchOptions={{ hide: true }}>
+    <Page>
       <p>id: {match.params.id}</p>
       <p>name: {data ? data.name : ""}</p>
-      <LinkButton to={`/pokemon/${parseInt(match.params.id) + 1}`}>
-        Next
-      </LinkButton>
+      <Link to={`/pokemon/${parseInt(match.params.id) + 1}`}>
+        <Button>Next</Button>
+      </Link>
     </Page>
   );
 };
-export default PokemonDataPage;
+export default DataPage;

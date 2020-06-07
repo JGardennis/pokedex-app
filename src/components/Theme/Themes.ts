@@ -9,15 +9,16 @@ export const lightTheme = {
   background: "#fafafa",
   pokeball: "#e6e6e6",
   text: "#707070",
-  cardBackground: "#fff",
+  boxShadow: "1px 1px 3px 0 #adadad;",
 };
 
 export const darkTheme = {
   ...globalTheme,
-  background: "#012840",
-  pokeball: "#234f6a",
+  background: "#252525",
+  pokeball: "#393e46",
   text: "#fff",
-  cardBackground: "#252525",
+  cardBackground: "#393e46",
+  boxShadow: "1px 1px 3px 0 #1d1a1a;",
 };
 
 export const colors = {

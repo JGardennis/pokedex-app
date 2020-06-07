@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, lightTheme, darkTheme } from "../Theme";
 import { Route, Switch } from "react-router-dom";
-import DashboardPage from "../../Pages/Dashboard";
 import Pokeball from "../Pokeball";
-import PokemonData from "../../Pages/PokemonData";
-import ResultsPage from "../../Pages/ResultsPage";
 import {
   getPokemonList,
   getMoveList,
   getAbilityList,
   getItemList,
 } from "../../helpers/pokeApi";
+import { DashboardPage, ResultsPage, DataPage } from "../Pages";
 import { AbilitiesCard, PokemonCard, MovesCard, ItemsCard } from "../Cards";
+import { ThemeButton } from "../Buttons";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -24,7 +23,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
-      <button onClick={toggleTheme}>Toggle theme</button>
+      <ThemeButton onClick={toggleTheme}>Toggle theme</ThemeButton>
       <Pokeball large />
       <Switch>
         <Route
@@ -45,7 +44,7 @@ const App = () => {
           )}
           exact
         />
-        <Route path="/pokemon/:id" component={PokemonData} />
+        <Route path="/pokemon/:id" component={DataPage} />
         <Route
           path="/abilities"
           render={() => (
