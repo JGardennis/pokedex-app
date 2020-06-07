@@ -1,7 +1,7 @@
 import React from "react";
 import { Pokemon } from "../../../helpers/types";
-import { capitalize } from "../../../helpers/strings";
 import ResultsCard from "../ResultsCard";
+import { capitalize } from "../../../helpers/strings";
 
 export const PokemonCard = (props: Pokemon) => {
   const className = `pokemonCard type-${
@@ -24,9 +24,9 @@ export const PokemonCard = (props: Pokemon) => {
         <img src={props.image} alt={props.name} />
       </div>
 
-      <div className="pokemon-types">
+      <div className="pills">
         {props.types.map(({ name }) => (
-          <span key={name} className={`type`}>
+          <span key={name} className={`pill`}>
             {capitalize(name)}
           </span>
         ))}

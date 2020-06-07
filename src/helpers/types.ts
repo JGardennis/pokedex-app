@@ -24,6 +24,7 @@ export type Move = {
   id: string;
   name: string;
   class: string;
+  type: string;
   text: string;
   effects: string[];
   effectChance: string;

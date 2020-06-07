@@ -1,4 +1,5 @@
 import { ListData, Pokemon, DataRef, Move } from "./types";
+import { capitalize } from "./strings";
 /****
  *
  * POKEMON
@@ -51,7 +52,8 @@ async function getMoveById(id: string): Promise<Move> {
   return {
     id: id,
     name: move.name.replace(/[-]/g, " ").toUpperCase(),
-    class: move.damage_class.name,
+    class: capitalize(move.damage_class.name),
+    type: move.type.name,
     text: getMoveText(move),
     effects: move.effect_entries.map((entry: any) => entry.effect),
     effectChance: move.effect_chance,
@@ -91,8 +93,8 @@ async function getDataList(item: string, query?: string) {
 }
 
 function getIdFromUrl(url: string): string {
-  const rgx = new RegExp(/pokemon\/([\d]*)/g).exec(url);
-  return rgx ? rgx[1] : "";
+  const rgx = new RegExp(/v2\/[\w]*\/([\d]*)/g).exec(url);
+  return rgx && rgx.length === 2 ? rgx[1] : "";
 }
 
 function getDataRefs(rawData: any, key: string): DataRef[] {

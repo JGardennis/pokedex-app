@@ -8,15 +8,14 @@ import Pokeball from "../Pokeball";
 import PokemonData from "../../Pages/PokemonData";
 import ResultsPage from "../../Pages/ResultsPage";
 import { getPokemonList, getMoveList } from "../../helpers/pokeApi";
-import MoveCard from "../MoveCard";
-import { PokemonCard } from "../ResultsCard";
+import { PokemonCard, MovesCard } from "../ResultsCard";
 
 const PokemonResults = () => (
   <ResultsPage title="Pokemon" getData={getPokemonList} Comp={PokemonCard} />
 );
 
 const MovesResults = () => (
-  <ResultsPage title="Moves" getData={getMoveList} Comp={MoveCard} />
+  <ResultsPage title="Moves" getData={getMoveList} Comp={MovesCard} />
 );
 
 const App = () => (

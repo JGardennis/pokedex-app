@@ -34,23 +34,18 @@
     }
   }
 
-  /**
-  POKEMON CARD
-  **/
-  &.pokemonCard {
-    & .pokemon-types {
-      display: flex;
-      flex-direction: column;
-      margin-top: 3em;
+  & .pills {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3em;
 
-      .type {
-        margin: 0.1em 0;
-        padding: 0.5em;
-        border-radius: 2em;
-        width: 90px;
-        display: block;
-        text-align: center;
-      }
+    .pill {
+      margin: 0.1em 0;
+      padding: 0.5em;
+      border-radius: 2em;
+      width: 90px;
+      display: block;
+      text-align: center;
     }
   }
 }
