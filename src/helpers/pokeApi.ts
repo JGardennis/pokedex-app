@@ -1,5 +1,9 @@
-import { ListData, Pokemon, DataRef } from "./types";
-
+import { ListData, Pokemon, DataRef, Move } from "./types";
+/****
+ *
+ * POKEMON
+ *
+ */
 async function getPokemonById(id: string): Promise<Pokemon> {
   const data: Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   const pokemon = await data.json();
@@ -27,6 +31,45 @@ async function getPokemonList(query?: string) {
   return {
     ...data,
     results: pokemon,
+  };
+}
+
+/****
+ *
+ * MOVES
+ *
+ */
+async function getMoveById(id: string): Promise<Move> {
+  const data: Response = await fetch(`https://pokeapi.co/api/v2/move/${id}`);
+  const move = await data.json();
+
+  const getMoveText = (m: any) =>
+    m.flavor_text_entries.find((entry: any) => {
+      return entry.language.name === "en";
+    });
+
+  return {
+    id: id,
+    name: move.name.replace(/[-]/g, " ").toUpperCase(),
+    class: move.damage_class.name,
+    text: getMoveText(move),
+    effects: move.effect_entries.map((entry: any) => entry.effect),
+    effectChance: move.effect_chance,
+    power: move.power || 0,
+    accuracy: move.accuracy || 0,
+    pp: move.pp,
+  };
+}
+
+async function getMoveList(query?: string) {
+  const data = await getDataList("move", query);
+  const moves = await Promise.all(
+    data.results.map(async ({ url }) => await getMoveById(getIdFromUrl(url)))
+  );
+
+  return {
+    ...data,
+    results: moves,
   };
 }
 
@@ -58,4 +101,4 @@ function getDataRefs(rawData: any, key: string): DataRef[] {
   });
 }
 
-export { getDataList, getPokemonList, getPokemonById };
+export { getPokemonList, getMoveList };

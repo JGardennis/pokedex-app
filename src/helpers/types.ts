@@ -20,6 +20,19 @@ export type Pokemon = {
   abilities: DataRef[];
 };
 
+export type Move = {
+  id: string;
+  name: string;
+  class: string;
+  text: string;
+  effects: string[];
+  effectChance: string;
+
+  power: number;
+  accuracy: number;
+  pp: number;
+};
+
 export type PokemonType = {
   name: string;
   url: string;
