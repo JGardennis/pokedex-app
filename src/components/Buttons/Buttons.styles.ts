@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link as ReactLink } from "react-router-dom";
+import { queries } from "../Theme";
 
 export const MenuButtonWrap = styled(ReactLink)`
   position: relative;
@@ -68,4 +69,10 @@ export const ThemeButton = styled(Button)`
   position: fixed;
   top: 1em;
   left: 1em;
+
+  ${queries.laptop} {
+    left: unset;
+    right: 1em;
+    z-index: 2;
+  }
 `;

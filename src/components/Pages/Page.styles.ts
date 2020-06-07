@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { queries } from "../Theme";
 
 export const PageWrapper = styled.div`
   position: relative;
@@ -10,6 +11,14 @@ export const PageWrapper = styled.div`
   transition: 0.4s all ease;
 
   ${(props: any) => props.landingPage && "margin-top: 30vh;"}
+
+  ${queries.laptop} {
+    width: 90%;
+  }
+
+  ${queries.tablet} {
+    width: 80%;
+  }
 `;
 
 export const PageTitle = styled.h1`

@@ -114,3 +114,10 @@ export const pokemonTypes = {
     secondary: "#ffeccb",
   },
 };
+
+export const queries = {
+  mobile: "@media only screen and (max-width: 500px)",
+  tablet: "@media only screen and (max-width: 768px)",
+  laptop: "@media only screen and (max-width: 1024px)",
+  desktop: "@media only screen and (min-width: 1024px)",
+};
