@@ -50,7 +50,27 @@ export type Item = {
 };
 
 export type PokemonType = {
-  name: string;
+  name: PokemonTypeNames;
   url: string;
   primary: boolean;
 };
+
+export type PokemonTypeNames =
+  | "grass"
+  | "bug"
+  | "fire"
+  | "water"
+  | "electric"
+  | "poison"
+  | "psychic"
+  | "dark"
+  | "fighting"
+  | "flying"
+  | "ground"
+  | "ghost"
+  | "fairy"
+  | "steel"
+  | "ice"
+  | "rock"
+  | "dragon"
+  | "normal";

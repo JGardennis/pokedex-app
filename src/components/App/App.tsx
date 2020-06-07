@@ -12,7 +12,8 @@ import {
   getAbilityList,
   getItemList,
 } from "../../helpers/pokeApi";
-import { PokemonCard, MovesCard, AbilityCard, ItemCard } from "../ResultsCard";
+import { MovesCard, AbilityCard, ItemCard } from "../ResultsCard";
+import { PokemonCard } from "../Cards";
 
 const App = () => {
   const [theme, setTheme] = useState("light");

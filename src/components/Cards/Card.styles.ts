@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-export const CardWrap = styled(Link)`
+export const CardWrap = styled.div`
   display: inline-block;
   position: relative;
   width: 230px;
@@ -11,8 +10,28 @@ export const CardWrap = styled(Link)`
   font-family: ${({ theme }: any) => theme.secondaryFont};
   padding: 1em;
   border-radius: 5px;
-  color: #fff;
-  background-color: ${(props: any) => props.backgroundColor};
+  background-color: ${(props: any) => props.bgColor};
+
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .pills {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3em;
+  }
+
+  .pill {
+    margin: 0.1em 0;
+    padding: 0.5em;
+    border-radius: 2em;
+    width: 90px;
+    display: block;
+    text-align: center;
+    background-color: ${(props: any) => props.pillColor};
+  }
 `;
 
 export const CardTitle = styled.h2`
@@ -32,19 +51,4 @@ export const CardImage = styled.div`
     width: 100%;
     height: 100%;
   }
-`;
-
-export const CardPills = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 3em;
-`;
-
-export const CardPill = styled.span`
-  margin: 0.1em 0;
-  padding: 0.5em;
-  border-radius: 2em;
-  width: ${(props: any) => props.width || "90px"};
-  display: block;
-  text-align: center;
 `;

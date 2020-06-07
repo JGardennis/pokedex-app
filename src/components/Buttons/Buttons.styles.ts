@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link as ReactLink } from "react-router-dom";
 
-export const MenuButtonWrap = styled(Link)`
+export const MenuButtonWrap = styled(ReactLink)`
   position: relative;
   width: 100%;
   max-width: 230px;
@@ -26,11 +26,16 @@ export const MenuButtonWrap = styled(Link)`
   background-color: ${(props: any) => props.primary};
 `;
 
-export const LinkButtonWrap = styled(Link)`
+export const LinkButtonWrap = styled(ReactLink)`
   display: block;
   font-family: ${({ theme }: any) => theme.primaryFont};
   letter-spacing: 1px;
   text-decoration: none;
   color: ${({ theme }: any) => theme.text};
   margin: 1em;
+`;
+
+export const Link = styled(ReactLink)`
+  text-decoration: none;
+  color: #fff;
 `;
