@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Pill } from "../Theme/GlobalStyles";
 
-export const CardWrap = styled.div`
+export const Wrap = styled.div`
   display: inline-block;
   position: relative;
   width: 230px;
@@ -10,46 +11,30 @@ export const CardWrap = styled.div`
   font-family: ${({ theme }: any) => theme.secondaryFont};
   padding: 1em;
   border-radius: 5px;
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => props.color};
   transition: ${({ theme }: any) => theme.transition};
+
+  h2 {
+    margin-top: 2em;
+    font-size: 1.2em;
+    font-weight: 500;
+  }
 
   a {
     text-decoration: none;
     color: #fff;
   }
-
-  .pills {
-    display: flex;
-    flex-direction: column;
-    margin-top: 3em;
-  }
-
-  .pill {
-    margin: 0.1em 0;
-    padding: 0.5em;
-    border-radius: 2em;
-    width: 90px;
-    display: block;
-    text-align: center;
-    background-color: ${(props: any) => props.pillColor};
-  }
 `;
 
-export const CardTitle = styled.h2`
-  margin-top: 2em;
-  font-size: 1.2em;
-  font-weight: 500;
-`;
-
-export const CardImage = styled.div`
+export const Image = styled.img`
   position: absolute;
   top: 20px;
   right: 0px;
   z-index: 10;
   width: 8em;
+`;
 
-  img {
-    width: 100%;
-    height: 100%;
-  }
+export const TypePill = styled(Pill)`
+  margin-top: 4em;
+  margin-right: 1em;
 `;

@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from "react";
 import Page from "./Page";
 import { Button } from "../Buttons";
+import { getItems } from "../../helpers/pokeApi";
 
 interface iProps {
   title: string;
-  getData: Function;
-  Comp: any;
+  dataName: string;
+  children: Function;
 }
 
-const ResultsPage = ({ title, getData, Comp }: iProps) => {
-  const [list, setList] = useState<any>([]);
-  const [nextUrl, setNextUrl] = useState("");
+const ResultsPage = ({ title, dataName, children }: iProps) => {
+  const [items, setItems] = useState<any>([]);
+  const [next, setNext] = useState("");
 
-  const updateList = (url?: string) => {
-    getData(url).then(({ results, next }: any) => {
-      setList([...list, ...results]);
-      setNextUrl(next || "");
-    });
+  const updateItems = async (path: string) => {
+    const data = await getItems(path);
+    setItems([...items, ...data.results]);
+    setNext(data.next || "");
   };
 
-  useEffect(updateList, []);
+  useEffect(() => {
+    updateItems(dataName);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Page title={title} backButton wide>
-      {list.map((data: any) => (
-        <Comp key={data.name} {...data} />
-      ))}
-
-      {nextUrl && (
-        <Button onClick={() => updateList(nextUrl)} center cta>
+      {children(items)}
+      {next && (
+        <Button onClick={() => updateItems(`${dataName}${next}`)} center cta>
           More
         </Button>
       )}
