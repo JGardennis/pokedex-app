@@ -1,22 +1,45 @@
 import React, { useState, useEffect } from "react";
-import Page from "./Page";
+import Page from "./Page/Page";
 import { Button } from "../Buttons";
 import { getItems } from "../../helpers/pokeApi";
+import { FlexBox } from "../Theme/GlobalStyles";
 
 interface iProps {
   title: string;
   dataName: string;
-  children: Function;
+  children(items: any): React.ReactNode[] | null;
+  columns?: number;
 }
 
-const ResultsPage = ({ title, dataName, children }: iProps) => {
+const ResultsPage = ({ title, dataName, children, columns = 3 }: iProps) => {
   const [items, setItems] = useState<any>([]);
   const [next, setNext] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const updateItems = async (path: string) => {
+    setLoading(true);
     const data = await getItems(path);
     setItems([...items, ...data.results]);
     setNext(data.next || "");
+    setLoading(false);
+  };
+
+  const printChildren = () => {
+    const all = children(items);
+
+    if (all) {
+      const chunks: React.ReactNode[] = [];
+
+      while (all.length) {
+        chunks.push(all.splice(0, 3));
+      }
+
+      return chunks.map((chunk) => (
+        <FlexBox justify="space-between">{chunk}</FlexBox>
+      ));
+    }
+
+    return null;
   };
 
   useEffect(() => {
@@ -25,13 +48,15 @@ const ResultsPage = ({ title, dataName, children }: iProps) => {
   }, []);
 
   return (
-    <Page title={title} backButton wide>
-      {children(items)}
-      {next && (
-        <Button onClick={() => updateItems(`${dataName}${next}`)} center cta>
-          More
-        </Button>
-      )}
+    <Page title={title} backButton>
+      <FlexBox wrap="wrap">
+        {printChildren()}
+        {next && (
+          <Button onClick={() => updateItems(`${dataName}${next}`)} center cta>
+            {loading ? "Loading..." : "More"}
+          </Button>
+        )}
+      </FlexBox>
     </Page>
   );
 };

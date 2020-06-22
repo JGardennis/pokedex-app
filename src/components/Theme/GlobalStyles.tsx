@@ -12,6 +12,7 @@ export const FlexBox = styled.div`
   flex-direction: ${(props) => props.direction || "initial"};
   align-items: ${(props) => props.align || "initial"};
   justify-content: ${(props) => props.justify || "initial"};
+  flex-wrap: ${(props) => props.wrap || "initial"};
 `;
 
 export const Pill = styled.div`

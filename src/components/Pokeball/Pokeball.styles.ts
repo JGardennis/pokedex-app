@@ -29,6 +29,7 @@ export const PokeballWrap = styled.div`
 
   &::after {
     top: calc(50% - 5px);
+    left: 0;
     width: 100%;
     height: 10px;
     background-color: ${({ theme, primary }: any) =>

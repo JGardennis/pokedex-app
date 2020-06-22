@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Page from "./Page";
+import Page from "./Page/Page";
 import { Pokemon } from "../../helpers/types";
 import { Link, Button } from "../../components/Buttons";
 

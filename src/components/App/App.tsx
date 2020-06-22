@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyles, lightTheme, darkTheme } from "../Theme";
 import { Route, Switch } from "react-router-dom";
 import Pokeball from "../Pokeball";
-import { DashboardPage, DataPage, PokemonResults } from "../Pages";
+import { DashboardPage, DataPage, PokemonPage } from "../Pages";
 import { ThemeButton } from "../Buttons";
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
       <ThemeButton onClick={toggleTheme}>Toggle theme</ThemeButton>
       <Pokeball large />
       <Switch>
-        <Route path="/pokemon" component={PokemonResults} />
+        <Route path="/pokemon" component={PokemonPage} />
         <Route path="/pokemon/:id" component={DataPage} />
         <Route path="/" component={DashboardPage} exact />
       </Switch>

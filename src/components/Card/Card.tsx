@@ -14,16 +14,16 @@ interface iProps {
 
 const Card = ({ to, color, theme, cardImage, children }: iProps) => {
   return (
-    <Link to={to}>
-      <Wrap color={theme.cardBackground || color.primary}>
+    <Wrap color={theme.cardBackground || color.primary}>
+      <Link to={to}>
         {cardImage && <Image src={cardImage} />}
         <Pokeball
           primary={theme.cardBackground || color.primary}
           secondary={color.secondary}
         />
         {children}
-      </Wrap>
-    </Link>
+      </Link>
+    </Wrap>
   );
 };
 
