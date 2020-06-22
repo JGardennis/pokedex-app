@@ -1,4 +1,4 @@
-import { ItemsResponse } from "./types";
+import { ApiResponse, RawPokemonData, ItemKey } from "./types";
 
 const baseUrl = "https://pokeapi.co/api/v2/";
 
@@ -8,20 +8,55 @@ function getEnglishEntryFromItem(item: any, key: string) {
   });
 }
 
-async function getItems(path: string) {
-  const data = await fetch(`${baseUrl}${path}`);
-  const response: ItemsResponse = await data.json();
+function getOffsetFromUrl(url: string) {
+  const regex = new RegExp(/offset=([\d]*)/gm).exec(url);
+  if (regex && regex.length === 2) {
+    return parseInt(regex[2]);
+  }
 
-  const results = await Promise.all(
-    response.results.map(async ({ url }) => await (await fetch(url)).json())
-  );
+  return null;
+}
+
+function extractFromRaw(arr: { [key: string]: ItemKey }[]) {
+  return arr.map((item) => {
+    const key = Object.keys(item)[0];
+    return item[key];
+  });
+}
+
+async function getPokemonById(id: string) {
+  const data = await fetch(`${baseUrl}/pokemon/${id}`);
+  const response: RawPokemonData = await data.json();
 
   return {
-    next: response.next
-      ? response.next.substring(response.next.indexOf("?"))
-      : null,
-    results,
+    id,
+    name: response.name,
+    image: response.sprites.front_default,
+    abilities: extractFromRaw(response.abilities),
+    moves: extractFromRaw(response.moves),
+    stats: response.stats.map((stat) => ({
+      name: stat.stat.name,
+      value: stat.base_stat,
+    })),
+    types: response.types.map((type) => type.type.name),
   };
 }
 
-export { getItems, getEnglishEntryFromItem };
+async function getSlugsFor(
+  slug: string,
+  options: { limit: number; offset: number }
+) {
+  const data = await fetch(
+    `${baseUrl}${slug}?limit=${options.limit}&offset=${options.offset}`
+  );
+  const response: ApiResponse = await data.json();
+
+  return response;
+}
+
+export {
+  getSlugsFor,
+  getPokemonById,
+  getEnglishEntryFromItem,
+  getOffsetFromUrl,
+};

@@ -1,4 +1,4 @@
-export type ItemsResponse = {
+export type ApiResponse = {
   count: number;
   next: string | null;
   previous: string | null;
@@ -43,9 +43,9 @@ export type Pokemon = {
   id: string;
   name: string;
   image: string;
+  abilities: DataRef[];
   types: PokemonType[];
   moves: DataRef[];
-  abilities: DataRef[];
 };
 
 export type Move = {
