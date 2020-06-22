@@ -4,7 +4,7 @@ import { FlexBox } from "../Theme/GlobalStyles";
 interface iProps {
   columns: number;
   children: React.ReactNode;
-  justify: "flex-start" | "center" | "flex-end";
+  justify?: "flex-start" | "center" | "flex-end";
 }
 
 const Grid = ({ columns, children, justify }: iProps) => {

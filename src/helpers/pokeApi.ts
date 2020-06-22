@@ -11,10 +11,15 @@ function getEnglishEntryFromItem(item: any, key: string) {
 function getOffsetFromUrl(url: string) {
   const regex = new RegExp(/offset=([\d]*)/gm).exec(url);
   if (regex && regex.length === 2) {
-    return parseInt(regex[2]);
+    return parseInt(regex[1]);
   }
 
   return null;
+}
+
+function getIdFromUrl(url: string): string {
+  const rgx = new RegExp(/v2\/[\w]*\/([\d]*)/g).exec(url);
+  return rgx && rgx.length === 2 ? rgx[1] : "";
 }
 
 function extractFromRaw(arr: { [key: string]: ItemKey }[]) {
@@ -25,7 +30,7 @@ function extractFromRaw(arr: { [key: string]: ItemKey }[]) {
 }
 
 async function getPokemonById(id: string) {
-  const data = await fetch(`${baseUrl}/pokemon/${id}`);
+  const data = await fetch(`${baseUrl}pokemon/${id}`);
   const response: RawPokemonData = await data.json();
 
   return {
@@ -59,4 +64,5 @@ export {
   getPokemonById,
   getEnglishEntryFromItem,
   getOffsetFromUrl,
+  getIdFromUrl,
 };

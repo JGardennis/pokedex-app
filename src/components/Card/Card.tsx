@@ -12,19 +12,17 @@ interface iProps {
   children: React.ReactNode;
 }
 
-const Card = ({ to, color, theme, cardImage, children }: iProps) => {
-  return (
+const Card = ({ to, color, theme, cardImage, children }: iProps) => (
+  <Link to={to}>
     <Wrap color={theme.cardBackground || color.primary}>
-      <Link to={to}>
-        {cardImage && <Image src={cardImage} />}
-        <Pokeball
-          primary={theme.cardBackground || color.primary}
-          secondary={color.secondary}
-        />
-        {children}
-      </Link>
+      {cardImage && <Image src={cardImage} />}
+      <Pokeball
+        primary={theme.cardBackground || color.primary}
+        secondary={color.secondary}
+      />
+      {children}
     </Wrap>
-  );
-};
+  </Link>
+);
 
 export default Card;

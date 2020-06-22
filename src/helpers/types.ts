@@ -44,7 +44,7 @@ export type Pokemon = {
   name: string;
   image: string;
   abilities: DataRef[];
-  types: PokemonType[];
+  types: string[];
   moves: DataRef[];
 };
 
@@ -75,12 +75,6 @@ export type Item = {
   name: string;
   image: string;
   text: string;
-};
-
-export type PokemonType = {
-  name: PokemonTypeNames;
-  url: string;
-  primary: boolean;
 };
 
 export type PokemonTypeNames =
