@@ -1,14 +1,9 @@
 import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
 export const GlobalStyles = createGlobalStyle`
-  html,body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
+  ${reset}
+  
   body {
     ${({ theme }) => `
       background-color: ${theme.background};
