@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Page from "./Page/Page";
 import { Pokemon } from "../../helpers/types";
-import { Link, Button } from "../../components/Buttons";
+import { Link, Button } from "../UI";
 
 interface iProps {
   match: { params: { id: string } };

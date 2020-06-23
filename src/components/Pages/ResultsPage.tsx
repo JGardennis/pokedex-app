@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Page from "./Page/Page";
-import { Button } from "../Buttons";
-import { FlexBox } from "../Theme/GlobalStyles";
 
 interface iProps {
   title: string;

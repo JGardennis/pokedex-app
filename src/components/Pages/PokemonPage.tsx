@@ -6,13 +6,10 @@ import {
   getPokemonById,
   getIdFromUrl,
 } from "../../helpers/pokeApi";
-import Grid from "../Grid/Grid";
-import Card from "../Card";
 import { Pokemon } from "../../helpers/types";
 import { pokemonTypes } from "../Theme";
-import { Pill, FlexBox } from "../Theme/GlobalStyles";
 import { capitalize } from "../../helpers/strings";
-import { Button } from "../Buttons";
+import { Button, Grid, Card, Pill, FlexBox } from "../UI";
 import styled from "styled-components";
 
 const PillWrap = styled(FlexBox)`
@@ -57,7 +54,12 @@ const PokemonPage = () => {
         {pokemon.map((p: Pokemon) => {
           const colors = pokemonTypes[p.types[0]];
           return (
-            <Card to={`/pokemon/${p.id}`} color={colors} cardImage={p.image}>
+            <Card
+              to={`/pokemon/${p.id}`}
+              color={colors.primary}
+              pokeballColor={colors.secondary}
+              image={p.image}
+            >
               <h2>{capitalize(p.name)}</h2>
               <PillWrap>
                 {p.types.map((type) => (

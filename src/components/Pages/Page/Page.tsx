@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Button } from "../../Buttons";
+import { Link, Button } from "../../UI";
 import { PageWrapper, PageTitle } from "./Page.styles";
 
 interface iProps {
