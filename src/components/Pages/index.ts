@@ -1,3 +1,2 @@
-export { default as DataPage } from "./DataPage";
-export { default as PokemonPage } from "./PokemonPage";
-export { default as Page } from "./Page/Page";
+export { default as Dashboard } from "./Dashboard";
+export { default as Pokemon } from "./Pokemon";

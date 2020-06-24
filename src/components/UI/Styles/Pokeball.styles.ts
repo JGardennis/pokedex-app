@@ -30,7 +30,9 @@ const StyledPokeball = styled.div`
             top: calc(50% - 5px);
             left: 0;
             height: 10px;
-            background-color: ${color || theme.background};
+            background-color: ${
+              theme.cardBackground || color || theme.background
+            };
         }
 
         .inner {
@@ -42,7 +44,7 @@ const StyledPokeball = styled.div`
             border-width: 5px;
             border-style: solid;
             background-color: ${altColor || theme.pokeball};
-            border-color: ${color || theme.background};
+            border-color: ${theme.cardBackground || color || theme.background};
             border-radius: 50%;
             z-index: 10;
             transition: ${theme.transition};

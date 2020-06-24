@@ -1,2 +1,9 @@
-export { lightTheme, darkTheme, colors, pokemonTypes, queries } from "./Themes";
+export {
+  lightTheme,
+  darkTheme,
+  colors,
+  pokemonTypes,
+  queries,
+  sizes,
+} from "./Themes";
 export { GlobalStyles } from "./GlobalStyles";

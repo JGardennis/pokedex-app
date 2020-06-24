@@ -13,7 +13,7 @@ const MenuButton = (props: iProps) => {
   const { primary, secondary } = colors[props.color];
 
   return (
-    <StyledButton color={primary}>
+    <StyledButton color={primary} to={props.to}>
       {props.children}
       <Pokeball color={primary} altColor={secondary} />
     </StyledButton>

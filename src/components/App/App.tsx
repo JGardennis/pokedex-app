@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles, lightTheme, darkTheme, queries } from "../Theme";
 import { Route, Switch } from "react-router-dom";
 import { Button, Pokeball } from "../UI";
-import Dashboard from "../Pages/Dashboard";
+import { Dashboard, Pokemon } from "../Pages";
 
 const ThemeButton = styled(Button)`
   position: fixed;
@@ -55,6 +55,7 @@ const App = () => {
       <ThemeButton onClick={toggleTheme}>Toggle theme</ThemeButton>
       <LargePokeball />
       <Switch>
+        <Route path="/pokemon" component={Pokemon} />
         <Route path="/" component={Dashboard} exact />
       </Switch>
     </ThemeProvider>

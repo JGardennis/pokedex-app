@@ -39,7 +39,7 @@ export type DataRef = {
   url: string;
 };
 
-export type Pokemon = {
+export type PokemonType = {
   id: string;
   name: string;
   image: string;
