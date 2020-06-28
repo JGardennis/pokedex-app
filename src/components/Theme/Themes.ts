@@ -68,8 +68,8 @@ export const pokemonTypes = {
     secondary: "#c3d680",
   },
   fire: {
-    primary: "#ff9f9f",
-    secondary: "#eea7a7",
+    primary: "#FF7070",
+    secondary: "#ff9f9f",
   },
   water: {
     primary: "#7ecefd",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Layout, Title, Link, Grid, Card, FlexBox, Pill, Button } from "../UI";
+import { Layout, Title, Link, Card, FlexBox, Pill, Button } from "../UI";
 import {
   getSlugsFor,
   getOffsetFromUrl,
@@ -10,7 +10,12 @@ import {
 import { PokemonType } from "../../helpers/types";
 import { pokemonTypes, queries } from "../Theme";
 import { capitalize } from "../../helpers/strings";
-import { StyledCard } from "../UI/Styles/Card.styles";
+
+const Container = styled(FlexBox)`
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+`;
 
 const Pills = styled(FlexBox)`
   margin-top: 3em;
@@ -52,10 +57,10 @@ const Pokemon = () => {
   }, []);
 
   return (
-    <Layout fromTop="15vh">
+    <Layout fromTop="10vh">
       <Title align="center">Pokemon</Title>
       <Link to="/">Back</Link>
-      <Grid columns={4} justify="center" fillEmpty={<StyledCard to="/" />}>
+      <Container wrap="wrap" justify="center">
         {pokemon.map((item: PokemonType) => {
           const primaryType = pokemonTypes[item.types[0]];
 
@@ -85,7 +90,7 @@ const Pokemon = () => {
             </Card>
           );
         })}
-      </Grid>
+      </Container>
 
       {pokemon && next && (
         <Button onClick={getPokemon} center cta>

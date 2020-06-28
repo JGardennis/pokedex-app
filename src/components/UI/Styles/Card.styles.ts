@@ -5,10 +5,12 @@ import { queries } from "../../Theme";
 
 const StyledCard = styled(Link)`
   ${({ theme, color, transition }) => `
-        display: block;
+        display: inline-block;
         position: relative;
-        width: 170px;
-        height: 140px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 200px;
+        height: auto;
         margin: 0.5em;
         box-shadow: ${theme.boxShadow};
         font-family: ${theme.secondaryFont};
@@ -44,9 +46,6 @@ const StyledCard = styled(Link)`
         }
 
         ${queries.mobile} {
-            width: 140px;
-            height: 140px;
-
             h2 {
                 margin-top: 0;
             }

@@ -3,9 +3,10 @@ import { Link } from "../Buttons";
 import { StyledPokeball } from "./Pokeball.styles";
 
 const StyledButton = styled(Link)`
+  display: inline-block;
   position: relative;
   width: 100%;
-  max-width: 230px;
+  max-width: 200px;
   height: 60px;
   line-height: 1.8;
   align-items: center;
