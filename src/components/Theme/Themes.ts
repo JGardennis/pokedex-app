@@ -1,5 +1,5 @@
 const globalTheme = {
-  transition: "0.4s all ease",
+  transition: "0.2s all ease",
   primaryFont: "Jost, sans-serif",
   secondaryFont: "rubik, sans-serif",
 };

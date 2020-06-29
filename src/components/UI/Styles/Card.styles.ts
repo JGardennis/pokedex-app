@@ -16,7 +16,7 @@ const StyledCard = styled(Link)`
         font-family: ${theme.secondaryFont};
         padding: 1em;
         border-radius: 5px;
-        background-color: ${theme.cardBackground || color};
+        background-color: ${theme.id === "dark" ? theme.cardBackground : color};
         transition: ${transition};
         z-index: 1;
 
@@ -39,11 +39,25 @@ const StyledCard = styled(Link)`
             width: 6em;
         }
 
-        ${StyledPokeball} {
-            left: unset;
-            right: 10px;
-            z-index: -1;
+        .pokeball-wrap {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 51px;
+            height: 50px;
+            overflow: hidden;
+            border-radius: 50%;
+
+            ${StyledPokeball} {
+                top: 0;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                z-index: -1;
+                overflow: initial;
+            }
         }
+
 
         ${queries.mobile} {
             h2 {

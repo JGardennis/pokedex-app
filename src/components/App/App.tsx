@@ -27,6 +27,19 @@ const LargePokeball = styled(Pokeball)`
     border-width: 60px;
   }
 
+  ${({ theme }) =>
+    theme.id === "dark" &&
+    `
+    &:after {
+      background: ${theme.background};
+    }
+
+    .inner {
+      border-color: ${theme.background};
+    }
+  
+  `}
+
   ${queries.mobile} {
     left: 0;
     right: 0;

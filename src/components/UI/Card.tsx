@@ -13,7 +13,9 @@ interface iProps {
 const Card = ({ to, color, pokeballColor, image, children }: iProps) => (
   <StyledCard color={color} to={to}>
     {image && <img className="card__image" alt="card-img" src={image} />}
-    <Pokeball color={color} altColor={pokeballColor} />
+    <div className="pokeball-wrap">
+      <Pokeball color={color} altColor={pokeballColor} />
+    </div>
     {children}
   </StyledCard>
 );
