@@ -24,24 +24,26 @@ const StyledTitle = styled(Title)`
   }
 `;
 
-const Dashboard = () => (
-  <Layout fromTop={{ desktop: "25vh", tablet: "20vh", mobile: "20vh" }}>
-    <Container>
-      <StyledTitle>The Pokedex App</StyledTitle>
-      <MenuButton color="red" to="/pokemon">
-        Pokedex
-      </MenuButton>
-      <MenuButton color="green" to="/moves">
-        Moves
-      </MenuButton>
-      <MenuButton color="blue" to="/abilities">
-        Abilities
-      </MenuButton>
-      <MenuButton color="purple" to="/items">
-        Items
-      </MenuButton>
-    </Container>
-  </Layout>
-);
+const Dashboard = () => {
+  return (
+    <Layout fromTop={{ desktop: "25vh", tablet: "20vh", mobile: "20vh" }}>
+      <Container>
+        <StyledTitle>The Pokedex App</StyledTitle>
+        <MenuButton color="red" to="/pokemon">
+          Pokedex
+        </MenuButton>
+        <MenuButton color="green" to="/moves">
+          Moves
+        </MenuButton>
+        <MenuButton color="blue" to="/abilities">
+          Abilities
+        </MenuButton>
+        <MenuButton color="purple" to="/items">
+          Items
+        </MenuButton>
+      </Container>
+    </Layout>
+  );
+};
 
 export default Dashboard;
