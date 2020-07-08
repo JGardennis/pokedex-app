@@ -1,4 +1,4 @@
-import { ApiResponse, RawPokemonData, ItemKey } from "./types";
+import { ApiResponse, RawPokemonData, ItemKey, PokemonType } from "./types";
 
 const baseUrl = "https://pokeapi.co/api/v2/";
 
@@ -14,7 +14,7 @@ function getOffsetFromUrl(url: string) {
     return parseInt(regex[1]);
   }
 
-  return null;
+  return 0;
 }
 
 function getIdFromUrl(url: string): string {
@@ -29,7 +29,7 @@ function extractFromRaw(arr: { [key: string]: ItemKey }[]) {
   });
 }
 
-async function getPokemonById(id: string) {
+async function getPokemonById(id: string): Promise<PokemonType> {
   const data = await fetch(`${baseUrl}pokemon/${id}`);
   const response: RawPokemonData = await data.json();
 

@@ -43,9 +43,13 @@ export type PokemonType = {
   id: string;
   name: string;
   image: string;
-  abilities: DataRef[];
+  abilities: ItemKey[];
+  moves: ItemKey[];
+  stats: {
+    name: string;
+    value: number;
+  }[];
   types: string[];
-  moves: DataRef[];
 };
 
 export type Move = {

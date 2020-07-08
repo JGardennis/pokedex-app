@@ -1,30 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import { Layout, MenuButton, Title } from "../UI";
-import { queries } from "../Theme";
+import { Layout, MenuButton } from "../../UI";
+import { Container, StyledTitle } from "./DashboardPage.styles";
 
-const Container = styled.div`
-  width: 560px;
-  margin: 0 auto;
-  overflow: hidden;
-
-  ${queries.mobile} {
-    width: 100%;
-    text-align: center;
-  }
-`;
-
-const StyledTitle = styled(Title)`
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-
-  ${queries.mobile} {
-    margin-top: 0;
-    text-align: center;
-  }
-`;
-
-const Dashboard = () => (
+const DashboardPage = () => (
   <Layout fromTop={{ desktop: "25vh", tablet: "20vh", mobile: "20vh" }}>
     <Container>
       <StyledTitle>The Pokedex App</StyledTitle>
@@ -44,4 +22,4 @@ const Dashboard = () => (
   </Layout>
 );
 
-export default Dashboard;
+export default DashboardPage;

@@ -4,7 +4,7 @@ const globalTheme = {
   secondaryFont: "rubik, sans-serif",
 };
 
-export const sizes = {
+const sizes = {
   small: 320,
   mobile: 500,
   tablet: 768,
@@ -12,7 +12,7 @@ export const sizes = {
   desktop: 1024,
 };
 
-export const queries = {
+const queries = {
   small: `@media only screen and (max-width: ${sizes.small}px)`,
   mobile: `@media only screen and (max-width: ${sizes.mobile}px)`,
   tablet: `@media only screen and (max-width: ${sizes.tablet}px)`,
@@ -20,7 +20,7 @@ export const queries = {
   desktop: `@media only screen and (min-width: ${sizes.desktop}px)`,
 };
 
-export const lightTheme = {
+const lightTheme = {
   ...globalTheme,
   id: "light",
   background: "#fafafa",
@@ -29,7 +29,7 @@ export const lightTheme = {
   boxShadow: "1px 1px 3px 0 #adadad;",
 };
 
-export const darkTheme = {
+const darkTheme = {
   ...globalTheme,
   id: "dark",
   background: "#252525",
@@ -39,7 +39,7 @@ export const darkTheme = {
   boxShadow: "1px 1px 3px 0 #1d1a1a;",
 };
 
-export const colors = {
+const colors = {
   red: {
     primary: "#ff5252",
     secondary: "#ff9f9f",
@@ -58,7 +58,7 @@ export const colors = {
   },
 };
 
-export const pokemonTypes = {
+const pokemonTypes = {
   grass: {
     primary: "#67cc8e",
     secondary: "#91d9ad",
@@ -132,3 +132,5 @@ export const pokemonTypes = {
     secondary: "#ffeccb",
   },
 };
+
+export { sizes, queries, lightTheme, darkTheme, colors, pokemonTypes };

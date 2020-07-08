@@ -6,4 +6,4 @@ export {
   queries,
   sizes,
 } from "./Themes";
-export { GlobalStyles } from "./GlobalStyles";
+export { default as GlobalStyles } from "./GlobalStyles";

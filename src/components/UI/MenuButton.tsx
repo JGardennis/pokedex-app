@@ -1,7 +1,7 @@
 import React from "react";
+import Pokeball from "./Pokeball";
 import { colors } from "../Theme";
 import { StyledButton } from "./Styles/MenuButtons.styles";
-import Pokeball from "./Pokeball";
 
 interface iProps {
   color: "red" | "green" | "blue" | "purple";
@@ -9,12 +9,12 @@ interface iProps {
   to: string;
 }
 
-const MenuButton = (props: iProps) => {
-  const { primary, secondary } = colors[props.color];
+const MenuButton = ({ color, children, to }: iProps) => {
+  const { primary, secondary } = colors[color];
 
   return (
-    <StyledButton color={primary} to={props.to}>
-      {props.children}
+    <StyledButton color={primary} to={to}>
+      {children}
       <Pokeball color={primary} altColor={secondary} />
     </StyledButton>
   );

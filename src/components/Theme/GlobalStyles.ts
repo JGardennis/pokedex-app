@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
-export const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   ${reset}
   
   body {
@@ -17,3 +17,4 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 3px;
   }
 `;
+export default GlobalStyles;

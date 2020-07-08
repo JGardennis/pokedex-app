@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 import { queries } from "../Theme";
 
-const marginTop = ({
-  fromTop,
-}: {
+interface iArg {
   fromTop: string | { [key: string]: string };
-}) => {
+}
+
+const marginTop = ({ fromTop }: iArg) => {
   switch (typeof fromTop) {
     case "string":
       return css`
@@ -25,11 +25,13 @@ const marginTop = ({
 };
 
 const Layout = styled.div`
-  display: block;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  ${(props) => (props.fromTop ? marginTop : ``)};
+  ${({ fromTop }) => `
+    display: block;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    ${fromTop ? marginTop : ``}
+  `}
 `;
 
 export default Layout;

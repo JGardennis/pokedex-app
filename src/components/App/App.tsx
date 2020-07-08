@@ -1,75 +1,30 @@
 import React, { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import { GlobalStyles, lightTheme, darkTheme, queries } from "../Theme";
 import { Route, Switch } from "react-router-dom";
-import { Button, Pokeball } from "../UI";
-import { Dashboard, Pokemon } from "../Pages";
+import { ThemeProvider } from "styled-components";
+import { DashboardPage, PokedexPage } from "../Pages";
+import { ThemeButton, LargePokeball } from "./App.styles";
+import { GlobalStyles, lightTheme, darkTheme } from "../Theme";
 
-const ThemeButton = styled(Button)`
-  position: fixed;
-  top: 1em;
-  left: 1em;
-`;
-
-const LargePokeball = styled(Pokeball)`
-  top: 10%;
-  left: unset;
-  right: 10%;
-  width: 400px;
-  height: 400px;
-  z-index: -1;
-
-  .inner {
-    top: calc(50% - 130px);
-    left: calc(50% - 130px);
-    width: 140px;
-    height: 140px;
-    border-width: 60px;
-  }
-
-  ${({ theme }) =>
-    theme.id === "dark" &&
-    `
-    &:after {
-      background: ${theme.background};
-    }
-
-    .inner {
-      border-color: ${theme.background};
-    }
-  
-  `}
-
-  ${queries.mobile} {
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: 300px;
-    height: 300px;
-
-    .inner {
-      top: calc(50% - 110px);
-      left: calc(50% - 110px);
-      border-width: 40px;
-    }
-  }
-`;
-
-const App = () => {
-  const [theme, setTheme] = useState("light");
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
+const App: React.SFC = () => {
+  const [state, setState] = useState({ theme: "light" });
 
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+    <ThemeProvider theme={state.theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
-      <ThemeButton onClick={toggleTheme}>Toggle theme</ThemeButton>
+      <ThemeButton
+        onClick={() => {
+          setState({
+            ...state,
+            theme: state.theme === "light" ? "dark" : "light",
+          });
+        }}
+      >
+        Toggle theme
+      </ThemeButton>
       <LargePokeball />
       <Switch>
-        <Route path="/pokemon" component={Pokemon} />
-        <Route path="/" component={Dashboard} exact />
+        <Route path="/pokemon" component={PokedexPage} />
+        <Route path="/" component={DashboardPage} exact />
       </Switch>
     </ThemeProvider>
   );
