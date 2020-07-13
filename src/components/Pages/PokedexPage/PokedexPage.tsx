@@ -50,7 +50,7 @@ const PokedexPage = () => {
     return (
       <Card
         key={pokemon.name}
-        to={`/pokemon/${pokemon.id}`}
+        to={{ pathname: `/pokemon/${pokemon.id}`, state: { data: pokemon } }}
         color={primary}
         pokeballColor={secondary}
         image={pokemon.image}

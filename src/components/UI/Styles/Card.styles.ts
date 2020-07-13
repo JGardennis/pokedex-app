@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { Link } from "../Buttons";
 import { StyledPokeball } from "./Pokeball.styles";
 import { queries } from "../../Theme";
 
-const StyledCard = styled(Link)`
+const StyledCard = styled.div`
   ${({ theme, color, transition }) => `
         display: inline-block;
         position: relative;
@@ -16,7 +15,9 @@ const StyledCard = styled(Link)`
         font-family: ${theme.secondaryFont};
         padding: 1em;
         border-radius: 5px;
-        background-color: ${theme.id === "dark" ? theme.cardBackground : color};
+        background-color: ${
+          theme.id === "dark" ? theme.cardBackground : color || "white"
+        };
         transition: ${transition};
         z-index: 1;
 
@@ -74,4 +75,23 @@ const StyledCard = styled(Link)`
     `}
 `;
 
-export { StyledCard };
+const BigCard = styled(StyledCard)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 600px;
+  max-height: 500px;
+`;
+
+const RoundCard = styled(StyledCard)`
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  text-align: center;
+`;
+
+export { StyledCard, BigCard, RoundCard };

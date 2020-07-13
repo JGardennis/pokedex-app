@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { DashboardPage, PokedexPage } from "../Pages";
 import { ThemeButton, LargePokeball } from "./App.styles";
 import { GlobalStyles, lightTheme, darkTheme } from "../Theme";
+import PokemonPage from "../Pages/PokemonPage";
 
 const App: React.SFC = () => {
   const [state, setState] = useState({ theme: "light" });
@@ -23,6 +24,7 @@ const App: React.SFC = () => {
       </ThemeButton>
       <LargePokeball />
       <Switch>
+        <Route path="/pokemon/:id" component={PokemonPage} />
         <Route path="/pokemon" component={PokedexPage} />
         <Route path="/" component={DashboardPage} exact />
       </Switch>

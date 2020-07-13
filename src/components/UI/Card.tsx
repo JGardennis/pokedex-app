@@ -1,9 +1,14 @@
 import React from "react";
+import { Link } from "../UI/Buttons";
 import Pokeball from "./Pokeball";
 import { StyledCard } from "./Styles/Card.styles";
+import { PokemonType } from "../../helpers/types";
 
 interface iProps {
-  to: string;
+  to: {
+    pathname: string;
+    state: { data: PokemonType };
+  };
   color: string;
   pokeballColor: string;
   image: string;
@@ -19,7 +24,7 @@ interface iProps {
  * @param {Element} props.children
  */
 const Card = ({ to, color, pokeballColor, image, children }: iProps) => (
-  <StyledCard color={color} to={to}>
+  <StyledCard color={color} to={to} as={Link}>
     {image && <img className="card__image" alt="card-img" src={image} />}
     <div className="pokeball-wrap">
       <Pokeball color={color} altColor={pokeballColor} />
