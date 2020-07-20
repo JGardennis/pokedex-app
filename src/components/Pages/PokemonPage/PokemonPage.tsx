@@ -31,10 +31,6 @@ const PokemonPage = ({ location, match }: PokemonPageData) => {
 
   const numberId = Number(match.params.id);
 
-  const handlePreviousClick = () => {};
-
-  const handleNextClick = () => {};
-
   useEffect(() => {
     const getData = async () => {
       const response = await getPokemonById(match.params.id);

@@ -10,6 +10,7 @@ const Header = styled(FlexBox)`
 
     h1 {
         font-family: ${theme.primaryFont};
+        color: ${theme.text}
     }
 
     img {
@@ -30,14 +31,17 @@ const StyledPill = styled(Pill)`
 `;
 
 const NavButton = styled(RoundCard)`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  text-align: center;
-  font-size: 0.8em;
-  line-height: 3;
-  cursor: pointer;
+  ${({ theme }) => `
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    font-size: 0.8em;
+    line-height: 3;
+    cursor: pointer;
+    color: ${theme.text};
+  `}
 `;
 
 const PreviousButton = styled(NavButton)`
