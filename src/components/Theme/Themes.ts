@@ -56,6 +56,7 @@ const colors = {
     primary: "#9c27b0",
     secondary: "#a95fb5",
   },
+  white: "#fff",
 };
 
 const pokemonTypes = {

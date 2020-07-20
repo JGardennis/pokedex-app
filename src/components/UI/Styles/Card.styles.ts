@@ -77,13 +77,13 @@ const StyledCard = styled.div`
 
 const BigCard = styled(StyledCard)`
   position: absolute;
-  top: 0;
+  top: 20vh;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-  max-width: 600px;
-  max-height: 500px;
+  max-width: 800px;
+  max-height: 400px;
 `;
 
 const RoundCard = styled(StyledCard)`

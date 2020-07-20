@@ -29,7 +29,7 @@ const StyledButton = styled(Link)`
     font-family:  ${theme.primaryFont};
     transition:  ${theme.transition};
     background-color: ${theme.id === "dark" ? theme.cardBackground : color};
-    ${theme.id === "dark" && `border: 1px solid ${color}; `}
+    ${theme.id === "dark" ? `border: 1px solid ${color}; ` : ""}
 
     &:hover {
         box-shadow: 1px 1px 8px ${theme.id === "light" ? color : "none"};

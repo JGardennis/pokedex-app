@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   getSlugsFor,
   getOffsetFromUrl,
@@ -10,6 +10,8 @@ import { PokemonType } from "../../../helpers/types";
 import { capitalize } from "../../../helpers/strings";
 import { Container, Pills } from "./PokedexPage.styles";
 import { Layout, Title, Card, Pill, Button } from "../../UI";
+import { AppContext } from "../../../context/context";
+import { Types } from "../../../context/reducers";
 
 interface iState {
   pokemon: PokemonType[];
@@ -23,6 +25,12 @@ const PokedexPage = () => {
     nextUrl: null,
     isLoading: false,
   });
+
+  const { state: appState, dispatch } = useContext(AppContext);
+
+  useEffect(() => {
+    console.log(appState);
+  }, [appState]);
 
   const getPokemon = async () => {
     setState({ ...state, isLoading: true });
@@ -42,6 +50,8 @@ const PokedexPage = () => {
       nextUrl: data.next || null,
       isLoading: false,
     });
+
+    dispatch({ type: Types.Update, payload: state.pokemon });
   };
 
   const buildCard = (pokemon: PokemonType) => {

@@ -9,7 +9,8 @@ const Pill = styled.div`
     max-width: 90px;
     text-align: center;
     background-color: ${theme.id === "dark" ? "transparent" : color};
-    ${theme.id === "dark" && `border: 1px solid ${color}`}
+    ${theme.id === "dark" ? `border: 1px solid ${color}` : ""}
+    font-family: ${theme.secondaryFont};
   `}
 `;
 

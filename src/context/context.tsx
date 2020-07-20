@@ -1,14 +1,9 @@
 import React, { createContext, useReducer, Dispatch } from "react";
 import { pokemonReducer, PokemonActions } from "./reducers";
-
-type DataType = {
-  id: number;
-  name: string;
-  [key: string]: string | number;
-};
+import { PokemonType } from "../helpers/types";
 
 type InitialStateType = {
-  pokemon: DataType[];
+  pokemon: PokemonType[];
 };
 
 const initialState = {

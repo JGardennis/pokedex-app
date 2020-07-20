@@ -27,8 +27,8 @@ const LargePokeball = styled(Pokeball)`
     }
     
     ${
-      theme.id === "dark" &&
-      `
+      theme.id === "dark"
+        ? `
       &:after {
         background: ${theme.background};
       }
@@ -37,6 +37,7 @@ const LargePokeball = styled(Pokeball)`
         border-color: ${theme.background};
       }
     `
+        : ""
     }
     
     ${queries.mobile} {

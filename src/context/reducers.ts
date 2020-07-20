@@ -11,30 +11,22 @@ export enum Types {
   Remove = "REMOVE_POKEMON",
 }
 
-type DataType = {
-  id: number;
-  name: string;
-  [key: string]: string | number;
-};
-
 type PokemonPayload = {
-  [Types.Update]: DataType;
-  [Types.Remove]: DataType;
+  [Types.Update]: PokemonType[];
+  [Types.Remove]: PokemonType;
 };
 
 export type PokemonActions = ActionMap<PokemonPayload>[keyof ActionMap<
   PokemonPayload
 >];
 
-export const pokemonReducer = (state: DataType[], action: PokemonActions) => {
+export const pokemonReducer = (
+  state: PokemonType[],
+  action: PokemonActions
+) => {
   switch (action.type) {
     case Types.Update:
-      const existingData = state.find((p) => p.id === action.payload.id);
-
-      if (existingData) {
-        return [...state, { ...existingData, ...action.payload }];
-      }
-      return [...state, { ...action.payload }];
+      return [...state, ...action.payload];
     case Types.Remove:
       return [...state.filter((p) => p.id !== action.payload.id)];
     default:

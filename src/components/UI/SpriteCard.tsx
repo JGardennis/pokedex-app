@@ -1,6 +1,10 @@
 import React from "react";
 import { RoundCard } from "./Styles/Card.styles";
 
-const SpriteCard = () => <RoundCard>YO</RoundCard>;
+interface iProps {
+  children?: React.ReactNode;
+}
+
+const SpriteCard = ({ children }: iProps) => <RoundCard>{children}</RoundCard>;
 
 export default SpriteCard;
