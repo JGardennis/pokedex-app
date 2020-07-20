@@ -3,11 +3,9 @@ import { Layout } from "../../UI";
 import { PokemonType } from "../../../helpers/types";
 import { BigCard } from "../../UI/Styles/Card.styles";
 import { RouteComponentProps, withRouter, useHistory } from "react-router";
-import { capitalize } from "../../../helpers/strings";
-import { pokemonTypes } from "../../Theme";
-import { Weakness, NavButton } from "./PokemonPage.styles";
+import { NavButton } from "./PokemonPage.styles";
 import { getPokemonById } from "../../../helpers/pokeApi";
-import Profile from "./components/Profile";
+import { Profile, Weaknesses } from "./components";
 
 interface iState {
   data: PokemonType | null;
@@ -44,7 +42,10 @@ const PokemonPage = ({ location, match }: PokemonPageData) => {
       {state.data && !state.loading ? (
         <>
           {numberId > 1 && (
-            <NavButton onClick={() => history.push(`/pokemon/${numberId - 1}`)}>
+            <NavButton
+              position="left"
+              onClick={() => history.push(`/pokemon/${numberId - 1}`)}
+            >
               Prev
             </NavButton>
           )}
@@ -52,16 +53,12 @@ const PokemonPage = ({ location, match }: PokemonPageData) => {
           <Profile pokemon={state.data} />
 
           <BigCard>
-            {state.data.weaknesses.map((s) => {
-              const { primary, secondary } = pokemonTypes[s];
-              return (
-                <Weakness key={s} color={primary} altColor={secondary}>
-                  {capitalize(s)}
-                </Weakness>
-              );
-            })}
+            <Weaknesses pokemon={state.data} />
           </BigCard>
-          <NavButton onClick={() => history.push(`/pokemon/${numberId + 1}`)}>
+          <NavButton
+            position="right"
+            onClick={() => history.push(`/pokemon/${numberId + 1}`)}
+          >
             Next
           </NavButton>
         </>

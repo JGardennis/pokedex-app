@@ -11,6 +11,13 @@ const GlobalStyles = createGlobalStyle`
     `}
   }
 
+  h1,h2,h3,h4,span,p {
+    ${({ theme }) => `
+      transition: ${theme.transition};
+      color: ${theme.id === "dark" ? "white" : "initial"};
+    `}
+  }
+
   button {
     border: none;
     outline: 0;
