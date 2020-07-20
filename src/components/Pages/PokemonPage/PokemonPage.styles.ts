@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FlexBox, Pill } from "../../UI";
 import { RoundCard } from "../../UI/Styles/Card.styles";
 
-const Header = styled(FlexBox)`
+const StyledFlexBox = styled(FlexBox)`
   ${({ theme }) => `
     flex-direction: column;
     justify-content: center;
@@ -31,7 +31,7 @@ const StyledPill = styled(Pill)`
 `;
 
 const NavButton = styled(RoundCard)`
-  ${({ theme }) => `
+  ${({ theme, position }) => `
     position: absolute;
     top: 0;
     bottom: 0;
@@ -41,15 +41,33 @@ const NavButton = styled(RoundCard)`
     line-height: 3;
     cursor: pointer;
     color: ${theme.text};
+    ${position}: 10vh;
   `}
 `;
 
-const PreviousButton = styled(NavButton)`
-  left: 10vh;
+const Weakness = styled.span`
+  ${({ theme, color, altColor }) => `
+    display: inline-block;
+    margin: 1em;
+    background-color: ${theme.id === "dark" ? "transparent" : color};
+    border-radius: 5px;
+    color: white;
+    padding-left: 0.5em;
+    cursor: default;
+
+    ${theme.id === "dark" ? `border: 1px solid ${color};` : ""}
+
+    &::after {
+      content: "x2";
+      margin-left: 1em;
+      display: inline-block;
+      padding: 0.5em;
+      background-color: ${theme.id === "dark" ? "transparent" : color};
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      ${theme.id === "dark" ? `color: ${color};` : ""}
+    }
+  `}
 `;
 
-const NextButton = styled(NavButton)`
-  right: 10vh;
-`;
-
-export { Header, Pills, StyledPill, PreviousButton, NextButton };
+export { StyledFlexBox, Pills, StyledPill, NavButton, Weakness };

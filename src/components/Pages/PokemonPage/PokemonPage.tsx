@@ -5,14 +5,9 @@ import { BigCard } from "../../UI/Styles/Card.styles";
 import { RouteComponentProps, withRouter, useHistory } from "react-router";
 import { capitalize } from "../../../helpers/strings";
 import { pokemonTypes } from "../../Theme";
-import {
-  Header,
-  StyledPill,
-  Pills,
-  PreviousButton,
-  NextButton,
-} from "./PokemonPage.styles";
+import { Weakness, NavButton } from "./PokemonPage.styles";
 import { getPokemonById } from "../../../helpers/pokeApi";
+import Profile from "./components/Profile";
 
 interface iState {
   data: PokemonType | null;
@@ -49,27 +44,26 @@ const PokemonPage = ({ location, match }: PokemonPageData) => {
       {state.data && !state.loading ? (
         <>
           {numberId > 1 && (
-            <PreviousButton
-              onClick={() => history.push(`/pokemon/${numberId - 1}`)}
-            >
+            <NavButton onClick={() => history.push(`/pokemon/${numberId - 1}`)}>
               Prev
-            </PreviousButton>
+            </NavButton>
           )}
-          <Header>
-            <img src={state.data.image} alt={state.data.name} />
-            <h1>{capitalize(state.data.name)}</h1>
-            <Pills>
-              {state.data.types.map((type) => (
-                <StyledPill key={type} color={pokemonTypes[type].secondary}>
-                  {capitalize(type)}
-                </StyledPill>
-              ))}
-            </Pills>
-          </Header>
-          <BigCard></BigCard>
-          <NextButton onClick={() => history.push(`/pokemon/${numberId + 1}`)}>
+
+          <Profile pokemon={state.data} />
+
+          <BigCard>
+            {state.data.weaknesses.map((s) => {
+              const { primary, secondary } = pokemonTypes[s];
+              return (
+                <Weakness key={s} color={primary} altColor={secondary}>
+                  {capitalize(s)}
+                </Weakness>
+              );
+            })}
+          </BigCard>
+          <NavButton onClick={() => history.push(`/pokemon/${numberId + 1}`)}>
             Next
-          </NextButton>
+          </NavButton>
         </>
       ) : (
         <p>LOADING</p>
