@@ -33,6 +33,15 @@ export type RawPokemonData = {
   }[];
 };
 
+export type RawTypeData = {
+  damage_relations: {
+    double_damage_from: ItemKey[];
+    double_damage_to: ItemKey[];
+    half_damage_from: ItemKey[];
+    half_damage_to: ItemKey[];
+  };
+};
+
 export type DataRef = {
   id: string;
   name: string;
@@ -50,6 +59,7 @@ export type PokemonType = {
     value: number;
   }[];
   types: string[];
+  weaknesses: string[];
 };
 
 export type Move = {
