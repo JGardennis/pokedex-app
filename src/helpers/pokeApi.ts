@@ -4,7 +4,9 @@ import {
   ItemKey,
   PokemonType,
   RawTypeData,
+  RawMoveData,
 } from "./types";
+import { report } from "process";
 
 const baseUrl = "https://pokeapi.co/api/v2/";
 
@@ -41,18 +43,36 @@ async function getPokemonById(id: string): Promise<PokemonType> {
 
   const typeData = await Promise.all(
     response.types.map(async ({ type }) => {
-      const res = await fetch(`${baseUrl}type/${getIdFromUrl(type.url)}`);
+      const res = await fetch(`${type.url}`);
       const raw: RawTypeData = await res.json();
       return raw.damage_relations.double_damage_from.map((item) => item.name);
     })
   );
+
+  const moveData = await Promise.all(
+    response.moves.map(async ({ move, version_group_details }) => {
+      const res = await fetch(`${move.url}`);
+      const raw: RawMoveData = await res.json();
+      return {
+        name: raw.name,
+        accuracy: raw.accuracy,
+        class: raw.damage_class.name,
+        description: raw.effect_entries.effect,
+        power: raw.power,
+        pp: raw.pp,
+        type: raw.type.name,
+      };
+    })
+  );
+
+  debugger;
 
   return {
     id,
     name: response.name,
     image: response.sprites.front_default,
     abilities: extractFromRaw(response.abilities),
-    moves: extractFromRaw(response.moves),
+    moves: moveData,
     stats: response.stats.map((stat) => ({
       name: stat.stat.name,
       value: stat.base_stat,
