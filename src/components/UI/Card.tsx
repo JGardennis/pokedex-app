@@ -2,12 +2,11 @@ import React from "react";
 import { Link } from "../UI/Buttons";
 import Pokeball from "./Pokeball";
 import { StyledCard } from "./Styles/Card.styles";
-import { PokemonType } from "../../helpers/types";
 
 interface iProps {
   to: {
     pathname: string;
-    state: { data: PokemonType };
+    state: { data: any };
   };
   color: string;
   pokeballColor: string;

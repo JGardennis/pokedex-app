@@ -1,11 +1,10 @@
 import React from "react";
-import { MoveData } from "../../../../helpers/types";
 import { Move } from "../PokemonPage.styles";
 import { capitalize } from "../../../../helpers/strings";
 import { pokemonTypes } from "../../../Theme";
 
 interface iProps {
-  items: MoveData[];
+  items: any[];
 }
 
 const Moves = ({ items }: iProps) => (

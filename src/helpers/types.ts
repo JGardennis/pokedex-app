@@ -1,132 +1,33 @@
-export type ApiResponse = {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: ItemKey[];
-};
-
-export type ItemKey = {
+export type DataItem = {
   name: string;
   url: string;
 };
 
-export type RawPokemonData = {
-  id: number;
-  name: string;
+export type Pokemon = {
   abilities: {
-    ability: ItemKey;
+    ability: DataItem;
+    is_hidden: boolean;
+    slot: number;
   }[];
+  base_experience: number;
+  forms: DataItem[];
+  game_indeces: {
+    game_index: number;
+    version: DataItem;
+  }[];
+  height: number;
+  heldItems: DataItem[];
+  id: number;
+  is_default: true;
+  location_area_encounters: string;
   moves: {
-    move: ItemKey;
+    move: DataItem[];
     version_group_details: {
-      level_learned_at: 0;
-      move_learned_method: ItemKey;
-      version_group: ItemKey;
+      level_learned_at: number;
+      move_learned_method: DataItem;
+      version_group: DataItem;
     }[];
   }[];
-  sprites: {
-    front_default: string;
-    front_shiny: string;
-  };
-  stats: {
-    base_stat: number;
-    stat: ItemKey;
-  }[];
-  types: {
-    slot: number;
-    type: ItemKey;
-  }[];
-};
-
-export type RawTypeData = {
-  damage_relations: {
-    double_damage_from: ItemKey[];
-    double_damage_to: ItemKey[];
-    half_damage_from: ItemKey[];
-    half_damage_to: ItemKey[];
-  };
-};
-
-export type RawMoveData = {
-  accuracy: number;
-  damage_class: ItemKey;
-  effect_entries: {
-    effect: string;
-    langauge: ItemKey;
-    short_effect: string;
-  };
   name: string;
-  power: number;
-  pp: number;
-  type: ItemKey;
+  weight: number;
 };
-
-export type MoveData = {
-  name: string;
-  accuracy: number;
-  class: string;
-  description: string;
-  power: number;
-  pp: number;
-  type: ItemKey;
-  learnedAt: number;
-};
-
-export type DataRef = {
-  id: string;
-  name: string;
-  url: string;
-};
-
-export type PokemonType = {
-  id: string;
-  name: string;
-  image: string;
-  abilities: ItemKey[];
-  moves: {
-    name: string;
-    url: string;
-    learnedAt: number;
-  }[];
-  stats: {
-    name: string;
-    value: number;
-  }[];
-  types: ItemKey[];
-};
-
-export type Ability = {
-  id: string;
-  name: string;
-  text: string;
-  type: PokemonTypeNames;
-  battleEffect: string;
-  pokemonIds: number[];
-};
-
-export type Item = {
-  id: string;
-  name: string;
-  image: string;
-  text: string;
-};
-
-export type PokemonTypeNames =
-  | "grass"
-  | "bug"
-  | "fire"
-  | "water"
-  | "electric"
-  | "poison"
-  | "psychic"
-  | "dark"
-  | "fighting"
-  | "flying"
-  | "ground"
-  | "ghost"
-  | "fairy"
-  | "steel"
-  | "ice"
-  | "rock"
-  | "dragon"
-  | "normal";

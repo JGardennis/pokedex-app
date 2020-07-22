@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {
-  getDataFor,
-  getOffsetFromUrl,
-  getPokemonById,
-  getIdFromUrl,
-} from "../../../helpers/pokeApi";
+import React, { useState, useEffect } from "react";
+import { getKeys, getPokemonById } from "../../../helpers/pokeApi";
 import { pokemonTypes } from "../../Theme";
-import { PokemonType } from "../../../helpers/types";
-import { capitalize } from "../../../helpers/strings";
+import { capitalize, getIdFromUrl } from "../../../helpers/strings";
 import { Container, Pills } from "./PokedexPage.styles";
 import { Layout, Title, Card, Pill, Button } from "../../UI";
 
 interface iState {
-  pokemon: PokemonType[];
+  pokemon: any;
   nextUrl: string | null;
   isLoading: boolean;
 }
@@ -24,27 +18,24 @@ const PokedexPage = () => {
     isLoading: false,
   });
 
-  const getPokemon = async () => {
-    setState({ ...state, isLoading: true });
-
-    const data = await getDataFor("pokemon", {
-      limit: 30,
-      offset: state.nextUrl ? getOffsetFromUrl(state.nextUrl) : 0,
-    });
-    const results = await Promise.all(
-      data.results.map(
-        async ({ url }) => await getPokemonById(getIdFromUrl(url))
-      )
+  const fetchData = async () => {
+    const { results, next } = await getKeys("pokemon", 30, 0);
+    const pokemonData = await getPokemonById(
+      results.map(({ url }) => getIdFromUrl(url))
     );
 
     setState({
-      pokemon: [...state.pokemon, ...results],
-      nextUrl: data.next || null,
+      pokemon: [...state.pokemon, ...pokemonData],
+      nextUrl: next || null,
       isLoading: false,
     });
   };
 
-  const buildCard = (pokemon: PokemonType) => {
+  useEffect(() => {
+    fetchData();
+  });
+
+  const buildCard = (pokemon) => {
     const { primary, secondary } = pokemonTypes[pokemon.types[0].name];
 
     return (
@@ -70,11 +61,6 @@ const PokedexPage = () => {
     );
   };
 
-  useEffect(() => {
-    getPokemon();
-    // eslint-disable-next-line
-  }, []);
-
   return (
     <Layout fromTop="10vh">
       <Title align="center">Pokemon</Title>
@@ -82,7 +68,7 @@ const PokedexPage = () => {
         {state.pokemon.map(buildCard)}
       </Container>
       {state.pokemon && state.nextUrl && (
-        <Button onClick={getPokemon} center cta>
+        <Button onClick={fetchData} center cta>
           {state.isLoading ? "Loading..." : "More"}
         </Button>
       )}

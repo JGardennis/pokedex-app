@@ -1,11 +1,10 @@
 import React from "react";
 import { StyledFlexBox, Pills, StyledPill } from "../PokemonPage.styles";
-import { PokemonType } from "../../../../helpers/types";
 import { capitalize } from "../../../../helpers/strings";
 import { pokemonTypes } from "../../../Theme";
 
 interface iProps {
-  pokemon: PokemonType;
+  pokemon: any;
 }
 
 const Profile = ({ pokemon }: iProps) => (
