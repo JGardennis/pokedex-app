@@ -20,6 +20,8 @@ export type RawPokemonData = {
     move: ItemKey;
     version_group_details: {
       level_learned_at: 0;
+      move_learned_method: ItemKey;
+      version_group: ItemKey;
     }[];
   }[];
   sprites: {
@@ -60,8 +62,14 @@ export type RawMoveData = {
 };
 
 export type MoveData = {
+  name: string;
   accuracy: number;
   class: string;
+  description: string;
+  power: number;
+  pp: number;
+  type: ItemKey;
+  learnedAt: number;
 };
 
 export type DataRef = {
@@ -75,13 +83,16 @@ export type PokemonType = {
   name: string;
   image: string;
   abilities: ItemKey[];
-  moves: MoveData[];
+  moves: {
+    name: string;
+    url: string;
+    learnedAt: number;
+  }[];
   stats: {
     name: string;
     value: number;
   }[];
-  types: string[];
-  weaknesses: string[];
+  types: ItemKey[];
 };
 
 export type Ability = {

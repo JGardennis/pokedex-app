@@ -13,9 +13,9 @@ const Profile = ({ pokemon }: iProps) => (
     <img src={pokemon.image} alt={pokemon.name} />
     <h1>{capitalize(pokemon.name)}</h1>
     <Pills>
-      {pokemon.types.map((type) => (
-        <StyledPill key={type} color={pokemonTypes[type].secondary}>
-          {capitalize(type)}
+      {pokemon.types.map(({ name }) => (
+        <StyledPill key={name} color={pokemonTypes[name].secondary}>
+          {capitalize(name)}
         </StyledPill>
       ))}
     </Pills>

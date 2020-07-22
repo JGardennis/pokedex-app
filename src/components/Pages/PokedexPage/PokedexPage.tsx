@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  getSlugsFor,
+  getDataFor,
   getOffsetFromUrl,
   getPokemonById,
   getIdFromUrl,
@@ -10,8 +10,6 @@ import { PokemonType } from "../../../helpers/types";
 import { capitalize } from "../../../helpers/strings";
 import { Container, Pills } from "./PokedexPage.styles";
 import { Layout, Title, Card, Pill, Button } from "../../UI";
-import { AppContext } from "../../../context/context";
-import { Types } from "../../../context/reducers";
 
 interface iState {
   pokemon: PokemonType[];
@@ -26,16 +24,10 @@ const PokedexPage = () => {
     isLoading: false,
   });
 
-  const { state: appState, dispatch } = useContext(AppContext);
-
-  useEffect(() => {
-    console.log(appState);
-  }, [appState]);
-
   const getPokemon = async () => {
     setState({ ...state, isLoading: true });
 
-    const data = await getSlugsFor("pokemon", {
+    const data = await getDataFor("pokemon", {
       limit: 30,
       offset: state.nextUrl ? getOffsetFromUrl(state.nextUrl) : 0,
     });
@@ -50,12 +42,10 @@ const PokedexPage = () => {
       nextUrl: data.next || null,
       isLoading: false,
     });
-
-    dispatch({ type: Types.Update, payload: state.pokemon });
   };
 
   const buildCard = (pokemon: PokemonType) => {
-    const { primary, secondary } = pokemonTypes[pokemon.types[0]];
+    const { primary, secondary } = pokemonTypes[pokemon.types[0].name];
 
     return (
       <Card
@@ -67,12 +57,12 @@ const PokedexPage = () => {
       >
         <h2>{capitalize(pokemon.name)}</h2>
         <Pills>
-          {pokemon.types.map((type) => (
+          {pokemon.types.map(({ name }) => (
             <Pill
-              key={`${pokemon.name}-${type}`}
-              color={pokemonTypes[type].secondary}
+              key={`${pokemon.name}-${name}`}
+              color={pokemonTypes[name].secondary}
             >
-              {capitalize(type)}
+              {capitalize(name)}
             </Pill>
           ))}
         </Pills>

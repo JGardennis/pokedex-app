@@ -70,4 +70,41 @@ const Weakness = styled.span`
   `}
 `;
 
-export { StyledFlexBox, Pills, StyledPill, NavButton, Weakness };
+const Move = styled.div`
+  ${({ theme, color, altColor }) => `
+    display: inline-block;
+    position: relative;
+    margin: 1em;
+    box-shadow: ${theme.boxShadow};
+    border-radius: 5px;
+    background-color: ${color};
+    ${theme.id === "dark" ? `border: 1px solid ${color};` : ""}
+    cursor: default;
+    overflow: hidden;
+
+    h3 {
+      color: #fff;
+      padding: 0.5em;
+    }
+
+    span {
+      position: absolute;
+      font-size: 0.8em;
+      top: 5px;
+      right: 5px;
+      color: #fff;
+    }
+
+    p {
+      background-color: ${theme.id === "dark" ? theme.cardBackground : "#fff"};
+      padding: 0.5em;
+      font-size: 0.6em;
+      margin-top: 0.5em;
+      line-height: 1.5em;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  `}
+`;
+
+export { StyledFlexBox, Pills, StyledPill, NavButton, Weakness, Move };

@@ -25,6 +25,7 @@ const StyledCard = styled.div`
             margin-top: 2em;
             font-size: 1.2em;
             font-weight: 500;
+            color: #fff;
           }
         
         a {

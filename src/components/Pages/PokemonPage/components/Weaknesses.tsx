@@ -1,20 +1,20 @@
 import React from "react";
-import { PokemonType } from "../../../../helpers/types";
 import { pokemonTypes } from "../../../Theme";
 import { Weakness } from "../PokemonPage.styles";
+import { capitalize } from "../../../../helpers/strings";
 
 interface iProps {
-  pokemon: PokemonType;
+  items: string[];
 }
 
-const Weaknesses = ({ pokemon }: iProps) => (
+const Weaknesses = ({ items }: iProps) => (
   <div>
     <h2>Weaknesses</h2>
-    {pokemon.weaknesses.map((w) => {
-      const { primary, secondary } = pokemonTypes[w];
+    {items.map((item) => {
+      const { primary, secondary } = pokemonTypes[item];
       return (
-        <Weakness key={w} color={primary} altColor={secondary}>
-          {w}
+        <Weakness key={item} color={primary} altColor={secondary}>
+          {capitalize(item)}
         </Weakness>
       );
     })}

@@ -4,9 +4,7 @@ import {
   ItemKey,
   PokemonType,
   RawTypeData,
-  RawMoveData,
 } from "./types";
-import { report } from "process";
 
 const baseUrl = "https://pokeapi.co/api/v2/";
 
@@ -41,48 +39,53 @@ async function getPokemonById(id: string): Promise<PokemonType> {
   const data = await fetch(`${baseUrl}pokemon/${id}`);
   const response: RawPokemonData = await data.json();
 
-  const typeData = await Promise.all(
-    response.types.map(async ({ type }) => {
-      const res = await fetch(`${type.url}`);
-      const raw: RawTypeData = await res.json();
-      return raw.damage_relations.double_damage_from.map((item) => item.name);
-    })
-  );
-
-  const moveData = await Promise.all(
-    response.moves.map(async ({ move, version_group_details }) => {
-      const res = await fetch(`${move.url}`);
-      const raw: RawMoveData = await res.json();
-      return {
-        name: raw.name,
-        accuracy: raw.accuracy,
-        class: raw.damage_class.name,
-        description: raw.effect_entries.effect,
-        power: raw.power,
-        pp: raw.pp,
-        type: raw.type.name,
-      };
-    })
-  );
-
-  debugger;
-
   return {
     id,
     name: response.name,
     image: response.sprites.front_default,
     abilities: extractFromRaw(response.abilities),
-    moves: moveData,
+    moves: response.moves.map(({ move, version_group_details }) => ({
+      name: move.name,
+      url: move.url,
+      learnedAt: version_group_details[0].level_learned_at,
+    })),
     stats: response.stats.map((stat) => ({
       name: stat.stat.name,
       value: stat.base_stat,
     })),
-    types: response.types.map((type) => type.type.name),
-    weaknesses: typeData.flat(),
+    types: response.types.map(({ type }) => type),
   };
 }
 
-async function getSlugsFor(
+async function getMovesData(
+  moves: { name: string; url: string; learnedAt: number }[]
+) {
+  const data = await Promise.all(
+    moves.map(async (move) => {
+      const res = await fetch(move.url);
+      return await res.json();
+    })
+  );
+
+  return data.filter((d) => d.generation.name === "generation-i");
+}
+
+async function getWeaknessesData(types: ItemKey[]) {
+  const data: RawTypeData[] = await Promise.all(
+    types.map(async (type) => {
+      const res = await fetch(type.url);
+      return await res.json();
+    })
+  );
+
+  return data
+    .map((item) =>
+      item.damage_relations.double_damage_from.map(({ name }) => name)
+    )
+    .flat();
+}
+
+async function getDataFor(
   slug: string,
   options: { limit: number; offset: number }
 ) {
@@ -95,8 +98,10 @@ async function getSlugsFor(
 }
 
 export {
-  getSlugsFor,
+  getDataFor,
   getPokemonById,
+  getMovesData,
+  getWeaknessesData,
   getEnglishEntryFromItem,
   getOffsetFromUrl,
   getIdFromUrl,
