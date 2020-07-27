@@ -3,78 +3,67 @@ import { Layout } from "../../UI";
 import { PokemonType, MoveData } from "../../../helpers/types";
 import { BigCard } from "../../UI/Styles/Card.styles";
 import { RouteComponentProps, withRouter, useHistory } from "react-router";
-import { NavButton } from "./PokemonPage.styles";
+import { Profile, Weaknesses, Moves } from "./components";
 import {
   getPokemonById,
-  getDataFor,
-  getMovesData,
-  getWeaknessesData,
-} from "../../../helpers/pokeApi";
-import { Profile, Weaknesses, Moves } from "./components";
+  getPokemonDetail,
+  PokemonResource,
+  PokemonDetail,
+} from "../../../helpers/api";
+
+type Props = RouteComponentProps<{ id: string }, any, { data: any }>;
 
 interface iState {
-  data: PokemonType | null;
+  pokemonData: PokemonResource | null;
+  pokemonDetail: PokemonDetail | null;
   loading: boolean;
-  moves: MoveData[];
-  weaknesses: string[];
 }
 
-type PokemonPageData = RouteComponentProps<
-  { id: string },
-  any,
-  { data: PokemonType }
->;
-
-const PokemonPage = ({ location, match }: PokemonPageData) => {
+const PokemonPage = ({ location, match }: Props) => {
   const [state, setState] = useState<iState>({
-    data: null,
-    moves: [],
-    weaknesses: [],
+    pokemonData: null,
+    pokemonDetail: null,
     loading: true,
   });
+
   const history = useHistory();
 
   useEffect(() => {
     const getData = async () => {
-      const response = await getPokemonById(match.params.id);
-      setState((s) => ({ ...s, data: response }));
+      const pokemon = await getPokemonById(Number(match.params.id));
+      setState((s) => ({ ...s, pokemonData: pokemon }));
     };
 
-    const getMoves = async () => {
-      if (state.data) {
-        const response = await getMovesData(state.data.moves);
-        setState((s) => ({ ...s, moves: response }));
+    if (location && location.state) {
+      setState((s) => ({ ...s, pokemonData: location.state.data }));
+    } else {
+      getData();
+    }
+  }, [state.pokemonData, location, match.params.id]);
+
+  useEffect(() => {
+    const getDetail = async () => {
+      if (state.pokemonData) {
+        const detail = await getPokemonDetail(state.pokemonData);
+
+        setState((s) => ({ ...s, pokemonDetail: detail }));
+      } else {
+        setState((s) => ({ ...s, pokemonData: null }));
       }
     };
 
-    const getWeaknesses = async () => {
-      if (state.data) {
-        const response = await getWeaknessesData(state.data.types);
-        setState((s) => ({ ...s, weaknesses: response }));
-      }
-    };
+    getDetail();
+  }, [state.pokemonData]);
 
-    location && location.state
-      ? setState((s) => ({ ...s, data: location.state.data }))
-      : getData();
-
-    setState((s) => ({ ...s, loading: false }));
-
-    getMoves();
-    getWeaknesses();
-  }, [state.data, location, match.params.id]);
-
-  if (state.loading || !state.data) {
+  if (state.loading || !state.pokemonData || !state.pokemonDetail) {
     return <Layout>LOADING</Layout>;
   }
 
+  console.log(state.pokemonDetail);
+
   return (
     <Layout>
-      <Profile pokemon={state.data} />
-      <BigCard>
-        <Weaknesses items={state.weaknesses} />
-        {state.moves.length > 0 && <Moves items={state.moves} />}
-      </BigCard>
+      <h1>{state.pokemonData.name}</h1>
     </Layout>
   );
 };

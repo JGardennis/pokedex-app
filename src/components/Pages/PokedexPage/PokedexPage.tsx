@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {
-  getDataFor,
-  getOffsetFromUrl,
-  getPokemonById,
-  getIdFromUrl,
-} from "../../../helpers/pokeApi";
 import { pokemonTypes } from "../../Theme";
 import { PokemonType } from "../../../helpers/types";
-import { capitalize } from "../../../helpers/strings";
+import { capitalize, getOffsetFromUrl } from "../../../helpers/strings";
 import { Container, Pills } from "./PokedexPage.styles";
 import { Layout, Title, Card, Pill, Button } from "../../UI";
+import { getPokemonList } from "../../../helpers/api";
 
 interface iState {
-  pokemon: PokemonType[];
+  pokemon: any[];
   nextUrl: string | null;
   isLoading: boolean;
 }
@@ -27,18 +22,13 @@ const PokedexPage = () => {
   const getPokemon = async () => {
     setState({ ...state, isLoading: true });
 
-    const data = await getDataFor("pokemon", {
-      limit: 30,
-      offset: state.nextUrl ? getOffsetFromUrl(state.nextUrl) : 0,
-    });
-    const results = await Promise.all(
-      data.results.map(
-        async ({ url }) => await getPokemonById(getIdFromUrl(url))
-      )
+    const data = await getPokemonList(
+      30,
+      state.nextUrl ? getOffsetFromUrl(state.nextUrl) : 0
     );
 
     setState({
-      pokemon: [...state.pokemon, ...results],
+      pokemon: [...state.pokemon, ...data.results],
       nextUrl: data.next || null,
       isLoading: false,
     });
