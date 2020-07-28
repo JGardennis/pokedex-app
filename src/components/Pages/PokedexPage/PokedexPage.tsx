@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { pokemonTypes } from "../../Theme";
-import { PokemonType } from "../../../helpers/types";
-import { capitalize, getOffsetFromUrl } from "../../../helpers/strings";
+import { PokemonType } from "helpers/types";
+import { getPokemonList } from "helpers/api";
+import { pokemonTypes } from "components/Theme";
 import { Container, Pills } from "./PokedexPage.styles";
-import { Layout, Title, Card, Pill, Button } from "../../UI";
-import { getPokemonList } from "../../../helpers/api";
+import { capitalize, getOffsetFromUrl } from "helpers/strings";
+import { Layout, Title, Card, Pill, Button } from "components/UI";
 
 interface iState {
   pokemon: any[];

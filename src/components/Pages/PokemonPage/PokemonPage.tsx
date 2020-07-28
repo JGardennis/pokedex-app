@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Layout } from "../../UI";
-import { RouteComponentProps, withRouter } from "react-router";
 import {
   getPokemonById,
   getPokemonDetail,
   PokemonResource,
   PokemonDetail,
-} from "../../../helpers/api";
+} from "helpers/api";
 import {
   Profile,
   Pills,
@@ -14,9 +12,11 @@ import {
   Weakness,
   Move,
 } from "./PokemonPage.styles";
-import { capitalize } from "../../../helpers/strings";
-import { pokemonTypes } from "../../Theme";
-import { BigCard } from "../../UI/Styles/Card.styles";
+import { Layout } from "components/UI";
+import { capitalize } from "helpers/strings";
+import { pokemonTypes } from "components/Theme";
+import { BigCard } from "components/UI/Styles/Card.styles";
+import { RouteComponentProps, withRouter } from "react-router";
 
 type Props = RouteComponentProps<{ id: string }, any, { data: any }>;
 

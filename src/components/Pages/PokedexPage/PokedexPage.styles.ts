@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { FlexBox } from "../../UI";
-import { queries } from "../../Theme";
+import { FlexBox } from "components/UI";
+import { queries } from "components/Theme";
 
 const Container = styled(FlexBox)`
   width: 100%;

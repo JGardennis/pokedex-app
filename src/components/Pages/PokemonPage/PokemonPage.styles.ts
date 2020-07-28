@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { FlexBox, Pill } from "../../UI";
-import { RoundCard } from "../../UI/Styles/Card.styles";
+import { FlexBox, Pill } from "components/UI";
+import { RoundCard } from "components/UI/Styles/Card.styles";
 
 const Profile = styled(FlexBox)`
   ${({ theme }) => `

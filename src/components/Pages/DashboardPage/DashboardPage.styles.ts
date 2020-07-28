@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { queries } from "../../Theme";
-import { Title } from "../../UI";
+import { Title } from "components/UI";
+import { queries } from "components/Theme";
 
 const Container = styled.div`
   width: 560px;
