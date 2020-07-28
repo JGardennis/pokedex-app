@@ -1,4 +1,4 @@
-import { PokemonType } from "../helpers/types";
+import { PokemonType } from "helpers/types";
 
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined

@@ -1,4 +1,4 @@
-import { getIdFromUrl } from "./pokeApi";
+import { getIdFromUrl } from "helpers/strings";
 
 type ApiResource = {
   name: string;

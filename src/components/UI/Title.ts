@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { queries } from "../Theme";
+import { queries } from "components/Theme";
 
 const Title = styled.h1`
   ${({ theme, align }) => `

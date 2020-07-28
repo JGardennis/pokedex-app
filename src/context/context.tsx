@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, Dispatch } from "react";
+import { PokemonType } from "helpers/types";
 import { pokemonReducer, PokemonActions } from "./reducers";
-import { PokemonType } from "../helpers/types";
 
 type InitialStateType = {
   pokemon: PokemonType[];

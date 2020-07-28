@@ -1,6 +1,6 @@
 import React from "react";
 import Pokeball from "./Pokeball";
-import { colors } from "../Theme";
+import { colors } from "components/Theme";
 import { StyledButton } from "./Styles/MenuButtons.styles";
 
 interface iProps {

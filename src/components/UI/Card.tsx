@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "../UI/Buttons";
 import Pokeball from "./Pokeball";
+import { PokemonType } from "helpers/types";
+import { Link } from "components/UI/Buttons";
 import { StyledCard } from "./Styles/Card.styles";
-import { PokemonType } from "../../helpers/types";
 
 interface iProps {
   to: {

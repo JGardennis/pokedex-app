@@ -1,6 +1,6 @@
 import styled from "styled-components";
+import { queries } from "components/Theme";
 import { StyledPokeball } from "./Pokeball.styles";
-import { queries } from "../../Theme";
 
 const StyledCard = styled.div`
   ${({ theme, color, transition }) => `
