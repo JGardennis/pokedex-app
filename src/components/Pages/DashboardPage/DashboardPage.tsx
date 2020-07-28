@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, MenuButton } from "../../UI";
+import { Layout, MenuButton } from "components/UI";
 import { Container, StyledTitle } from "./DashboardPage.styles";
 
 const DashboardPage = () => (

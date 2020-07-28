@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import PokemonPage from "../Pages/PokemonPage";
 import { Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { DashboardPage, PokedexPage } from "../Pages";
-import { ThemeButton, LargePokeball } from "./App.styles";
-import { GlobalStyles, lightTheme, darkTheme } from "../Theme";
 import { AppProvider } from "../../context/context";
+import { ThemeButton, LargePokeball } from "./App.styles";
+import { GlobalStyles, lightTheme, darkTheme } from "components/Theme";
+import { DashboardPage, PokedexPage, PokemonPage } from "components/Pages";
 
 const App: React.SFC = () => {
   const [state, setState] = useState({ theme: "light" });

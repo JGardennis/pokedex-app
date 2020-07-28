@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Button, Pokeball } from "../UI";
-import { queries } from "../Theme";
+import { queries } from "components/Theme";
+import { Button, Pokeball } from "components/UI";
 
 const ThemeButton = styled(Button)`
   position: fixed;
