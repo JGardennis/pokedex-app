@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FlexBox, Pill } from "../../UI";
 import { RoundCard } from "../../UI/Styles/Card.styles";
 
-const StyledFlexBox = styled(FlexBox)`
+const Profile = styled(FlexBox)`
   ${({ theme }) => `
     flex-direction: column;
     justify-content: center;
@@ -107,4 +107,4 @@ const Move = styled.div`
   `}
 `;
 
-export { StyledFlexBox, Pills, StyledPill, NavButton, Weakness, Move };
+export { Profile, Pills, StyledPill, NavButton, Weakness, Move };

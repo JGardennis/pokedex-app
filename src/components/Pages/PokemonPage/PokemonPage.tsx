@@ -7,6 +7,16 @@ import {
   PokemonResource,
   PokemonDetail,
 } from "../../../helpers/api";
+import {
+  Profile,
+  Pills,
+  StyledPill,
+  Weakness,
+  Move,
+} from "./PokemonPage.styles";
+import { capitalize } from "../../../helpers/strings";
+import { pokemonTypes } from "../../Theme";
+import { BigCard } from "../../UI/Styles/Card.styles";
 
 type Props = RouteComponentProps<{ id: string }, any, { data: any }>;
 
@@ -57,8 +67,49 @@ const PokemonPage = ({ location, match }: Props) => {
 
   return (
     <Layout>
-      <h1>{state.pokemonData.name}</h1>
-      {state.pokemonDetail && <p>{state.pokemonDetail.description}</p>}
+      <Profile>
+        <img src={state.pokemonData.image} alt={state.pokemonData.name} />
+        <h1>{capitalize(state.pokemonData.name)}</h1>
+        <Pills>
+          {state.pokemonData.types.map(({ name }) => (
+            <StyledPill key={name} color={pokemonTypes[name].secondary}>
+              {capitalize(name)}
+            </StyledPill>
+          ))}
+        </Pills>
+      </Profile>
+
+      {state.pokemonDetail && (
+        <BigCard>
+          <p>{state.pokemonDetail.description}</p>
+
+          <h2>Weaknesses</h2>
+          {state.pokemonDetail.typeData.map(({ double_damage }) => {
+            return double_damage.from.map((item) => {
+              const { primary, secondary } = pokemonTypes[item];
+
+              return (
+                <Weakness key={item} color={primary} altColor={secondary}>
+                  {capitalize(item)}
+                </Weakness>
+              );
+            });
+          })}
+
+          <h2>Moves</h2>
+          {state.pokemonDetail.moveData.slice(0, 5).map((move) => {
+            const { primary, secondary } = pokemonTypes[move.type];
+
+            return (
+              <Move key={move.name} color={primary} altColor={secondary}>
+                <h3>{capitalize(move.name).replace("-", " ")}</h3>
+                <span>Lvl {move.learnedAt === 0 ? "1" : move.learnedAt}</span>
+                <p>{move.description}</p>
+              </Move>
+            );
+          })}
+        </BigCard>
+      )}
     </Layout>
   );
 };

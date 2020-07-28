@@ -37,6 +37,7 @@ type PokemonMoveResource = {
   power: number;
   pp: number;
   type: string;
+  learnedAt: number;
 };
 
 type DamageDetail = {
@@ -125,8 +126,8 @@ async function getPokemonDetail(
 
   // MOVELIST STATS
   const moves = await Promise.all(
-    pokemon.moves.map(async ({ url }) => {
-      const data = await getJson(`/move/${getIdFromUrl(url)}`);
+    pokemon.moves.map(async (move) => {
+      const data = await getJson(`/move/${getIdFromUrl(move.url)}`);
 
       return {
         name: data.name,
@@ -136,6 +137,7 @@ async function getPokemonDetail(
         power: data.power,
         pp: data.pp,
         type: data.type.name,
+        learnedAt: move.learnedAt,
       };
     })
   );
