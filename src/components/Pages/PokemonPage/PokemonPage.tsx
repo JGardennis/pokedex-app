@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Layout } from "../../UI";
-import { PokemonType, MoveData } from "../../../helpers/types";
-import { BigCard } from "../../UI/Styles/Card.styles";
-import { RouteComponentProps, withRouter, useHistory } from "react-router";
-import { Profile, Weaknesses, Moves } from "./components";
+import { RouteComponentProps, withRouter } from "react-router";
 import {
   getPokemonById,
   getPokemonDetail,
@@ -26,16 +23,18 @@ const PokemonPage = ({ location, match }: Props) => {
     loading: true,
   });
 
-  const history = useHistory();
-
   useEffect(() => {
     const getData = async () => {
       const pokemon = await getPokemonById(Number(match.params.id));
-      setState((s) => ({ ...s, pokemonData: pokemon }));
+      setState((s) => ({ ...s, pokemonData: pokemon, loading: false }));
     };
 
     if (location && location.state) {
-      setState((s) => ({ ...s, pokemonData: location.state.data }));
+      setState((s) => ({
+        ...s,
+        pokemonData: location.state.data,
+        loading: false,
+      }));
     } else {
       getData();
     }
@@ -45,25 +44,21 @@ const PokemonPage = ({ location, match }: Props) => {
     const getDetail = async () => {
       if (state.pokemonData) {
         const detail = await getPokemonDetail(state.pokemonData);
-
         setState((s) => ({ ...s, pokemonDetail: detail }));
-      } else {
-        setState((s) => ({ ...s, pokemonData: null }));
       }
     };
 
     getDetail();
   }, [state.pokemonData]);
 
-  if (state.loading || !state.pokemonData || !state.pokemonDetail) {
+  if (state.loading || !state.pokemonData) {
     return <Layout>LOADING</Layout>;
   }
-
-  console.log(state.pokemonDetail);
 
   return (
     <Layout>
       <h1>{state.pokemonData.name}</h1>
+      {state.pokemonDetail && <p>{state.pokemonDetail.description}</p>}
     </Layout>
   );
 };

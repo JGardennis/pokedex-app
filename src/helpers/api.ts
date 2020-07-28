@@ -122,27 +122,6 @@ async function getPokemonDetail(
   pokemon: PokemonResource
 ): Promise<PokemonDetail> {
   const speciesData = await getJson(`/pokemon-species/${pokemon.id}`);
-  const evolutionData = await getJson(
-    `/evolution-chain/${getIdFromUrl(speciesData.evolution_chain.url)}`
-  );
-
-  // EVOLUTION CHAIN
-  const evolutions = [
-    {
-      ...evolutionData.chain.species,
-      level: 0,
-    },
-    {
-      ...evolutionData.chain.evolves_to[0].species,
-      level: evolutionData.chain.evolves_to[0].evolution_details[0].min_level,
-    },
-    {
-      ...evolutionData.chain.evolves_to[0].evolves_to[0].species,
-      level:
-        evolutionData.chain.evolves_to[0].evolves_to[0].evolution_details[0]
-          .min_level,
-    },
-  ];
 
   // MOVELIST STATS
   const moves = await Promise.all(
@@ -164,7 +143,7 @@ async function getPokemonDetail(
   // STRENGTHS, WEAKNESSES
   const types = await Promise.all(
     pokemon.types.map(async ({ url }) => {
-      const data = await getJson(`/type/${getIdFromUrl}`);
+      const data = await getJson(`/type/${getIdFromUrl(url)}`);
 
       const getDamages = (str: string) =>
         data.damage_relations[str].map(({ name }) => name);
@@ -190,7 +169,7 @@ async function getPokemonDetail(
   // ABILITIES
   const abilities = await Promise.all(
     pokemon.abilities.map(async ({ url }) => {
-      const data = await getJson(`/ability/${getIdFromUrl}`);
+      const data = await getJson(`/ability/${getIdFromUrl(url)}`);
 
       return {
         name: data.name,
@@ -200,7 +179,7 @@ async function getPokemonDetail(
   );
 
   return {
-    evolutions: evolutions,
+    evolutions: [],
     description: speciesData.flavor_text_entries[0].flavor_text,
     moveData: moves,
     typeData: types,
