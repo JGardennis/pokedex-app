@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { getKeys, getPokemonById } from "../../../helpers/pokeApi";
+import { getKeys, getPokemonFromKeys } from "../../../helpers/pokeApi";
 import { pokemonTypes } from "../../Theme";
-import {
-  capitalize,
-  getIdFromUrl,
-  getOffsetFromUrl,
-} from "../../../helpers/strings";
+import { capitalize, getOffsetFromUrl } from "../../../helpers/strings";
 import { Container, Pills } from "./PokedexPage.styles";
 import { Layout, Title, Card, Pill, Button } from "../../UI";
 import { Pokemon } from "../../../helpers/types";
@@ -27,9 +23,7 @@ const PokedexPage = () => {
     setState((s) => ({ ...s, isLoading: true }));
 
     const { results, next } = await getKeys("pokemon", 30, offset);
-    const pokemonData = await getPokemonById(
-      results.map(({ url }) => getIdFromUrl(url))
-    );
+    const pokemonData = await getPokemonFromKeys(results);
 
     setState((s) => ({
       ...s,

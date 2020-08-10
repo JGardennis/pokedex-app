@@ -1,80 +1,58 @@
 import React, { useState, useEffect } from "react";
-// import { Layout } from "../../UI";
-// import { BigCard } from "../../UI/Styles/Card.styles";
-// import { RouteComponentProps, withRouter, useHistory } from "react-router";
-// import { NavButton } from "./PokemonPage.styles";
-// import {
-//   getPokemonById,
-// } from "../../../helpers/pokeApi";
-// import { Profile, Weaknesses, Moves } from "./components";
+import { RouteComponentProps } from "react-router-dom";
+import { Pokemon } from "../../../helpers/types";
+import { getPokemonById, getPokemonDetail } from "../../../helpers/pokeApi";
+import { capitalize } from "../../../helpers/strings";
+import { Section } from "./components";
 
-// interface iState {
-//   data: PokemonType | null;
-//   loading: boolean;
-//   moves: MoveData[];
-//   weaknesses: string[];
-// }
+type Props = RouteComponentProps<{ id: string }, any, { data: Pokemon }>;
 
-// type PokemonPageData = RouteComponentProps<
-//   { id: string },
-//   any,
-//   { data: PokemonType }
-// >;
+interface iState {
+  pokemon: Pokemon | null;
+}
 
-// const PokemonPage = ({ location, match }: PokemonPageData) => {
-//   const [state, setState] = useState<iState>({
-//     data: null,
-//     moves: [],
-//     weaknesses: [],
-//     loading: true,
-//   });
-//   const history = useHistory();
+const PokemonPage = ({ location, match }: Props) => {
+  const [state, setState] = useState<iState>({ pokemon: null });
 
-//   useEffect(() => {
-//     const getData = async () => {
-//       const response = await getPokemonById(match.params.id);
-//       setState((s) => ({ ...s, data: response }));
-//     };
+  useEffect(() => {
+    const fetchPokemon = async () => {
+      const response = await getPokemonById(match.params.id);
+      setState((s) => ({ ...s, pokemon: response }));
+    };
 
-//     const getMoves = async () => {
-//       if (state.data) {
-//         const response = await getMovesData(state.data.moves);
-//         setState((s) => ({ ...s, moves: response }));
-//       }
-//     };
+    if (location.state && location.state.data) {
+      setState((s) => ({ ...s, pokemon: location.state.data }));
+    } else {
+      fetchPokemon();
+    }
+  }, [location.state, match.params.id]);
 
-//     const getWeaknesses = async () => {
-//       if (state.data) {
-//         const response = await getWeaknessesData(state.data.types);
-//         setState((s) => ({ ...s, weaknesses: response }));
-//       }
-//     };
+  useEffect(() => {
+    const fetchDetail = async () => {
+      if (state.pokemon) {
+        const response = await getPokemonDetail(state.pokemon);
 
-//     location && location.state
-//       ? setState((s) => ({ ...s, data: location.state.data }))
-//       : getData();
+        debugger;
+      }
+    };
 
-//     setState((s) => ({ ...s, loading: false }));
+    fetchDetail();
+  });
 
-//     getMoves();
-//     getWeaknesses();
-//   }, [state.data, location, match.params.id]);
+  if (!state.pokemon) {
+    return <h1>Loading...</h1>;
+  }
 
-//   if (state.loading || !state.data) {
-//     return <Layout>LOADING</Layout>;
-//   }
-
-//   return (
-//     <Layout>
-//       <Profile pokemon={state.data} />
-//       <BigCard>
-//         <Weaknesses items={state.weaknesses} />
-//         {state.moves.length > 0 && <Moves items={state.moves} />}
-//       </BigCard>
-//     </Layout>
-//   );
-// };
-
-const PokemonPage = () => <></>;
+  return (
+    <>
+      <Section title={capitalize(state.pokemon.name)}>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
+          velit, vulputate eu pharetra nec, mattis ac neque.
+        </p>
+      </Section>
+    </>
+  );
+};
 
 export default PokemonPage;

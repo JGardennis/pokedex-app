@@ -52,3 +52,22 @@ export type Pokemon = {
   }[];
   weight: number;
 };
+
+export type getKeysResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: DataItem[];
+};
+
+type DamageObject = {
+  doubleDamage: string[];
+  halfDamage: string[];
+  noDamage: string[];
+};
+
+export type getPokemonDetailResponse = {
+  description: string;
+  strengths: DamageObject;
+  weaknesses: DamageObject;
+};

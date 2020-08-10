@@ -26,6 +26,7 @@ const lightTheme = {
   background: "#fafafa",
   pokeball: "#e6e6e6",
   text: "#707070",
+  lightText: "#909090",
   boxShadow: "1px 1px 3px 0 #adadad;",
 };
 

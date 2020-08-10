@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
     ${({ theme }) => `
       transition: ${theme.transition};
       color: ${theme.id === "dark" ? "white" : "initial"};
+      font-family: ${theme.primaryFont};
     `}
   }
 
