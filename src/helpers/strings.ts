@@ -12,4 +12,9 @@ function getIdFromUrl(url: string): string {
   return rgx && rgx.length === 2 ? rgx[1] : "";
 }
 
-export { capitalize, prefixZeros, getIdFromUrl };
+function getOffsetFromUrl(url: string): number | null {
+  const rgx = new RegExp(/(offset=)(\d+)/g).exec(url);
+  return rgx && rgx.length === 3 ? parseInt(rgx[2]) : null;
+}
+
+export { capitalize, prefixZeros, getIdFromUrl, getOffsetFromUrl };
