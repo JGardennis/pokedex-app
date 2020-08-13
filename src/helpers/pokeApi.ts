@@ -1,4 +1,9 @@
-import { Pokemon, getKeysResponse, getPokemonDetailResponse } from "./types";
+import {
+  Pokemon,
+  getKeysResponse,
+  getPokemonDetailResponse,
+  getFormResposne,
+} from "./types";
 import { getIdFromUrl } from "./strings";
 
 // HELPERS
@@ -37,11 +42,23 @@ async function getPokemonById(id: string): Promise<Pokemon> {
   return getData(id);
 }
 
+async function getPokemonSprites(id: number): Promise<getFormResposne> {
+  const formRes = await fetchFromApi(`${BASE_URL}/pokemon-form/${id}`);
+
+  return {
+    name: formRes.name,
+    sprites: formRes.sprites,
+  };
+}
+
 async function getPokemonDetail(
   pokemon: Pokemon
 ): Promise<getPokemonDetailResponse> {
   const speciesRes = await fetchFromApi(pokemon.species.url);
   const evolutionRes = await fetchFromApi(speciesRes.evolution_chain.url);
+  const abilitiesRes = await Promise.all(
+    pokemon.abilities.map(async (a) => await fetchFromApi(a.ability.url))
+  );
   const typesRes = await Promise.all(
     pokemon.types.map(async (t) => await fetchFromApi(t.type.url))
   );
@@ -58,6 +75,11 @@ async function getPokemonDetail(
     description: speciesRes.flavor_text_entries.find(
       (f) => f.version.name === "red"
     ).flavor_text,
+    abilities: abilitiesRes.map((a) => ({
+      name: a.name,
+      description: a.effect_entries.find((item) => item.language.name === "en")
+        .effect,
+    })),
     strengths: {
       doubleDamage: getDamagesByKey("double_damage_to"),
       halfDamage: getDamagesByKey("half_damage_from"),
@@ -71,4 +93,10 @@ async function getPokemonDetail(
   };
 }
 
-export { getKeys, getPokemonById, getPokemonFromKeys, getPokemonDetail };
+export {
+  getKeys,
+  getPokemonById,
+  getPokemonFromKeys,
+  getPokemonDetail,
+  getPokemonSprites,
+};

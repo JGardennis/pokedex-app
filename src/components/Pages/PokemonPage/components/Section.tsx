@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledLayout } from "../Shared.styles";
+import { StyledLayout } from "./Shared.styles";
 
 interface iProps {
   title: string;

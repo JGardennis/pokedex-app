@@ -68,6 +68,20 @@ type DamageObject = {
 
 export type getPokemonDetailResponse = {
   description: string;
+  abilities: {
+    name: string;
+    description: string;
+  }[];
   strengths: DamageObject;
   weaknesses: DamageObject;
+};
+
+export type getFormResposne = {
+  name: string;
+  sprites: {
+    back_default: string;
+    back_shiny: string;
+    front_default: string;
+    front_shiny: string;
+  };
 };
