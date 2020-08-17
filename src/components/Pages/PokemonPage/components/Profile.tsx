@@ -1,7 +1,7 @@
 import React from "react";
 import { StyledFlexBox, Pills, StyledPill } from "../PokemonPage.styles";
 import { capitalize } from "../../../../helpers/strings";
-import { pokemonTypes } from "../../../Theme";
+import { pokemonTypes } from "../../../../Theme";
 
 interface iProps {
   pokemon: any;

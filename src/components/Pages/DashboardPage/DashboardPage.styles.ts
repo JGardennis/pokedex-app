@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { queries } from "../../Theme";
+import { queries } from "../../../Theme";
 import { Title } from "../../UI";
 
 const Container = styled.div`

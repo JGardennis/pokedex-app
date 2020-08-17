@@ -1,7 +1,7 @@
 import React from "react";
 import { Move } from "../PokemonPage.styles";
 import { capitalize } from "../../../../helpers/strings";
-import { pokemonTypes } from "../../../Theme";
+import { pokemonTypes } from "../../../../Theme";
 
 interface iProps {
   items: any[];

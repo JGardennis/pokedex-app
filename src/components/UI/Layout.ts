@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { queries } from "../Theme";
+import { queries } from "../../Theme";
 
 interface iArg {
   fromTop: string | { [key: string]: string };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getKeys, getPokemonById } from "../../../helpers/pokeApi";
-import { pokemonTypes } from "../../Theme";
+import { pokemonTypes } from "../../../Theme";
 import {
   capitalize,
   getIdFromUrl,

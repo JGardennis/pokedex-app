@@ -1,5 +1,5 @@
 import React from "react";
-import { pokemonTypes } from "../../../Theme";
+import { pokemonTypes } from "../../../../Theme";
 import { Weakness } from "../PokemonPage.styles";
 import { capitalize } from "../../../../helpers/strings";
 
