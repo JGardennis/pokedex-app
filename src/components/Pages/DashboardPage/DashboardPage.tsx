@@ -1,25 +1,36 @@
 import React from "react";
-import { Layout, MenuButton } from "../../UI";
-import { Container, StyledTitle } from "./DashboardPage.styles";
+import { Container, Row, Col } from "react-bootstrap";
+import Button from "../../Button";
 
-const DashboardPage = () => (
-  <Layout fromTop={{ desktop: "25vh", tablet: "20vh", mobile: "20vh" }}>
-    <Container>
-      <StyledTitle>The Pokedex App</StyledTitle>
-      <MenuButton color="red" to="/pokemon">
-        Pokedex
-      </MenuButton>
-      <MenuButton color="green" to="/moves">
-        Moves
-      </MenuButton>
-      <MenuButton color="blue" to="/abilities">
-        Abilities
-      </MenuButton>
-      <MenuButton color="purple" to="/items">
-        Items
-      </MenuButton>
-    </Container>
-  </Layout>
+const DashboardPage: React.SFC = () => (
+  <Container fluid>
+    <Row>
+      <Col md={{ span: 6, offset: 3 }}>
+        <h1 style={{ textAlign: "center" }}>The Pokedex App</h1>
+      </Col>
+      <Col md={{ span: 6, offset: 3 }}>
+        <Container>
+          <Row>
+            <Col>
+              <Button size="lg">Generation I</Button>
+            </Col>
+
+            <Col>
+              <Button size="lg">Generation II</Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button size="lg">Generation III</Button>
+            </Col>
+            <Col>
+              <Button size="lg">Generation IV</Button>
+            </Col>
+          </Row>
+        </Container>
+      </Col>
+    </Row>
+  </Container>
 );
 
 export default DashboardPage;

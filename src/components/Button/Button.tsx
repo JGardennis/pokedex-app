@@ -1,5 +1,6 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
+import { useTheme } from "styled-components";
 import { StyledButton } from "./Button.styles";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -8,7 +9,6 @@ interface iProps {
   to?: string;
   size?: "sm" | "lg";
   loading?: boolean;
-  variant?: string;
   onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
@@ -17,13 +17,14 @@ const Button: React.SFC<iProps> = ({
   to,
   size,
   loading,
-  variant,
   onClick,
 }) => {
+  const theme = useTheme();
+
   const Comp = (
     <StyledButton
-      size={size}
-      variant={variant}
+      size={size || "sm"}
+      variant={theme.id}
       onClick={onClick}
       disabled={loading}
     >
@@ -47,10 +48,4 @@ const Button: React.SFC<iProps> = ({
 
   return Comp;
 };
-
-Button.defaultProps = {
-  size: "sm",
-  variant: "primary",
-};
-
 export default Button;
