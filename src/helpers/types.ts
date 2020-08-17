@@ -72,6 +72,12 @@ export type getPokemonDetailResponse = {
     name: string;
     description: string;
   }[];
+  evolutions: {
+    id: number;
+    name: string;
+    image: string;
+    evolutionLevel: number;
+  }[];
   strengths: DamageObject;
   weaknesses: DamageObject;
 };

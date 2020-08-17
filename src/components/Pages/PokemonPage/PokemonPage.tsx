@@ -63,17 +63,40 @@ const PokemonPage = ({ location, match }: Props) => {
         {state.detail && <Abilities items={state.detail.abilities} />}
       </Section>
 
-      <Section title="Evolutions">
-        <p>SOME STUFF</p>
-      </Section>
+      {state.detail && (
+        <>
+          {state.detail.evolutions && (
+            <Section title="Evolutions">
+              <div>
+                <span>{capitalize(state.pokemon.name)}</span>
+                <img
+                  src={state.pokemon.sprites.front_default}
+                  alt={state.pokemon.name}
+                />
+              </div>
 
-      <Section title="Stats">
-        <p>SOME STUFF</p>
-      </Section>
+              {state.detail.evolutions.map((evolution) => (
+                <>
+                  <span>Lvl {evolution.evolutionLevel}</span>
 
-      <Section title="Moves">
-        <p>SOME STUFF</p>
-      </Section>
+                  <div>
+                    <span>{capitalize(evolution.name)}</span>
+                    <img src={evolution.image} alt={evolution.name} />
+                  </div>
+                </>
+              ))}
+            </Section>
+          )}
+
+          <Section title="Stats">
+            <p>SOME STUFF</p>
+          </Section>
+
+          <Section title="Moves">
+            <p>SOME STUFF</p>
+          </Section>
+        </>
+      )}
     </>
   );
 };

@@ -56,9 +56,11 @@ async function getPokemonDetail(
 ): Promise<getPokemonDetailResponse> {
   const speciesRes = await fetchFromApi(pokemon.species.url);
   const evolutionRes = await fetchFromApi(speciesRes.evolution_chain.url);
+
   const abilitiesRes = await Promise.all(
     pokemon.abilities.map(async (a) => await fetchFromApi(a.ability.url))
   );
+
   const typesRes = await Promise.all(
     pokemon.types.map(async (t) => await fetchFromApi(t.type.url))
   );
@@ -71,6 +73,36 @@ async function getPokemonDetail(
     ),
   ];
 
+  let evolutions: {
+    id: number;
+    name: string;
+    image: string;
+    evolutionLevel: number;
+  }[] = [];
+  let digging = true;
+
+  if (evolutionRes.chain) {
+    let chain = evolutionRes.chain.evolves_to[0];
+
+    while (digging) {
+      const species = await fetchFromApi(chain.species.url);
+      const pokemon = await fetchFromApi(species.varieties[0].pokemon.url);
+
+      evolutions.push({
+        id: pokemon.id,
+        name: species.name,
+        image: pokemon.sprites.front_default,
+        evolutionLevel: chain.evolution_details[0].min_level,
+      });
+
+      if (chain.evolves_to.length > 0) {
+        chain = chain.evolves_to[0];
+      } else {
+        digging = false;
+      }
+    }
+  }
+
   return {
     description: speciesRes.flavor_text_entries.find(
       (f) => f.version.name === "red"
@@ -80,6 +112,7 @@ async function getPokemonDetail(
       description: a.effect_entries.find((item) => item.language.name === "en")
         .effect,
     })),
+    evolutions: evolutions,
     strengths: {
       doubleDamage: getDamagesByKey("double_damage_to"),
       halfDamage: getDamagesByKey("half_damage_from"),
