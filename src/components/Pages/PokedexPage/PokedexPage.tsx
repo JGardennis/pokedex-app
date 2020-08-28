@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { getKeys, getPokemonById } from "../../../helpers/pokeApi";
-import { pokemonTypes } from "../../../Theme";
 import {
   capitalize,
   getIdFromUrl,
   getOffsetFromUrl,
 } from "../../../helpers/strings";
-import { Container, Pills } from "./PokedexPage.styles";
-import { Layout, Title, Card, Pill, Button } from "../../UI";
+import { pokemonTypes } from "../../../Theme";
 import { Pokemon } from "../../../helpers/types";
+import { Container, Row, Col } from "react-bootstrap";
+import { Pills } from "./PokedexPage.styles";
+import { Card, Pill } from "../../UI";
+import { getKeys, getPokemonById } from "../../../helpers/pokeApi";
+import PokemonCard from "./components/PokemonCard";
 
 interface iState {
   pokemon: Pokemon[];
@@ -16,7 +18,7 @@ interface iState {
   isLoading: boolean;
 }
 
-const PokedexPage = () => {
+const PokedexPage: React.SFC = () => {
   const [state, setState] = useState<iState>({
     pokemon: [],
     nextUrl: null,
@@ -77,7 +79,26 @@ const PokedexPage = () => {
   };
 
   return (
-    <Layout fromTop="10vh">
+    <Container fluid>
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <h1 style={{ textAlign: "center" }}>Pokemon</h1>
+        </Col>
+
+        <Col md={{ span: 6, offset: 3 }}>
+          <Row>
+            {state.pokemon.map((p) => (
+              <PokemonCard key={p.name} data={p} />
+            ))}
+          </Row>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+/*
+<Layout fromTop="10vh">
       <Title align="center">Pokemon</Title>
       <Container wrap="wrap" justify="center">
         {state.pokemon.map(buildCard)}
@@ -88,7 +109,6 @@ const PokedexPage = () => {
         </Button>
       )}
     </Layout>
-  );
-};
+*/
 
 export default PokedexPage;

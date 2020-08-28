@@ -13,13 +13,15 @@ const StyledButton = styled(Button)`
     &.btn-light {
       background-color: #e6e6e6;
       box-shadow: ${theme.boxShadow};
-      
     }
 
     &.btn-light:hover {
       background-color: #e2e6ea;
     }
 
+    &.btn-dark:hover {
+      background-color: #404244;
+    }
   `}
 `;
 
