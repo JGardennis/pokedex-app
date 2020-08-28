@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import Button from "../../Button";
+import { Container, Row, Col } from "react-bootstrap";
 
 const DashboardPage: React.SFC = () => (
   <Container fluid>
