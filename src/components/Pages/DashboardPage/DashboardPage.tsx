@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../Button";
 import { Container, Row, Col } from "react-bootstrap";
+import GenerationButton from "./components/GenerationButton";
 
 const DashboardPage: React.SFC = () => (
   <Container fluid>
@@ -9,25 +9,7 @@ const DashboardPage: React.SFC = () => (
         <h1 style={{ textAlign: "center" }}>The Pokedex App</h1>
       </Col>
       <Col md={{ span: 6, offset: 3 }}>
-        <Container>
-          <Row>
-            <Col>
-              <Button size="lg">Generation I</Button>
-            </Col>
-
-            <Col>
-              <Button size="lg">Generation II</Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button size="lg">Generation III</Button>
-            </Col>
-            <Col>
-              <Button size="lg">Generation IV</Button>
-            </Col>
-          </Row>
-        </Container>
+        <GenerationButton gen={1} />
       </Col>
     </Row>
   </Container>
