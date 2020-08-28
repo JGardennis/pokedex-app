@@ -5,6 +5,7 @@ import {
   getOffsetFromUrl,
 } from "../../../helpers/strings";
 import { pokemonTypes } from "../../../Theme";
+import Button from "../../Button";
 import { Pokemon } from "../../../helpers/types";
 import { Container, Row, Col } from "react-bootstrap";
 import { Pills } from "./PokedexPage.styles";
@@ -52,63 +53,29 @@ const PokedexPage: React.SFC = () => {
     // eslint-disable-next-line
   }, []);
 
-  const buildCard = (pokemon: Pokemon) => {
-    const { primary, secondary } = pokemonTypes[pokemon.types[0].type.name];
-
-    return (
-      <Card
-        key={pokemon.name}
-        to={{ pathname: `/pokemon/${pokemon.id}`, state: { data: pokemon } }}
-        color={primary}
-        pokeballColor={secondary}
-        image={pokemon.sprites.front_default}
-      >
-        <h2>{capitalize(pokemon.name)}</h2>
-        <Pills>
-          {pokemon.types.map(({ type }) => (
-            <Pill
-              key={`${pokemon.name}-${type.name}`}
-              color={pokemonTypes[type.name].secondary}
-            >
-              {capitalize(type.name)}
-            </Pill>
-          ))}
-        </Pills>
-      </Card>
-    );
-  };
-
   return (
     <Container fluid>
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
           <h1 style={{ textAlign: "center" }}>Pokemon</h1>
         </Col>
-
-        <Col md={{ span: 6, offset: 3 }}>
-          <Row>
-            {state.pokemon.map((p) => (
-              <PokemonCard key={p.name} data={p} />
-            ))}
-          </Row>
-        </Col>
       </Row>
+
+      <Row className="justify-content-md-center">
+        {state.pokemon.map((p) => (
+          <PokemonCard key={p.name} data={p} />
+        ))}
+      </Row>
+
+      {state.pokemon && state.nextUrl && (
+        <Row className="justify-content-md-center">
+          <Button onClick={handleLoadMoreClick} loading={state.isLoading}>
+            More
+          </Button>
+        </Row>
+      )}
     </Container>
   );
 };
-
-/*
-<Layout fromTop="10vh">
-      <Title align="center">Pokemon</Title>
-      <Container wrap="wrap" justify="center">
-        {state.pokemon.map(buildCard)}
-      </Container>
-      {state.pokemon && state.nextUrl && (
-        <Button onClick={handleLoadMoreClick} center cta>
-          {state.isLoading ? "Loading..." : "More"}
-        </Button>
-      )}
-    </Layout>
-*/
 
 export default PokedexPage;
