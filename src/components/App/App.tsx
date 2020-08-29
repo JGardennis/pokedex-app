@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import PokemonPage from "../Pages/PokemonPage";
+import Button from "../Button";
+import { Container, Row } from "react-bootstrap";
 import { Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { DashboardPage, PokedexPage } from "../Pages";
-import { ThemeButton, LargePokeball } from "./App.styles";
-import { GlobalStyles, lightTheme, darkTheme } from "../Theme";
+import { DashboardPage, PokedexPage, PokemonPage } from "../../pages";
+import { GlobalStyles, lightTheme, darkTheme } from "../../Theme";
 
 const App: React.SFC = () => {
-  const [state, setState] = useState({ theme: "light" });
+  const [theme, setTheme] = useState("light");
 
   return (
-    <ThemeProvider theme={state.theme === "light" ? lightTheme : darkTheme}>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
-      <ThemeButton
-        onClick={() => {
-          setState({
-            ...state,
-            theme: state.theme === "light" ? "dark" : "light",
-          });
-        }}
-      >
-        Toggle theme
-      </ThemeButton>
-      <LargePokeball />
+      <Container fluid>
+        <Row>
+          <Button
+            onClick={() => {
+              setTheme(theme === "light" ? "dark" : "light");
+            }}
+          >
+            Toggle theme
+          </Button>
+        </Row>
+      </Container>
       <Switch>
         <Route path="/pokemon/:id" component={PokemonPage} />
         <Route path="/pokemon" component={PokedexPage} />

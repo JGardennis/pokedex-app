@@ -3,6 +3,11 @@ import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
+
+  #root {
+    padding: 1rem;
+    box-sizing: border-box;
+  }
   
   body {
     ${({ theme }) => `
@@ -19,10 +24,10 @@ const GlobalStyles = createGlobalStyle`
     `}
   }
 
-  button {
-    border: none;
-    outline: 0;
-    border-radius: 3px;
+  h1 {
+    font-size: 2rem;
   }
+
+
 `;
 export default GlobalStyles;
