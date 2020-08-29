@@ -1,8 +1,13 @@
 import React from "react";
+import {
+  StyledContainer,
+  StyledPokeball,
+  PokemonId,
+} from "./PokemonCardStyles";
 import Pill from "../../../../Pill";
 import { useTheme } from "styled-components";
 import { Card, Row, Col } from "react-bootstrap";
-import { StyledContainer } from "./PokemonCardStyles";
+import { pokemonTypes } from "../../../../../Theme";
 import { Pokemon } from "../../../../../helpers/types";
 import { capitalize, prefixZeros } from "../../../../../helpers/strings";
 
@@ -21,18 +26,29 @@ const PokemonCard: React.SFC<iProps> = ({ data }: iProps) => {
     >
       <Card bg={variant}>
         <Card.Body>
+          <StyledPokeball
+            size="sm"
+            color={pokemonTypes[data.types[0].type.name]}
+          />
+          <PokemonId>#{prefixZeros(data.id.toString())}</PokemonId>
+
           <Card.Title>{capitalize(data.name)}</Card.Title>
-          <span className="pokemon-id">#{prefixZeros(data.id.toString())}</span>
+
           <Row>
-            <Col md={{ offset: 1, span: 4 }}>
-              {data.types.map(({ type }) => (
-                <Row key={type.name}>
-                  <Pill text={type.name} typeColor={type.name} />
-                </Row>
-              ))}
+            <Col sm={{ offset: 2 }}>
+              <img
+                style={{ marginBottom: "0.5em" }}
+                alt={data.name}
+                src={data.sprites.front_default}
+              />
             </Col>
+          </Row>
+
+          <Row>
             <Col>
-              <img alt={data.name} src={data.sprites.front_default} />
+              {data.types.map(({ type }) => (
+                <Pill key={type.name} text={type.name} typeColor={type.name} />
+              ))}
             </Col>
           </Row>
         </Card.Body>

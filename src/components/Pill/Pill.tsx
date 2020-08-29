@@ -17,9 +17,10 @@ const StyledSpan = styled.span`
         color: #fff;
         padding: 0.3em;
         margin: 0;
-        margin-bottom: 0.5rem;
-        border-radius: 3px;
+        margin-right: 0.5em;
+        border-radius: 1em;
         border: 1px solid ${color};
+        font-family: ${theme.secondaryFont};
     `;
   }}
 `;
