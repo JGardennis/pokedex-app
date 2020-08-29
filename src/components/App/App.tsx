@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Button from "../Button";
-import PokemonPage from "../Pages/PokemonPage";
 import { Container, Row } from "react-bootstrap";
 import { Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { DashboardPage, PokedexPage } from "../Pages";
+import { DashboardPage, PokedexPage, PokemonPage } from "../../pages";
 import { GlobalStyles, lightTheme, darkTheme } from "../../Theme";
 
 const App: React.SFC = () => {
