@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Button from "../../Button";
-import { Pokemon } from "../../../helpers/types";
-import PokemonCard from "./components/PokemonCard";
+import Button from "../../components/Button";
+import { Pokemon } from "../../helpers/types";
 import { Container, Row, Col } from "react-bootstrap";
-import { getKeys, getPokemonById } from "../../../helpers/pokeApi";
-import { getIdFromUrl, getOffsetFromUrl } from "../../../helpers/strings";
+import PokemonCard from "../../components/PokemonCard";
+import { getKeys, getPokemonById } from "../../helpers/pokeApi";
+import { getIdFromUrl, getOffsetFromUrl } from "../../helpers/strings";
 
 interface iState {
   pokemon: Pokemon[];

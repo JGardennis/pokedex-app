@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Backdrop from "./components/Backdrop";
-import { Pokemon } from "../../../helpers/types";
+import { Pokemon } from "../../helpers/types";
+import Backdrop from "../../components/Backdrop";
 import { Container, Row, Col } from "react-bootstrap";
 import { RouteComponentProps } from "react-router-dom";
-import LoadingSpinner from "./components/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 type PageData = RouteComponentProps<{ id: string }, any, { data: Pokemon }>;
 

@@ -1,15 +1,15 @@
 import React from "react";
+import Pill from "../Pill";
 import {
   StyledContainer,
   StyledPokeball,
   PokemonId,
 } from "./PokemonCardStyles";
-import Pill from "../../../../Pill";
+import { pokemonTypes } from "../../Theme";
 import { useTheme } from "styled-components";
+import { Pokemon } from "../../helpers/types";
 import { Card, Row, Col } from "react-bootstrap";
-import { pokemonTypes } from "../../../../../Theme";
-import { Pokemon } from "../../../../../helpers/types";
-import { capitalize, prefixZeros } from "../../../../../helpers/strings";
+import { capitalize, prefixZeros } from "../../helpers/strings";
 
 interface iProps {
   data: Pokemon;

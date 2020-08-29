@@ -1,7 +1,7 @@
+import Pokeball from "../Pokeball";
 import styled from "styled-components";
+import { pokemonTypes } from "../../Theme";
 import { LinkContainer } from "react-router-bootstrap";
-import { pokemonTypes } from "../../../../../Theme";
-import Pokeball from "../../../../Pokeball";
 
 const StyledContainer = styled(LinkContainer)`
   ${({ theme, type }) => {
