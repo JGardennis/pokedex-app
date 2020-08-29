@@ -19,7 +19,7 @@ const StyledSpan = styled.span`
         margin: 0;
         margin-right: 0.5em;
         border-radius: 1em;
-        border: 1px solid ${color};
+        border: 2px solid ${color};
         font-family: ${theme.secondaryFont};
     `;
   }}

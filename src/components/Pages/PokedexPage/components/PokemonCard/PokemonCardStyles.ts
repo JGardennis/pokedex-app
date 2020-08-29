@@ -25,9 +25,11 @@ const StyledContainer = styled(LinkContainer)`
         background-color: ${color} !important;
 
         &:hover {
-          box-shadow: 3px 3px 5px 0 #adadad;
+          box-shadow: 3px 3px 5px 0 ${
+            theme.id === "light" ? "#adadad" : "#333333"
+          };
         }
-
+        
         .card-title {
           margin-bottom: 0;
         }
