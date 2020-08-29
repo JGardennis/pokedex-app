@@ -4,7 +4,7 @@ import {
   StyledContainer,
   StyledPokeball,
   PokemonId,
-} from "./PokemonCardStyles";
+} from "./PokemonCard.styles";
 import { pokemonTypes } from "../../Theme";
 import { useTheme } from "styled-components";
 import { Pokemon } from "../../helpers/types";

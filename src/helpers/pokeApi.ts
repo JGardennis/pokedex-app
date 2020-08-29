@@ -1,7 +1,17 @@
-import { DataItem, Pokemon } from "./types";
+import { DataItem, Pokemon, PokemonDetail } from "./types";
 
 // HELPERS
 const baseUrl = "https://pokeapi.co/api/v2";
+
+const getEnglishEntry = (data: any, returnKey?: string) => {
+  const found = data.find((item) => item.language.name === "en");
+
+  if (found) {
+    return returnKey ? found[returnKey] : found;
+  }
+
+  return null;
+};
 
 // TYPES
 type getKeysResponse = {
@@ -40,4 +50,27 @@ async function getPokemonById(ids: string | string[]): Promise<Pokemon[]> {
   return [];
 }
 
-export { getKeys, getPokemonById };
+async function getPokemonDetails(pokemon: Pokemon): Promise<PokemonDetail> {
+  const speciesResponse = await fetch(pokemon.species.url).then((res) =>
+    res.json()
+  );
+
+  const abilityResponse = await Promise.all(
+    pokemon.abilities.map(({ ability }) =>
+      fetch(ability.url).then((res) => res.json())
+    )
+  );
+
+  return {
+    abilities: abilityResponse.map((ability) => ({
+      name: ability.name,
+      description: getEnglishEntry(ability.flavor_text_entries, "flavor_text"),
+    })),
+    description: getEnglishEntry(
+      speciesResponse.flavor_text_entries,
+      "flavor_text"
+    ),
+  };
+}
+
+export { getKeys, getPokemonById, getPokemonDetails };

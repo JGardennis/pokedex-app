@@ -3,6 +3,7 @@ import Button from "../../components/Button";
 import { Pokemon } from "../../helpers/types";
 import { Container, Row, Col } from "react-bootstrap";
 import PokemonCard from "../../components/PokemonCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import { getKeys, getPokemonById } from "../../helpers/pokeApi";
 import { getIdFromUrl, getOffsetFromUrl } from "../../helpers/strings";
 
@@ -16,12 +17,10 @@ const PokedexPage: React.SFC = () => {
   const [state, setState] = useState<iState>({
     pokemon: [],
     nextUrl: null,
-    isLoading: false,
+    isLoading: true,
   });
 
   const fetchData = async (offset: number = 0) => {
-    setState((s) => ({ ...s, isLoading: true }));
-
     const { results, next } = await getKeys("pokemon", 30, offset);
     const pokemonData = await getPokemonById(
       results.map(({ url }) => getIdFromUrl(url))
@@ -45,6 +44,10 @@ const PokedexPage: React.SFC = () => {
     fetchData();
     // eslint-disable-next-line
   }, []);
+
+  if (state.isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Container fluid>

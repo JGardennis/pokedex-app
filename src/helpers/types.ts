@@ -52,3 +52,11 @@ export type Pokemon = {
   }[];
   weight: number;
 };
+
+export type PokemonDetail = {
+  abilities: {
+    name: string;
+    description: string;
+  }[];
+  description: string;
+};
