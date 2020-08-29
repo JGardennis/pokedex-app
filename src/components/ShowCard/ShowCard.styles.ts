@@ -6,7 +6,13 @@ const StyledCard = styled(Card)`
     font-family: ${theme.secondaryFont};
     padding: 1rem;
     box-sizing: border-box;
+    max-height: 80vh;
+    overflow-y: scroll
   `}
 `;
 
-export { StyledCard };
+const PokemonImage = styled.img`
+  max-width: 8em;
+`;
+
+export { StyledCard, PokemonImage };

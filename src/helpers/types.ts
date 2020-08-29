@@ -58,5 +58,11 @@ export type PokemonDetail = {
     name: string;
     description: string;
   }[];
+  damages: {
+    doubleDamageTo: string[];
+    doubleDamageFrom: string[];
+    halfDamageTo: string[];
+    halfDamageFrom: string[];
+  };
   description: string;
 };

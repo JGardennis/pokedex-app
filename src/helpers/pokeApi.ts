@@ -61,11 +61,31 @@ async function getPokemonDetails(pokemon: Pokemon): Promise<PokemonDetail> {
     )
   );
 
+  const typeResponse = await Promise.all(
+    pokemon.types.map(({ type }) => fetch(type.url).then((res) => res.json()))
+  );
+
+  const getDamages = (key: string) => {
+    const asSet = new Set(
+      typeResponse.flatMap(({ damage_relations }) =>
+        damage_relations[key].map(({ name }) => name)
+      )
+    );
+
+    return Array.from(asSet.values());
+  };
+
   return {
     abilities: abilityResponse.map((ability) => ({
       name: ability.name,
       description: getEnglishEntry(ability.flavor_text_entries, "flavor_text"),
     })),
+    damages: {
+      doubleDamageTo: getDamages("double_damage_to"),
+      doubleDamageFrom: getDamages("double_damage_from"),
+      halfDamageTo: getDamages("half_damage_to"),
+      halfDamageFrom: getDamages("half_damage_from"),
+    },
     description: getEnglishEntry(
       speciesResponse.flavor_text_entries,
       "flavor_text"
