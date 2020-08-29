@@ -1,10 +1,10 @@
 import React from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import Pill from "../../../../Pill";
 import { useTheme } from "styled-components";
+import { Card, Row, Col } from "react-bootstrap";
 import { StyledContainer } from "./PokemonCardStyles";
 import { Pokemon } from "../../../../../helpers/types";
 import { capitalize, prefixZeros } from "../../../../../helpers/strings";
-import Pill from "../../../../Pill";
 
 interface iProps {
   data: Pokemon;

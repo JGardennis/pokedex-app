@@ -1,80 +1,24 @@
-import React, { useState, useEffect } from "react";
-// import { Layout } from "../../UI";
-// import { BigCard } from "../../UI/Styles/Card.styles";
-// import { RouteComponentProps, withRouter, useHistory } from "react-router";
-// import { NavButton } from "./PokemonPage.styles";
-// import {
-//   getPokemonById,
-// } from "../../../helpers/pokeApi";
-// import { Profile, Weaknesses, Moves } from "./components";
+import React from "react";
+import { RouteComponentProps } from "react-router-dom";
+import { Pokemon } from "../../../helpers/types";
+import { Container, Row, Col } from "react-bootstrap";
+import Backdrop from "./components/Backdrop";
 
-// interface iState {
-//   data: PokemonType | null;
-//   loading: boolean;
-//   moves: MoveData[];
-//   weaknesses: string[];
-// }
+type PageData = RouteComponentProps<{ id: string }, any, { data: Pokemon }>;
 
-// type PokemonPageData = RouteComponentProps<
-//   { id: string },
-//   any,
-//   { data: PokemonType }
-// >;
+interface iState {}
 
-// const PokemonPage = ({ location, match }: PokemonPageData) => {
-//   const [state, setState] = useState<iState>({
-//     data: null,
-//     moves: [],
-//     weaknesses: [],
-//     loading: true,
-//   });
-//   const history = useHistory();
-
-//   useEffect(() => {
-//     const getData = async () => {
-//       const response = await getPokemonById(match.params.id);
-//       setState((s) => ({ ...s, data: response }));
-//     };
-
-//     const getMoves = async () => {
-//       if (state.data) {
-//         const response = await getMovesData(state.data.moves);
-//         setState((s) => ({ ...s, moves: response }));
-//       }
-//     };
-
-//     const getWeaknesses = async () => {
-//       if (state.data) {
-//         const response = await getWeaknessesData(state.data.types);
-//         setState((s) => ({ ...s, weaknesses: response }));
-//       }
-//     };
-
-//     location && location.state
-//       ? setState((s) => ({ ...s, data: location.state.data }))
-//       : getData();
-
-//     setState((s) => ({ ...s, loading: false }));
-
-//     getMoves();
-//     getWeaknesses();
-//   }, [state.data, location, match.params.id]);
-
-//   if (state.loading || !state.data) {
-//     return <Layout>LOADING</Layout>;
-//   }
-
-//   return (
-//     <Layout>
-//       <Profile pokemon={state.data} />
-//       <BigCard>
-//         <Weaknesses items={state.weaknesses} />
-//         {state.moves.length > 0 && <Moves items={state.moves} />}
-//       </BigCard>
-//     </Layout>
-//   );
-// };
-
-const PokemonPage = () => <></>;
+const PokemonPage: React.SFC<PageData> = ({ location, match }: PageData) => {
+  return (
+    <>
+      <Backdrop pokemonType="grass" />
+      <Container fluid>
+        <Row>
+          <Col md={{ span: 6, offset: 3 }}>HELLO</Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
 
 export default PokemonPage;
