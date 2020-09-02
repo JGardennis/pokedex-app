@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Backdrop from "../../components/Backdrop";
+import ShowCard from "../../components/ShowCard";
+import { Container, Row, Col } from "react-bootstrap";
 import { RouteComponentProps } from "react-router-dom";
 import { getPokemonDetails } from "../../helpers/pokeApi";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import { Pokemon, PokemonDetail } from "../../helpers/types";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { capitalize } from "../../helpers/strings";
-import ShowCard from "../../components/ShowCard";
+import { Pokemon, PokemonDetail } from "../../helpers/types";
 
 type PageData = RouteComponentProps<{ id: string }, any, { data: Pokemon }>;
 
@@ -38,20 +37,6 @@ const PokemonPage: React.SFC<PageData> = ({ location, match }: PageData) => {
 
     fetchData();
   }, [state.data, location, match]);
-
-  /*
-    pokemon/
-      NAME
-      IMG
-      ID
-      STATS
-      ABILITIES *
-      MOVES *
-    pokemon-species/
-      EVOLUTIONS *
-      FLAVOR_TEXT_ENTRIES
-
-  */
 
   if (state.isLoading) {
     return <LoadingSpinner />;

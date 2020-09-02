@@ -3,6 +3,16 @@ export type DataItem = {
   url: string;
 };
 
+export type PokemonMove = {
+  accuracy: number;
+  class: string;
+  description: string;
+  name: string;
+  power: number;
+  pp: number;
+  type: string;
+};
+
 export type Pokemon = {
   abilities: {
     ability: DataItem;
@@ -21,10 +31,10 @@ export type Pokemon = {
   is_default: true;
   location_area_encounters: string;
   moves: {
-    move: DataItem[];
+    move: DataItem;
     version_group_details: {
       level_learned_at: number;
-      move_learned_method: DataItem;
+      move_learn_method: DataItem;
       version_group: DataItem;
     }[];
   }[];
@@ -65,4 +75,10 @@ export type PokemonDetail = {
     halfDamageFrom: string[];
   };
   description: string;
+  moves: {
+    levelUp: PokemonMove[];
+    machine: PokemonMove[];
+    tutor: PokemonMove[];
+    egg: PokemonMove[];
+  };
 };

@@ -1,12 +1,12 @@
 import React from "react";
-import { Card, Row, Col } from "react-bootstrap";
-import { StyledCard, PokemonImage } from "./ShowCard.styles";
-import { capitalize } from "../../helpers/strings";
-import { Pokemon, PokemonDetail } from "../../helpers/types";
+import MovesList from "../MovesList";
 import Pill, { DamagePill } from "../Pill";
-
 import Img from "../../assets/pokemon/1.png";
 import { useTheme } from "styled-components";
+import { Card, Row, Col } from "react-bootstrap";
+import { capitalize } from "../../helpers/strings";
+import { Pokemon, PokemonDetail } from "../../helpers/types";
+import { StyledCard, PokemonImage } from "./ShowCard.styles";
 
 interface iProps {
   pokemon: Pokemon;
@@ -75,11 +75,7 @@ const ShowCard: React.SFC<iProps> = ({ pokemon, detail }: iProps) => {
         </Col>
       </Row>
 
-      <Row>
-        <Col>
-          <h2>Moves</h2>
-        </Col>
-      </Row>
+      <MovesList moves={detail.moves} />
     </StyledCard>
   );
 };

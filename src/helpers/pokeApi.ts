@@ -65,6 +65,18 @@ async function getPokemonDetails(pokemon: Pokemon): Promise<PokemonDetail> {
     pokemon.types.map(({ type }) => fetch(type.url).then((res) => res.json()))
   );
 
+  /*
+    MOVES
+      GEN 
+        red-blue
+      METHOD
+        EGG
+        MACHINE
+        TUTOR
+        level-up
+
+  */
+
   const getDamages = (key: string) => {
     const asSet = new Set(
       typeResponse.flatMap(({ damage_relations }) =>
@@ -74,6 +86,34 @@ async function getPokemonDetails(pokemon: Pokemon): Promise<PokemonDetail> {
 
     return Array.from(asSet.values());
   };
+
+  const getMoves = async (gen: string, method: string) => {
+    const filtered = pokemon.moves.filter((move) => {
+      const genMatch = move.version_group_details.find(
+        (details) => details.version_group.name === gen
+      );
+      return genMatch ? genMatch.move_learn_method.name === method : false;
+    });
+
+    const movesResponse = await Promise.all(
+      filtered.map(({ move }) => fetch(move.url).then((res) => res.json()))
+    );
+
+    return movesResponse.map((move) => ({
+      accuracy: move.accuracy,
+      class: move.damage_class.name,
+      description: getEnglishEntry(move.flavor_text_entries, "flavor_text"),
+      name: move.name,
+      power: move.power,
+      pp: move.pp,
+      type: move.type.name,
+    }));
+  };
+
+  const levelMoves = await getMoves("red-blue", "level-up");
+  const machineMoves = await getMoves("red-blue", "machine");
+  const tutorMoves = await getMoves("red-blue", "tutor");
+  const eggMoves = await getMoves("red-blue", "egg");
 
   return {
     abilities: abilityResponse.map((ability) => ({
@@ -90,6 +130,12 @@ async function getPokemonDetails(pokemon: Pokemon): Promise<PokemonDetail> {
       speciesResponse.flavor_text_entries,
       "flavor_text"
     ),
+    moves: {
+      levelUp: levelMoves,
+      machine: machineMoves,
+      tutor: tutorMoves,
+      egg: eggMoves,
+    },
   };
 }
 
