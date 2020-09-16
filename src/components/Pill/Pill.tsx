@@ -13,6 +13,7 @@ const StyledSpan = styled.span`
     const color = pokemonTypes[typeColor].secondary;
 
     return `
+        display: inline-block;
         background-color: ${theme.id === "light" ? color : "transparent"};
         color: #fff;
         padding: 0.3em;

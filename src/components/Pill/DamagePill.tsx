@@ -5,7 +5,6 @@ import { capitalize } from "../../helpers/strings";
 
 interface iProps {
   text: string;
-  value: number;
 }
 
 const StyledPill = styled.div`
@@ -37,10 +36,10 @@ const StyledPill = styled.div`
   }}
 `;
 
-const DamagePill: React.SFC<iProps> = ({ text, value }: iProps) => (
+const DamagePill: React.SFC<iProps> = ({ text }: iProps) => (
   <StyledPill type={text}>
     <p>{capitalize(text)}</p>
-    <span>x{value}</span>
+    <span>x2</span>
   </StyledPill>
 );
 

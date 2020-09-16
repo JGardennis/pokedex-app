@@ -18,11 +18,9 @@ const MovesList: React.SFC<iProps> = ({ moves }: iProps) => {
   const [list, setList] = useState<PokemonMove[]>(moves.levelUp);
 
   return (
-    <Row>
-      <Col>
-        <h2>Moves</h2>
-
-        <Row>
+    <>
+      <Row>
+        <Col>
           {moves.levelUp.length > 0 && (
             <Button onClick={() => setList(moves.levelUp)}>Level Up</Button>
           )}
@@ -38,16 +36,20 @@ const MovesList: React.SFC<iProps> = ({ moves }: iProps) => {
           {moves.egg.length > 0 && (
             <Button onClick={() => setList(moves.egg)}>Egg</Button>
           )}
-        </Row>
+        </Col>
+      </Row>
 
-        {list.map((move) => (
-          <Move key={move.name} type={move.type}>
-            <h2>{capitalize(move.name).replace(/[-]/g, " ")}</h2>
-            <span>Lvl 1</span>
-          </Move>
-        ))}
-      </Col>
-    </Row>
+      <Row>
+        <Col>
+          {list.map((move) => (
+            <Move key={move.name} type={move.type}>
+              <h2>{capitalize(move.name).replace(/[-]/g, " ")}</h2>
+              <span>Lvl 1</span>
+            </Move>
+          ))}
+        </Col>
+      </Row>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 
 const StyledCard = styled(Card)`
   ${({ theme }) => `
@@ -15,4 +15,9 @@ const PokemonImage = styled.img`
   max-width: 8em;
 `;
 
-export { StyledCard, PokemonImage };
+const StyledRow = styled(Row)`
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+`;
+
+export { StyledCard, PokemonImage, StyledRow };
